@@ -1,0 +1,6 @@
+@Tradio_HostAddress = http://localhost:5188
+
+GET {{Tradio_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
