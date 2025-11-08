@@ -28,7 +28,8 @@ namespace Tradio.Infrastructure.Services
                 UserName = dto.Email,
                 Email = dto.Email,
                 Fullname = dto.Name,
-                VerificationCode = code
+                VerificationCode = code,
+                CityId = dto.CityId,
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
 

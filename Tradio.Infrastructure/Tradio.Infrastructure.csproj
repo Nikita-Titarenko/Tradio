@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Tradio.Application\Tradio.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

@@ -30,7 +30,7 @@ namespace Tradio.Infrastructure.Services
             };
 
             using SmtpClient smtp = new();
-            await smtp.ConnectAsync(_options.Host, _options.Port, MailKit.Security.SecureSocketOptions.SslOnConnect);
+            await smtp.ConnectAsync(_options.Host, _options.Port, MailKit.Security.SecureSocketOptions.StartTls);
             await smtp.AuthenticateAsync(_options.Email, _options.Password);
             await smtp.SendAsync(message);
             await smtp.DisconnectAsync(true);

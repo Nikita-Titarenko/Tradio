@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Tradio.Domain;
 
@@ -34,6 +35,8 @@ namespace Tradio.Infrastructure
                 .WithMany(au => au.ComplaintReplies)
                 .HasForeignKey(p => p.ApplicationUserId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public DbSet<Service> Services { get; set; }
