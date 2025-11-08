@@ -1,27 +1,40 @@
 ﻿using Eventa.Application.DTOs.Users;
+using Eventa.Application.Repositories;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Tradio.Application.Common;
 using Tradio.Application.Services;
+using Tradio.Application.Services.Cities;
+using Tradio.Domain;
 
 namespace Tradio.Infrastructure.Services
 {
     public class UserService : IUserService
     {
+        private const int initialCreditCount = 100;
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ICityService _cityService;
 
-        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ICityService cityService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _cityService = cityService;
         }
 
         public async Task<Result<RegisterResultDto>> RegisterUserAsync(RegisterUserDto dto)
         {
+            var getCityResult = await _cityService.GetCityAsync(dto.CityId);
+            if (!getCityResult.IsSuccess)
+            {
+                return Result.Fail(getCityResult.Errors);
+            }
+
             var code = GenerateVerificationCode();
             var user = new ApplicationUser
             {
@@ -30,6 +43,7 @@ namespace Tradio.Infrastructure.Services
                 Fullname = dto.Name,
                 VerificationCode = code,
                 CityId = dto.CityId,
+                CreditCount = initialCreditCount
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
 
@@ -158,7 +172,7 @@ namespace Tradio.Infrastructure.Services
             await _emailSender.SendEmailAsync(
                 email,
                 "Registration confirmation",
-                $"Confirm email to register in Eventa. Confirmation code: {code}");
+                $"Confirm email to register in Tradio. Confirmation code: {code}");
         }
     }
 }

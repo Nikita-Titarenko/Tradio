@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Eventa.Application.Repositories;
+using Eventa.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,8 @@ namespace Tradio.Infrastructure
             services.AddScoped<IFileService, Services.FileService>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.Configure<SmtpEmailOptions>(configuration.GetSection("EmailOptions"));
             services.Configure<JwtTokenOptions>(configuration.GetSection("Jwt"));
