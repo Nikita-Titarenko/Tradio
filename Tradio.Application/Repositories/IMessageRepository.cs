@@ -1,6 +1,6 @@
 ﻿using Tradio.Application.Dtos.ApplicationUserServices;
 
-namespace Tradio.Infrastructure.Repositories
+namespace Tradio.Application.Repositories
 {
     public interface IMessageRepository
     {

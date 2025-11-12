@@ -1,8 +1,8 @@
-﻿using Eventa.Application.Repositories;
+﻿using Eventa.Infrastructure.Repositories;
+using Tradio.Application.Repositories;
 using Tradio.Infrastructure;
-using Tradio.Infrastructure.Repositories;
 
-namespace Eventa.Infrastructure.Repositories
+namespace Tradio.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

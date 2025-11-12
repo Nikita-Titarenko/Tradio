@@ -1,4 +1,4 @@
-﻿namespace Eventa.Server.ResponseModels
+﻿namespace Tradio.Server.Responses.Users
 {
     public class RegisterResponseModel
     {

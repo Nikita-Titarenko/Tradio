@@ -1,12 +1,12 @@
-﻿using Eventa.Application.DTOs.Users;
-using Eventa.Application.Repositories;
+﻿using Eventa.Application.Repositories;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Tradio.Application.Common;
+using Tradio.Application.Dtos.Users;
 using Tradio.Application.Services;
 using Tradio.Application.Services.Cities;
 using Tradio.Domain;
+using Tradio.Infrastructure.Common;
 
 namespace Tradio.Infrastructure.Services
 {

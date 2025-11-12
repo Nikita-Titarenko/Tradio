@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Tradio.Application.Dtos.Messages;
-using Tradio.Server.Hubs;
+using Tradio.Application.Services;
+using Tradio.Infrastructure.Hubs;
 
 namespace Tradio.Infrastructure.Services
 {

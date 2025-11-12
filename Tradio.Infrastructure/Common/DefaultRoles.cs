@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Tradio.Application.Common
+namespace Tradio.Infrastructure.Common
 {
     public class DefaultRoles
     {

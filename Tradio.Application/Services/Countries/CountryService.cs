@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.Countries;
-using Tradio.Application.Services.Countries;
+using Tradio.Application.Repositories;
 using Tradio.Domain;
 
-namespace Tradio.Infrastructure.Services
+namespace Tradio.Application.Services.Countries
 {
     public class CountryService : ICountryService
     {

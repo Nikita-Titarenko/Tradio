@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tradio.Application.Common;
+using Tradio.Infrastructure.Common;
 
-namespace Eventa.Infrastructure.EntityTypeConfigurations
+namespace Tradio.Infrastructure.EntityTypeConfigurations
 {
     public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
     {

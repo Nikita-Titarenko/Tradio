@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.Cities;
+using Tradio.Application.Repositories;
 using Tradio.Domain;
 
 namespace Tradio.Application.Services.Cities

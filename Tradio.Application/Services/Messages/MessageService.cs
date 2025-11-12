@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.ApplicationUserServices;
 using Tradio.Application.Dtos.Messages;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services.ApplicationUserServices;
 using Tradio.Application.Services.Services;
 using Tradio.Domain;
-using Tradio.Infrastructure.Services;
 
 namespace Tradio.Application.Services.Messages
 {

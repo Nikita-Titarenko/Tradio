@@ -1,4 +1,4 @@
-﻿namespace Eventa.Application.DTOs.Users
+﻿namespace Tradio.Application.Dtos.Users
 {
     public class LoginResultDto
     {

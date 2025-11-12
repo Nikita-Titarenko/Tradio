@@ -1,7 +1,6 @@
-﻿using Eventa.Application.Repositories;
-using Tradio.Domain;
+﻿using Tradio.Domain;
 
-namespace Tradio.Infrastructure.Repositories
+namespace Tradio.Application.Repositories
 {
     public interface IUserSubscriptionRepositroy : IRepository<UserSubscription>
     {

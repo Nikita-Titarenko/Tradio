@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Eventa.Application.DTOs.Users;
-using Eventa.Server.ResponseModels;
+using Tradio.Application.Dtos.Users;
 using Tradio.Server.RequestsModel.Users;
+using Tradio.Server.Responses.Users;
 
-namespace Eventa.Server.Profiles
+namespace Tradio.Server.Profiles
 {
     public class UserProfile : Profile
     {

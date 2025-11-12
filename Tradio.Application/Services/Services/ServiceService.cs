@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.Services;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services.Categories;
 using Tradio.Domain;
 

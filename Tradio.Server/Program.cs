@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Tradio.Infrastructure;
-using Tradio.Server.Hubs;
+using Tradio.Infrastructure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 

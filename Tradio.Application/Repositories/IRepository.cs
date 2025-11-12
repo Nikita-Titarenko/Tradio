@@ -1,4 +1,4 @@
-﻿namespace Eventa.Application.Repositories
+﻿namespace Tradio.Application.Repositories
 {
     public interface IRepository<T> where T : class
     {

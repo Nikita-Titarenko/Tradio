@@ -1,5 +1,5 @@
-﻿using Eventa.Application.DTOs.Users;
-using FluentResults;
+﻿using FluentResults;
+using Tradio.Application.Dtos.Users;
 
 namespace Tradio.Application.Services
 {

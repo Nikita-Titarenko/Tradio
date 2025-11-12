@@ -1,7 +1,7 @@
-﻿using Eventa.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Tradio.Application.Dtos.ApplicationUserServices;
 using Tradio.Application.Dtos.Messages;
+using Tradio.Application.Repositories;
 using Tradio.Domain;
 
 namespace Tradio.Infrastructure.Repositories

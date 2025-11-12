@@ -1,7 +1,7 @@
 ﻿using Tradio.Application.Dtos.ApplicationUserServices;
 using Tradio.Domain;
 
-namespace Tradio.Infrastructure.Repositories
+namespace Tradio.Application.Repositories
 {
     public interface IApplicationUserServiceRepository
     {

@@ -1,6 +1,6 @@
 ﻿using Tradio.Application.Dtos.Messages;
 
-namespace Tradio.Infrastructure.Services
+namespace Tradio.Application.Services
 {
     public interface INotificationService
     {

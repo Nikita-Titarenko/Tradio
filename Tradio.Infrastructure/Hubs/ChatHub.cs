@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace Tradio.Server.Hubs
+namespace Tradio.Infrastructure.Hubs
 {
     public class ChatHub : Hub
     {

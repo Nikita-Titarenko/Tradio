@@ -1,7 +1,7 @@
-﻿using Eventa.Infrastructure.Repositories;
-using FluentResults;
+﻿using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Tradio.Application.Dtos.ApplicationUserServices;
+using Tradio.Application.Repositories;
 using Tradio.Domain;
 
 namespace Tradio.Infrastructure.Repositories

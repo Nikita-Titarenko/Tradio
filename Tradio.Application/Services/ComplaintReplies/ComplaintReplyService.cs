@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.ComplaintReplies;
 using Tradio.Application.Dtos.Complaints;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services.Complaints;
 using Tradio.Domain;
 

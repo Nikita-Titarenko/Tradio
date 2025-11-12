@@ -1,13 +1,13 @@
-﻿using Eventa.Application.Repositories;
-using Eventa.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Stripe;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services;
 using Tradio.Infrastructure.Options;
+using Tradio.Infrastructure.Repositories;
 using Tradio.Infrastructure.Services;
 namespace Tradio.Infrastructure
 {

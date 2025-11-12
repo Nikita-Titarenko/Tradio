@@ -1,7 +1,7 @@
-﻿using Eventa.Application.Repositories;
-using FluentResults;
+﻿using FluentResults;
 using Tradio.Application.Dtos;
 using Tradio.Application.Dtos.UserSubscriptions;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services.SubscriptionTypes;
 using Tradio.Domain;
 

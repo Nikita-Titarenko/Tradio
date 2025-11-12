@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Eventa.Application.Repositories;
 using FluentResults;
 using Tradio.Application.Dtos.Complaints;
 using Tradio.Application.Dtos.Messages;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services.ApplicationUserServices;
 using Tradio.Domain;
 
@@ -45,6 +45,11 @@ namespace Tradio.Application.Services.Complaints
             }
 
             return Result.Ok(_mapper.Map<ComplaintDto>(complaint));
+        }
+
+        public async Task<Result<IEnumerable<ComplaintListItemDto>>> GetComplaintsByUserAsync(string userId)
+        {
+
         }
     }
 }

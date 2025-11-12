@@ -1,6 +1,6 @@
 ﻿using Tradio.Domain;
 
-namespace Tradio.Infrastructure.Repositories
+namespace Tradio.Application.Repositories
 {
     public interface ICityRepository
     {

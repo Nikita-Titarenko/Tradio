@@ -12,6 +12,8 @@ namespace Tradio.Server.RequestsModel.ComplaintReplies
             public bool IsApproved { get; set; }
 
             public int ComplaintId { get; set; }
+
+            public int? ReturningCredit { get; set; }
         }
     }
 }

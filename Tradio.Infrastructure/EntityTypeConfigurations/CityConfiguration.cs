@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tradio.Domain;
 using Tradio.Infrastructure.Common;
 
-namespace Eventa.Infrastructure.EntityTypeConfigurations
+namespace Tradio.Infrastructure.EntityTypeConfigurations
 {
     public class CityConfiguration : IEntityTypeConfiguration<City>
     {

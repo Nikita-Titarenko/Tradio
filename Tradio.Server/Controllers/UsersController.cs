@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
-using Eventa.Application.DTOs.Users;
-using Eventa.Server.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.Users;
 using Tradio.Application.Services;
 using Tradio.Server.RequestsModel.Users;
+using Tradio.Server.Responses.Users;
 
-namespace Eventa.Server.Controllers
+namespace Tradio.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

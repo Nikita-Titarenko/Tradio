@@ -1,6 +1,4 @@
-﻿using Tradio.Infrastructure.Repositories;
-
-namespace Eventa.Application.Repositories
+﻿namespace Tradio.Application.Repositories
 {
     public interface IUnitOfWork
     {

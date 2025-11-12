@@ -1,8 +1,7 @@
-﻿using Eventa.Application.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Tradio.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using Tradio.Application.Repositories;
 
-namespace Eventa.Infrastructure.Repositories
+namespace Tradio.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
