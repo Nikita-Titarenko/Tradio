@@ -15,9 +15,11 @@ namespace Tradio.Infrastructure
 
         public City City { get; set; } = default!;
 
-        public ICollection<ApplicationUserChat> ApplicationUserChats { get; set; } = [];
+        public ICollection<Service> Services { get; set; } = [];
 
-        public ICollection<Payment> Payments { get; set; } = [];
+        public ICollection<ApplicationUserService> ApplicationUserServices { get; set; } = [];
+
+        public ICollection<UserSubscription> UserSubscriptions { get; set; } = [];
 
         public ICollection<Complaint> Complaints { get; set; } = [];
 

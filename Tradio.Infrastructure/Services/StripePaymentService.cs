@@ -27,7 +27,7 @@ namespace Tradio.Infrastructure.Services
                     PriceData = new SessionLineItemPriceDataOptions
                     {
                         UnitAmount = t.Price,
-                        Currency = "uah",
+                        Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = t.Name

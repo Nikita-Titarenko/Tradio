@@ -12,23 +12,29 @@ namespace Tradio.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ApplicationUserChat>()
-                .HasKey(auc => new {auc.ApplicationUserId, auc.ChatId});
 
-            builder.Entity<ApplicationUserChat>()
-                .HasOne<ApplicationUser>()
-                .WithMany(au => au.ApplicationUserChats)
-                .HasForeignKey(au => au.ApplicationUserId);
+            builder.Entity<ApplicationUser>()
+                .HasOne(u => u.City)
+                .WithMany()
+                .HasForeignKey(au => au.CityId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Entity<Payment>()
+            builder.Entity<Service>()
                 .HasOne<ApplicationUser>()
-                .WithMany(au => au.Payments)
+                .WithMany(au => au.Services)
+                .HasForeignKey(au => au.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<ApplicationUserService>()
+                .HasOne<ApplicationUser>()
+                .WithMany(au => au.ApplicationUserServices)
+                .HasForeignKey(au => au.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<UserSubscription>()
+                .HasOne<ApplicationUser>()
+                .WithMany(au => au.UserSubscriptions)
                 .HasForeignKey(p => p.ApplicationUserId);
-
-            builder.Entity<Complaint>()
-                .HasOne<ApplicationUser>()
-                .WithMany(au => au.Complaints)
-                .HasForeignKey(c => c.ApplicationUserId);
 
             builder.Entity<ComplaintReply>()
                 .HasOne<ApplicationUser>()
@@ -41,9 +47,7 @@ namespace Tradio.Infrastructure
 
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<ApplicationUserChat> ApplicationUserChats { get; set; }
-
-        public DbSet<Chat> Chats { get; set; }
+        public DbSet<ApplicationUserService> ApplicationUserServices { get; set; }
 
         public DbSet<Message> Messages { get; set; }
 
@@ -51,7 +55,7 @@ namespace Tradio.Infrastructure
 
         public DbSet<Country> Countres { get; set; }
 
-        public DbSet<Payment> Payments { get; set; }
+        public DbSet<UserSubscription> UserSubscriptions { get; set; }
 
         public DbSet<SubscriptionType> SubscriptionTypies { get; set; }
 

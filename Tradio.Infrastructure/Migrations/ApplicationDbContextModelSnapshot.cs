@@ -173,19 +173,28 @@ namespace Tradio.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Tradio.Domain.ApplicationUserChat", b =>
+            modelBuilder.Entity("Tradio.Domain.ApplicationUserService", b =>
                 {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ChatId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "ChatId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasIndex("ChatId");
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.ToTable("ApplicationUserChats");
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ApplicationUserServices");
                 });
 
             modelBuilder.Entity("Tradio.Domain.Category", b =>
@@ -198,7 +207,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
@@ -396,19 +406,6 @@ namespace Tradio.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Chat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chats");
-                });
-
             modelBuilder.Entity("Tradio.Domain.City", b =>
                 {
                     b.Property<int>("Id")
@@ -422,7 +419,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -508,8 +506,10 @@ namespace Tradio.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ApplicationUserServiceId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ComplaintStatusId")
                         .HasColumnType("int");
@@ -517,20 +517,18 @@ namespace Tradio.Infrastructure.Migrations
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ComplaintStatusId");
+                    b.HasIndex("ApplicationUserServiceId");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("ComplaintStatusId");
 
                     b.ToTable("Complaints");
                 });
@@ -555,7 +553,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("Id");
 
@@ -576,7 +575,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -593,7 +593,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -620,62 +621,28 @@ namespace Tradio.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserChatApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ApplicationUserChatChatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChatId")
+                    b.Property<int>("ApplicationUserServiceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsFromProvider")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserChatApplicationUserId", "ApplicationUserChatChatId");
+                    b.HasIndex("ApplicationUserServiceId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("Tradio.Domain.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IsPurcharsed")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubscriptionTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("SubscriptionTypeId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Tradio.Domain.Service", b =>
@@ -688,12 +655,9 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDateTime")
@@ -701,20 +665,25 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsVisible")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Services");
                 });
@@ -727,12 +696,13 @@ namespace Tradio.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
+                    b.Property<int>("DurationInDays")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("PriceInCents")
                         .HasColumnType("int");
@@ -740,6 +710,59 @@ namespace Tradio.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubscriptionTypies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DurationInDays = 30,
+                            Name = "Standart",
+                            PriceInCents = 1000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DurationInDays = 90,
+                            Name = "Premium",
+                            PriceInCents = 2500
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DurationInDays = 365,
+                            Name = "Ultimate",
+                            PriceInCents = 9000
+                        });
+                });
+
+            modelBuilder.Entity("Tradio.Domain.UserSubscription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("EndDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPurcharsed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SubscriptionTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("SubscriptionTypeId");
+
+                    b.ToTable("UserSubscriptions");
                 });
 
             modelBuilder.Entity("Tradio.Infrastructure.ApplicationUser", b =>
@@ -874,21 +897,21 @@ namespace Tradio.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tradio.Domain.ApplicationUserChat", b =>
+            modelBuilder.Entity("Tradio.Domain.ApplicationUserService", b =>
                 {
                     b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
-                        .WithMany("ApplicationUserChats")
+                        .WithMany("ApplicationUserServices")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Tradio.Domain.Chat", "Chat")
+                    b.HasOne("Tradio.Domain.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ChatId")
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Chat");
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("Tradio.Domain.Category", b =>
@@ -915,7 +938,11 @@ namespace Tradio.Infrastructure.Migrations
                 {
                     b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
                         .WithMany("Complaints")
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Tradio.Domain.ApplicationUserService", "ApplicationUserService")
+                        .WithMany("Complaints")
+                        .HasForeignKey("ApplicationUserServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -925,15 +952,9 @@ namespace Tradio.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tradio.Domain.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUserService");
 
                     b.Navigation("ComplaintStatus");
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("Tradio.Domain.ComplaintReply", b =>
@@ -955,19 +976,36 @@ namespace Tradio.Infrastructure.Migrations
 
             modelBuilder.Entity("Tradio.Domain.Message", b =>
                 {
-                    b.HasOne("Tradio.Domain.ApplicationUserChat", "ApplicationUserChat")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserChatApplicationUserId", "ApplicationUserChatChatId")
+                    b.HasOne("Tradio.Domain.ApplicationUserService", "ApplicationUserService")
+                        .WithMany("Messages")
+                        .HasForeignKey("ApplicationUserServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUserChat");
+                    b.Navigation("ApplicationUserService");
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Payment", b =>
+            modelBuilder.Entity("Tradio.Domain.Service", b =>
                 {
                     b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
-                        .WithMany("Payments")
+                        .WithMany("Services")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Tradio.Domain.Category", "Category")
+                        .WithMany("Services")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Tradio.Domain.UserSubscription", b =>
+                {
+                    b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
+                        .WithMany("UserSubscriptions")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -981,38 +1019,25 @@ namespace Tradio.Infrastructure.Migrations
                     b.Navigation("SubscriptionType");
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Service", b =>
-                {
-                    b.HasOne("Tradio.Domain.Category", "Category")
-                        .WithMany("Services")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tradio.Domain.City", null)
-                        .WithMany("Services")
-                        .HasForeignKey("CityId");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Tradio.Infrastructure.ApplicationUser", b =>
                 {
                     b.HasOne("Tradio.Domain.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Category", b =>
+            modelBuilder.Entity("Tradio.Domain.ApplicationUserService", b =>
                 {
-                    b.Navigation("Services");
+                    b.Navigation("Complaints");
+
+                    b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("Tradio.Domain.City", b =>
+            modelBuilder.Entity("Tradio.Domain.Category", b =>
                 {
                     b.Navigation("Services");
                 });
@@ -1029,13 +1054,15 @@ namespace Tradio.Infrastructure.Migrations
 
             modelBuilder.Entity("Tradio.Infrastructure.ApplicationUser", b =>
                 {
-                    b.Navigation("ApplicationUserChats");
+                    b.Navigation("ApplicationUserServices");
 
                     b.Navigation("ComplaintReplies");
 
                     b.Navigation("Complaints");
 
-                    b.Navigation("Payments");
+                    b.Navigation("Services");
+
+                    b.Navigation("UserSubscriptions");
                 });
 #pragma warning restore 612, 618
         }

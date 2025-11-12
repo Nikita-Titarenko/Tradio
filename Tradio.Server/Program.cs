@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Tradio.Infrastructure;
+using Tradio.Server.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,9 +38,17 @@ builder.Services
         };
     });
 
+builder.Services.AddSignalR();
+
 builder.Services.AddAutoMapper(c => { }, AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+app.MapHub<ChatHub>("/chatHub");
+
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+await DbInitializer.InitializeAsync(context);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

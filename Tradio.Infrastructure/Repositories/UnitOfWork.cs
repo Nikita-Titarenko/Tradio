@@ -30,6 +30,13 @@ namespace Eventa.Infrastructure.Repositories
 
         public ICategoryRepository GetCategoryRepository() => new CategoryRepository(_dbContext);
 
+        public IServiceRepository GetServiceRepository() => new ServiceRepository(_dbContext);
+
+        public IUserSubscriptionRepositroy GetUserSubscriptionRepository() => new UserSubscriptionRepositroy(_dbContext);
+
+        public IApplicationUserServiceRepository GetApplicationUserServiceRepository() => new ApplicationUserServiceRepository(_dbContext);
+
+        public IMessageRepository GetMessageRepository() => new MessageRepository(_dbContext);
 
         public void Dispose()
         {

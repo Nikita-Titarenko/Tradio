@@ -1,17 +1,22 @@
-﻿namespace Tradio.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tradio.Domain
 {
     public class Message
     {
         public int Id { get; set; }
 
+        [MaxLength(200)]
         public string Text { get; set; } = string.Empty;
 
         public DateTime CreationDateTime { get; set; }
 
-        public ApplicationUserChat ApplicationUserChat { get; set; } = default!;
+        public int ApplicationUserServiceId { get; set; }
 
-        public string ApplicationUserId { get; set; } = string.Empty;
+        public ApplicationUserService ApplicationUserService { get; set; } = default!;
 
-        public int ChatId { get; set; }
+        public bool IsFromProvider { get; set; }
+
+        public bool IsRead { get; set; }
     }
 }

@@ -1,17 +1,13 @@
-﻿namespace Tradio.Domain
+﻿using Tradio.Domain;
+
+public class Payment
 {
-    public class Payment
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string ApplicationUserId { get; set; } = string.Empty;
+    public int ApplicationUserServiceId { get; set; }
+    public ApplicationUserService ApplicationUserService { get; set; } = default!;
 
-        public int SubscriptionTypeId { get; set; }
+    public int Price { get; set; }
 
-        public SubscriptionType SubscriptionType { get; set; } = default!;
-
-        public int IsPurcharsed { get; set; }
-
-        public DateTime CreationDateTime { get; set; }
-    }
+    public DateTime CreationDateTime { get; set; }
 }

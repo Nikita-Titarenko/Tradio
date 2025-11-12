@@ -34,6 +34,7 @@ namespace Tradio.Infrastructure
             services.AddScoped<IFileService, Services.FileService>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
