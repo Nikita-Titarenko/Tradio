@@ -16,18 +16,26 @@ namespace Tradio.Application.Services.Messages
         private readonly IMapper _mapper;
         private readonly IServiceService _serviceService;
         private readonly INotificationService _notificationService;
+        private readonly IUserService _userService;
 
-        public MessageService(IUnitOfWork unitOfWork, IApplicationUserServiceService applicationUserServiceService, IMapper mapper, IServiceService serviceService, INotificationService notificationService)
+        public MessageService(IUnitOfWork unitOfWork, IApplicationUserServiceService applicationUserServiceService, IMapper mapper, IServiceService serviceService, INotificationService notificationService, IUserService userService)
         {
             _unitOfWork = unitOfWork;
             _applicationUserServiceService = applicationUserServiceService;
             _mapper = mapper;
             _serviceService = serviceService;
             _notificationService = notificationService;
+            _userService = userService;
         }
 
         public async Task<Result<MessageDto>> CreateMessageAsync(string senderUserId, CreateMessageDto dto)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(senderUserId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var message = new Message
             {
                 Text = dto.Text,
@@ -77,7 +85,7 @@ namespace Tradio.Application.Services.Messages
             var applicationUserServiceId = getApplicationUserServiceResult.Value.Id;
 
             message.ApplicationUserServiceId = applicationUserServiceId;
-            message.IsFromProvider = senderUserId != getApplicationUserServiceResult.Value.ApplicationUserId;
+            message.IsFromProvider = senderUserId != getApplicationUserServiceResult.Value.ProviderUserId;
 
             await _notificationService.SendMessageToChatAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
             {
@@ -105,6 +113,12 @@ namespace Tradio.Application.Services.Messages
 
         public async Task<Result<ChatDto>> GetMessagesAsync(int applicationUserServiceId, string userId)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var messageDbSet = _unitOfWork.GetMessageRepository();
             var chat = await messageDbSet.GetMessagesAsync(applicationUserServiceId, userId);
             if (chat == null)

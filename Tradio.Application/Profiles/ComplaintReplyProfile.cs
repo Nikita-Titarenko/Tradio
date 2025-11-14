@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Tradio.Application.Dtos.ComplaintReplies;
+using Tradio.Application.Dtos.Complaints;
 using Tradio.Domain;
 
 namespace Tradio.Application.Profiles
@@ -9,6 +10,7 @@ namespace Tradio.Application.Profiles
         public ComplaintReplyProfile()
         {
             CreateMap<CreateComplaintReplyDto, ComplaintReply>();
+            CreateMap<ComplaintReply, ComplaintReplyDto>();
         }
     }
 }

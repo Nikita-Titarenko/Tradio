@@ -1,6 +1,4 @@
-﻿using Eventa.Infrastructure.Repositories;
-using Tradio.Application.Repositories;
-using Tradio.Infrastructure;
+﻿using Tradio.Application.Repositories;
 
 namespace Tradio.Infrastructure.Repositories
 {
@@ -10,7 +8,8 @@ namespace Tradio.Infrastructure.Repositories
 
         private readonly Dictionary<Type, object> _repositories = [];
 
-        public UnitOfWork(ApplicationDbContext dbContext) {
+        public UnitOfWork(ApplicationDbContext dbContext)
+        {
             _dbContext = dbContext;
         }
 
@@ -37,6 +36,10 @@ namespace Tradio.Infrastructure.Repositories
         public IApplicationUserServiceRepository GetApplicationUserServiceRepository() => new ApplicationUserServiceRepository(_dbContext);
 
         public IMessageRepository GetMessageRepository() => new MessageRepository(_dbContext);
+
+        public IComplaintRepository GetComplaintRepository() => new ComplaintRepository(_dbContext);
+
+        public IPaymentRepository GetPaymentRepository() => new PaymentRepository(_dbContext);
 
         public void Dispose()
         {

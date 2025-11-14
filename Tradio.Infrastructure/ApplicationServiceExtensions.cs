@@ -7,6 +7,7 @@ using Tradio.Application.Services.ComplaintReplies;
 using Tradio.Application.Services.Complaints;
 using Tradio.Application.Services.Countries;
 using Tradio.Application.Services.Messages;
+using Tradio.Application.Services.Payments;
 using Tradio.Application.Services.Services;
 using Tradio.Application.Services.SubscriptionTypes;
 using Tradio.Application.Services.UserSubscriptionService;
@@ -28,6 +29,7 @@ namespace Tradio.Infrastructure
             services.AddScoped<IComplaintService, ComplaintService>();
             services.AddScoped<IComplaintReplyService, ComplaintReplyService>();
             services.AddScoped<IApplicationUserServiceService, ApplicationUserServiceService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             return services;
         }

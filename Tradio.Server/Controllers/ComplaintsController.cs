@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Dtos.Complaints;
 using Tradio.Application.Services.Complaints;
 using Tradio.Domain;
+using Tradio.Server.Common;
 using Tradio.Server.RequestsModel.Complaints;
 
 namespace Tradio.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComplaintsController : ControllerBase
+    public class ComplaintsController : BaseController
     {
         private readonly IComplaintService _complaintService;
         private readonly IMapper _mapper;
@@ -24,7 +25,7 @@ namespace Tradio.Server.Controllers
         [Authorize]
         public async Task<IActionResult> CreateComplaint(CreateComplaintRequestModel requestModel)
         {
-            var result = await _complaintService.CreateComplaintAsync(_mapper.Map<CreateComplaintDto>(requestModel));
+            var result = await _complaintService.CreateComplaintAsync(_mapper.Map<CreateComplaintDto>(requestModel), GetUserId());
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);
@@ -41,6 +42,51 @@ namespace Tradio.Server.Controllers
         public async Task<IActionResult> GetComplaint(int complaintId)
         {
             var result = await _complaintService.GetComplaintDtoAsync(complaintId);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            var complaint = result.Value;
+
+            return Ok(complaint);
+        }
+
+        [HttpGet("by-user")]
+        [Authorize]
+        public async Task<IActionResult> GetComplaintsByUser()
+        {
+            var result = await _complaintService.GetComplaintsByUserAsync(GetUserId());
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            var complaint = result.Value;
+
+            return Ok(complaint);
+        }
+
+        [HttpGet("against-user")]
+        [Authorize]
+        public async Task<IActionResult> GetComplaintsAgainstUser()
+        {
+            var result = await _complaintService.GetComplaintsAgainstUserAsync(GetUserId());
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            var complaint = result.Value;
+
+            return Ok(complaint);
+        }
+
+        [HttpGet("without-reply")]
+        [Authorize(Roles = DefaultRoles.AdminRole)]
+        public async Task<IActionResult> GetComplaintsWithoutReply()
+        {
+            var result = await _complaintService.GetComplaintsWithoutReplyAsync(GetUserId());
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);

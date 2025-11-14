@@ -30,7 +30,7 @@ namespace Tradio.Infrastructure
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped<IPaymentService, StripePaymentService>();
+            services.AddScoped<IPaymentProcessorService, StripePaymentService>();
             services.AddScoped<IFileService, Services.FileService>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();

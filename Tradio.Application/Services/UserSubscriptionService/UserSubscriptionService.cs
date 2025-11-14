@@ -13,17 +13,25 @@ namespace Tradio.Application.Services.UserSubscriptionService
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISubscriptionTypeService _subscriptionTypeService;
-        private readonly IPaymentService _paymentService;
+        private readonly IPaymentProcessorService _paymentService;
+        private readonly IUserService _userService;
 
-        public UserSubscriptionService(IUnitOfWork unitOfWork, ISubscriptionTypeService subscriptionTypeService, IPaymentService paymentService)
+        public UserSubscriptionService(IUnitOfWork unitOfWork, ISubscriptionTypeService subscriptionTypeService, IPaymentProcessorService paymentService, IUserService userService)
         {
             _unitOfWork = unitOfWork;
             _subscriptionTypeService = subscriptionTypeService;
             _paymentService = paymentService;
+            _userService = userService;
         }
 
         public async Task<Result<UserSubscriptionDto>> CreatePaymentAsync(string userId, int subscriptionTypeId, string successUrl, string cancleUrl)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var getSubscriptionTypeResult = await _subscriptionTypeService.GetSubscriptionTypeAsync(subscriptionTypeId);
             if (!getSubscriptionTypeResult.IsSuccess)
             {

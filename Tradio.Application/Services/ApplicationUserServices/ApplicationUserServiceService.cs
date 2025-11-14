@@ -33,9 +33,9 @@ namespace Tradio.Application.Services.ApplicationUserServices
 
         public async Task<Result<ApplicationUserServiceDto>> GetApplicationUserServiceAsync(int applicationUserServiceId)
         {
-            var applicationUserServiceRepository = _unitOfWork.GetDbSet<ApplicationUserService>();
+            var applicationUserServiceRepository = _unitOfWork.GetApplicationUserServiceRepository();
 
-            var applicationUserService = await applicationUserServiceRepository.GetAsync(applicationUserServiceId);
+            var applicationUserService = await applicationUserServiceRepository.GetApplicationUserServiceAsync(applicationUserServiceId);
 
             if (applicationUserService == null)
             {

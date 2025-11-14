@@ -1,11 +1,9 @@
-﻿using Eventa.Application.Repositories;
-using FluentResults;
+﻿using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Tradio.Application.Dtos.Users;
 using Tradio.Application.Services;
 using Tradio.Application.Services.Cities;
-using Tradio.Domain;
 using Tradio.Infrastructure.Common;
 
 namespace Tradio.Infrastructure.Services
@@ -148,6 +146,64 @@ namespace Tradio.Infrastructure.Services
                 EmailConfirmed = emailConfirmed,
                 Role = (await _userManager.GetRolesAsync(user)).First()
             });
+        }
+
+        public async Task<Result> MakePaymentAsync(string giverId, string receiverId, int creditCount)
+        {
+            var getUserResult = await GetUserAsync(giverId);
+            if (!getUserResult.IsSuccess)
+            {
+                return Result.Fail(getUserResult.Errors);
+            }
+
+            var giver = getUserResult.Value;
+
+            getUserResult = await GetUserAsync(receiverId);
+            if (!getUserResult.IsSuccess)
+            {
+                return Result.Fail(getUserResult.Errors);
+            }
+
+            var receiver = getUserResult.Value;
+
+            if (giver.CreditCount < creditCount)
+            {
+                return Result.Fail(new Error("").WithMetadata("Code", ""));
+            }
+            receiver.CreditCount += creditCount;
+            giver.CreditCount -= creditCount;
+
+            return Result.Ok();
+        }
+
+        public async Task<Result> BanUserAsync(string userId, TimeSpan banDuration)
+        {
+            var getUserResult = await GetUserAsync(userId);
+            if (!getUserResult.IsSuccess)
+            {
+                return Result.Fail(getUserResult.Errors);
+            }
+            var user = getUserResult.Value;
+
+            await _userManager.SetLockoutEndDateAsync(user, DateTime.UtcNow + banDuration);
+            return Result.Ok();
+        }
+
+        public async Task<Result> IsUserAllowed(string userId)
+        {
+            var getUserResult = await GetUserAsync(userId);
+            if (!getUserResult.IsSuccess)
+            {
+                return Result.Fail(getUserResult.Errors);
+            }
+            var user = getUserResult.Value;
+
+            var banEndDate = await _userManager.GetLockoutEndDateAsync(user);
+            if (banEndDate > DateTime.UtcNow)
+            {
+                return Result.Fail(new Error("Account lockout").WithMetadata("Code", "AccountLockout"));
+            }
+            return Result.Ok();
         }
 
         private async Task<Result<ApplicationUser>> GetUserAsync(string userId)

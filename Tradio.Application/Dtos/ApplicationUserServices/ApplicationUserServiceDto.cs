@@ -6,6 +6,10 @@
 
         public int ServiceId { get; set; }
 
-        public string ApplicationUserId { get; set; } = string.Empty;
+        public int Price { get; set; }
+
+        public string ProviderUserId { get; set; } = string.Empty;
+
+        public string RecepientUserId { get; set; } = string.Empty;
     }
 }

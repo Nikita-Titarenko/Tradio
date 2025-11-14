@@ -1,5 +1,4 @@
-﻿using Eventa.Application.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Tradio.Application.Repositories;
 using Tradio.Domain;
 

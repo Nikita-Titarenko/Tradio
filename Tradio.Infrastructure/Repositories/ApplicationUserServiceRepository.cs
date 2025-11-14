@@ -17,6 +17,21 @@ namespace Tradio.Infrastructure.Repositories
             return await _dbSet.Where(us => us.ApplicationUserId == userId && us.ServiceId == serviceId).FirstOrDefaultAsync();
         }
 
+        public async Task<ApplicationUserServiceDto?> GetApplicationUserServiceAsync(int complaintId)
+        {
+            return await _dbSet
+                .Where(us => us.Id == complaintId)
+                .Select(us => new ApplicationUserServiceDto
+                {
+                    Id = us.Id,
+                    ProviderUserId = us.Service.ApplicationUserId,
+                    ServiceId = us.ServiceId,
+                    RecepientUserId = us.ApplicationUserId,
+                    Price = us.Service.Price
+                })
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<ChatListItemDto>> GetProvidedServiceChatsAsync(string userId)
         {
             return await _dbSet

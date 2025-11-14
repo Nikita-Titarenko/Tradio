@@ -1,23 +1,21 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Tradio.Application.Dtos.Complaints;
+using Tradio.Application.Dtos.ComplaintReplies;
 using Tradio.Application.Services.ComplaintReplies;
-using Tradio.Application.Services.Complaints;
 using Tradio.Server.Common;
-using Tradio.Server.RequestsModel.Complaints;
+using Tradio.Server.RequestsModel.ComplaintReplies;
 
 namespace Tradio.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComplaintRepliesControllerController : ControllerBase
+    public class ComplaintRepliesController : BaseController
     {
         private readonly IComplaintReplyService _complaintReplyService;
         private readonly IMapper _mapper;
 
-        public ComplaintRepliesControllerController(IComplaintReplyService complaintReplyService, IMapper mapper)
+        public ComplaintRepliesController(IComplaintReplyService complaintReplyService, IMapper mapper)
         {
             _complaintReplyService = complaintReplyService;
             _mapper = mapper;
@@ -25,9 +23,9 @@ namespace Tradio.Server.Controllers
 
         [HttpPost]
         [Authorize(Roles = DefaultRoles.AdminRole)]
-        public async Task<IActionResult> CreateComplaintReply(CreateComplaintRequestModel requestModel)
+        public async Task<IActionResult> CreateComplaintReply(CreateComplaintReplyRequestModel requestModel)
         {
-            var result = await _complaintReplyService.CreateComplaintAsync(_mapper.Map<CreateComplaintDto>(requestModel));
+            var result = await _complaintReplyService.CreateComplaintReplyAsync(_mapper.Map<CreateComplaintReplyDto>(requestModel), GetUserId());
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);
@@ -43,7 +41,7 @@ namespace Tradio.Server.Controllers
         [Authorize]
         public async Task<IActionResult> GetComplaintReply(int complaintReplyId)
         {
-            var result = await _complaintReplyService.GetComplaintDtoAsync(complaintReplyId);
+            var result = await _complaintReplyService.GetComplaintReplyDtoAsync(complaintReplyId);
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);

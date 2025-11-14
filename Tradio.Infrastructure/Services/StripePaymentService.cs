@@ -7,7 +7,7 @@ using Tradio.Infrastructure.Options;
 
 namespace Tradio.Infrastructure.Services
 {
-    public class StripePaymentService : IPaymentService
+    public class StripePaymentService : IPaymentProcessorService
     {
         private readonly PaymentOptions _options;
 
@@ -49,57 +49,11 @@ namespace Tradio.Infrastructure.Services
             return seccion.Id;
         }
 
-        public async Task<string> CreatePaymentIntentAsync(int orderId, string metadataName, double totalPrice)
-        {
-            var options = new PaymentIntentCreateOptions
-            {
-                PaymentMethodTypes = new List<string>
-                {
-                    "card"
-                },
-                Amount = (int)Math.Ceiling(totalPrice) * 100,
-                Currency = "uah",
-                Metadata = new Dictionary<string, string>
-                {
-                     { metadataName, orderId.ToString() }
-                }
-            };
-            var service = new PaymentIntentService();
-            var paymentIntent = await service.CreateAsync(options);
-
-            return paymentIntent.Id;
-        }
-
         public bool IsCheckoutSessionSuccess(string payload, string signature)
         {
             var stripeEvent = EventUtility.ConstructEvent(payload, signature, _options.WebhookSecret);
 
             return stripeEvent.Type == "checkout.session.completed";
-        }
-
-        public bool IsPaymentIntentSuccess(string payload, string signature)
-        {
-            var stripeEvent = EventUtility.ConstructEvent(payload, signature, _options.WebhookSecret);
-
-            return stripeEvent.Type == "payment_intent.succeeded";
-        }
-
-        public string? GetMetadataFromPayment(string payload, string signature, string metadataName)
-        {
-            var stripeEvent = EventUtility.ConstructEvent(payload, signature, _options.WebhookSecret);
-
-            var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-
-            if (paymentIntent == null)
-            {
-                return null;
-            }
-
-            var metadata = paymentIntent.Metadata;
-
-            var metadataExists = metadata.TryGetValue(metadataName, out var metadataValue);
-
-            return metadataValue;
         }
 
         public string? GetMetadataFromSession(string payload, string signature, string metadataName)

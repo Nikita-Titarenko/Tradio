@@ -1,4 +1,6 @@
-﻿namespace Tradio.Application.Dtos.Complaints
+﻿using Tradio.Application.Dtos.ComplaintReplies;
+
+namespace Tradio.Application.Dtos.Complaints
 {
     public class ComplaintListItemDto
     {
@@ -13,5 +15,7 @@
         public string ServiceName = string.Empty;
 
         public string ApplicationUserName = string.Empty;
+
+        public ComplaintReplyDto? ComplaintReplyDto { get; set; } = default!;
     }
 }

@@ -14,5 +14,7 @@ namespace Tradio.Domain
         public int ApplicationUserServiceId { get; set; }
 
         public ApplicationUserService ApplicationUserService { get; set; } = default!;
+
+        public ComplaintReply? ComplaintReply { get; set; } = default!;
     }
 }

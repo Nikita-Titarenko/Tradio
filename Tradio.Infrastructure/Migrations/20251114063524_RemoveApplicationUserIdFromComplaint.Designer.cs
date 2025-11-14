@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tradio.Infrastructure;
 
@@ -11,9 +12,11 @@ using Tradio.Infrastructure;
 namespace Tradio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251114063524_RemoveApplicationUserIdFromComplaint")]
+    partial class RemoveApplicationUserIdFromComplaint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,13 +153,6 @@ namespace Tradio.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "2d13340c-d9ab-4439-bd7c-897c12f8ceba",
-                            RoleId = "2"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -548,9 +544,6 @@ namespace Tradio.Infrastructure.Migrations
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreditReturning")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
@@ -830,27 +823,6 @@ namespace Tradio.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "2d13340c-d9ab-4439-bd7c-897c12f8ceba",
-                            AccessFailedCount = 0,
-                            CityId = 4,
-                            ConcurrencyStamp = "73fa19ca-4374-4a0a-b180-0104ef50f211",
-                            CreditCount = 105,
-                            Email = "nikitatitarenko81@gmail.com",
-                            EmailConfirmed = true,
-                            Fullname = "Микита",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "NIKITATITARENKO81@GMAIL.COM",
-                            NormalizedUserName = "NIKITATITARENKO81@GMAIL.COM",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "22758ef3-c2d6-4cc4-a8f0-dab4790fd254",
-                            TwoFactorEnabled = false,
-                            UserName = "nikitatitarenko81@gmail.com",
-                            VerificationCode = "151515"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Tradio.Domain;
+using Tradio.Infrastructure.Common;
 
 namespace Tradio.Infrastructure
 {
@@ -33,7 +35,6 @@ namespace Tradio.Infrastructure
             };
             context.Users.AddRange(users);
             await context.SaveChangesAsync();
-
 
             var services = new Service[]
             {

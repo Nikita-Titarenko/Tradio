@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using Tradio.Application.Dtos.Complaints;
-using Tradio.Server.RequestsModel.Complaints;
+using Tradio.Application.Dtos.ComplaintReplies;
+using Tradio.Server.RequestsModel.ComplaintReplies;
 
 namespace Tradio.Server.Profiles
 {
     public class ComplaintReplyProfile : Profile
     {
-        public ComplaintReplyProfile() {
-            CreateMap<CreateComplaintRequestModel, CreateComplaintDto>();
+        public ComplaintReplyProfile()
+        {
+            CreateMap<CreateComplaintReplyRequestModel, CreateComplaintReplyDto>();
         }
     }
 }

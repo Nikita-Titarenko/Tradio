@@ -61,8 +61,6 @@ namespace Tradio.Infrastructure
 
         public DbSet<Complaint> Complaints { get; set; }
 
-        public DbSet<ComplaintStatus> ComplaintStatuses { get; set; }
-
         public DbSet<ComplaintReply> ComplaintReplies { get; set; }
     }
 }

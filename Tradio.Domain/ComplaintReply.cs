@@ -18,5 +18,7 @@ namespace Tradio.Domain
         public Complaint Complaint { get; set; } = default!;
 
         public bool IsApproved { get; set; }
+
+        public int? CreditReturning { get; set; }
     }
 }

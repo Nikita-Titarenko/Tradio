@@ -21,8 +21,6 @@ namespace Tradio.Infrastructure
 
         public ICollection<UserSubscription> UserSubscriptions { get; set; } = [];
 
-        public ICollection<Complaint> Complaints { get; set; } = [];
-
         public ICollection<ComplaintReply> ComplaintReplies { get; set; } = [];
     }
 }

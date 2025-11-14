@@ -12,15 +12,23 @@ namespace Tradio.Application.Services.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        public ServiceService(IUnitOfWork unitOfWork, ICategoryService categoryService, IMapper mapper) {
+        public ServiceService(IUnitOfWork unitOfWork, ICategoryService categoryService, IMapper mapper, IUserService userService) {
             _unitOfWork = unitOfWork;
             _categoryService = categoryService;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public async Task<Result<ServiceDto>> CreateServiceAsync(CreateServiceDto dto, string userId)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var getCategoryResult = await _categoryService.GetCategoryAsync(dto.CategoryId);
 
             if (!getCategoryResult.IsSuccess)
@@ -44,6 +52,12 @@ namespace Tradio.Application.Services.Services
 
         public async Task<Result<ServiceDto>> UpdateServiceAsync(int serviceId, UpdateServiceDto dto, string userId)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var getCategoryResult = await _categoryService.GetCategoryAsync(dto.CategoryId);
 
             if (!getCategoryResult.IsSuccess)
@@ -76,6 +90,12 @@ namespace Tradio.Application.Services.Services
 
         public async Task<Result<ServiceDto>> DeleteServiceAsync(int serviceId, string userId)
         {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
             var getServiceResult = await GetServiceAsync(serviceId);
             if (!getServiceResult.IsSuccess)
             {
