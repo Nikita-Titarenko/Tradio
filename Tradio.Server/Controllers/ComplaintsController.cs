@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Dtos.Complaints;
@@ -23,6 +24,8 @@ namespace Tradio.Server.Controllers
 
         [HttpPost]
         [Authorize]
+        [ProducesResponseType(typeof(ComplaintDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateComplaint(CreateComplaintRequestModel requestModel)
         {
             var result = await _complaintService.CreateComplaintAsync(_mapper.Map<CreateComplaintDto>(requestModel), GetUserId());
@@ -37,8 +40,11 @@ namespace Tradio.Server.Controllers
                 result.Value);
         }
 
+
         [HttpGet("{complaintId}")]
         [Authorize]
+        [ProducesResponseType(typeof(ComplaintDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComplaint(int complaintId)
         {
             var result = await _complaintService.GetComplaintDtoAsync(complaintId);
@@ -54,6 +60,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("by-user")]
         [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<ComplaintListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComplaintsByUser()
         {
             var result = await _complaintService.GetComplaintsByUserAsync(GetUserId());
@@ -69,6 +77,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("against-user")]
         [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<ComplaintListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComplaintsAgainstUser()
         {
             var result = await _complaintService.GetComplaintsAgainstUserAsync(GetUserId());
@@ -84,6 +94,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("without-reply")]
         [Authorize(Roles = DefaultRoles.AdminRole)]
+        [ProducesResponseType(typeof(IEnumerable<ComplaintListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComplaintsWithoutReply()
         {
             var result = await _complaintService.GetComplaintsWithoutReplyAsync(GetUserId());

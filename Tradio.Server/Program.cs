@@ -1,5 +1,7 @@
 using System.Text;
+using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Tradio.Infrastructure;
 using Tradio.Infrastructure.Hubs;
@@ -37,6 +39,20 @@ builder.Services
             ValidAudience = audience
         };
     });
+
+builder.Services.Configure<ApiBehaviorOptions>(opt =>
+{
+    opt.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(ms => ms.Value != null && ms.Value.Errors.Count > 0)
+            .SelectMany(ms => ms.Value!.Errors.Select(e =>
+            {
+                return new Error(e.ErrorMessage);
+            }));
+        return new BadRequestObjectResult(new { errors });
+    };
+});
 
 builder.Services.AddSignalR();
 

@@ -51,6 +51,8 @@ namespace Tradio.Infrastructure
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Country> Countres { get; set; }
@@ -62,5 +64,7 @@ namespace Tradio.Infrastructure
         public DbSet<Complaint> Complaints { get; set; }
 
         public DbSet<ComplaintReply> ComplaintReplies { get; set; }
+
+        public DbSet<Payment> Payments { get; set; }
     }
 }

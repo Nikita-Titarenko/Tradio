@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using Tradio.Domain;
 
 namespace Tradio.Infrastructure
 {
     public class ApplicationUser : IdentityUser
     {
+        [MaxLength(6)]
         public string VerificationCode { get; set; } = string.Empty;
 
+        [MaxLength(50)]
         public string Fullname { get; set; } = string.Empty;
 
         public int CreditCount { get; set; }

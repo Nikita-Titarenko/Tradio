@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.Countries;
 using Tradio.Application.Services.Countries;
 
 namespace Tradio.Server.Controllers
@@ -15,6 +17,8 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<CountryDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllCountries()
         {
             var getCountriesResult = await _countryService.GetCountriesAsync();

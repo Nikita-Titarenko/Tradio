@@ -1,7 +1,9 @@
 ﻿using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Tradio.Application.Dtos.Users;
+using Tradio.Application.Repositories;
 using Tradio.Application.Services;
 using Tradio.Application.Services.Cities;
 using Tradio.Infrastructure.Common;
@@ -16,13 +18,15 @@ namespace Tradio.Infrastructure.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ICityService _cityService;
+        private readonly ApplicationDbContext _dbContext;
 
-        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ICityService cityService)
+        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ICityService cityService, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _cityService = cityService;
+            _dbContext = dbContext;
         }
 
         public async Task<Result<RegisterResultDto>> RegisterUserAsync(RegisterUserDto dto)
@@ -168,7 +172,7 @@ namespace Tradio.Infrastructure.Services
 
             if (giver.CreditCount < creditCount)
             {
-                return Result.Fail(new Error("").WithMetadata("Code", ""));
+                return Result.Fail(new Error("The user does not have enough credits to make the payment.").WithMetadata("Code", "NotEnoughCredits"));
             }
             receiver.CreditCount += creditCount;
             giver.CreditCount -= creditCount;
@@ -204,6 +208,27 @@ namespace Tradio.Infrastructure.Services
                 return Result.Fail(new Error("Account lockout").WithMetadata("Code", "AccountLockout"));
             }
             return Result.Ok();
+        }
+
+        public async Task<Result<UserDto>> GetUserDtoAsync(string userId)
+        {
+            var user = await _dbContext.Users
+                .Where(u => u.Id == userId)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Fullname = u.Fullname,
+                    CreditCount = u.CreditCount,
+                    CityName = u.City.Name,
+                    CountryName = u.City.Country.Name
+                })
+                .FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return Result.Fail(new Error("User not found").WithMetadata("Code", "UserNotFound"));
+            }
+
+            return Result.Ok(user);
         }
 
         private async Task<Result<ApplicationUser>> GetUserAsync(string userId)

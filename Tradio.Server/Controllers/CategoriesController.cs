@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.Categories;
 using Tradio.Application.Services.Categories;
-using Tradio.Application.Services.Cities;
 
 namespace Tradio.Server.Controllers
 {
@@ -16,15 +17,14 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<CategoryDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllCategories(int? parentCategoryId)
         {
             var getCategoriesResult = await _categoryService.GetCategoriesAsync(parentCategoryId);
             if (!getCategoriesResult.IsSuccess)
             {
-                return BadRequest(new
-                {
-                    errors = getCategoriesResult.Errors
-                });
+                return BadRequest(getCategoriesResult.Errors);
             }
 
             return Ok(getCategoriesResult.Value);

@@ -22,25 +22,35 @@ namespace Tradio.Application.Services.Payments
             _mapper = mapper;
         }
 
-        public async Task<Result<PaymentDto>> CreatePaymentAsync(int applicationUserServiceId)
+        public async Task<Result<PaymentDto>> CreatePaymentAsync(int applicationUserServiceId, string userId)
         {
-            var getApplicationUserServiceResult = await _applicationUserServiceService.GetApplicationUserServiceAsync(applicationUserServiceId);
-            if (getApplicationUserServiceResult.IsSuccess)
-            {
-                return Result.Fail(getApplicationUserServiceResult.Errors);
-            }
-            var applicationUserService = getApplicationUserServiceResult.Value;
-
-            var isUserAllowedResult = await _userService.IsUserAllowed(applicationUserService.RecepientUserId);
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
             if (!isUserAllowedResult.IsSuccess)
             {
                 return Result.Fail(isUserAllowedResult.Errors);
             }
 
-            await _userService.MakePaymentAsync(
+            var getApplicationUserServiceResult = await _applicationUserServiceService.GetApplicationUserServiceAsync(applicationUserServiceId);
+            if (!getApplicationUserServiceResult.IsSuccess)
+            {
+                return Result.Fail(getApplicationUserServiceResult.Errors);
+            }
+            var applicationUserService = getApplicationUserServiceResult.Value;
+
+            if (applicationUserService.RecepientUserId != userId)
+            {
+                return Result.Fail(new Error("You are not the recipient of the service.").WithMetadata("Code", "NotRecepient"));
+            }
+
+            var paymentResult = await _userService.MakePaymentAsync(
                 applicationUserService.RecepientUserId,
                 applicationUserService.ProviderUserId,
                 applicationUserService.Price);
+
+            if (!paymentResult.IsSuccess)
+            {
+                return Result.Fail(paymentResult.Errors);
+            }
 
             var paymentDbSet = _unitOfWork.GetDbSet<Payment>();
             var payment = new Payment

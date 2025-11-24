@@ -18,7 +18,7 @@ namespace Tradio.Infrastructure.Services
         {
             MimeMessage message = new();
 
-            message.From.Add(new MailboxAddress("Eventa", _options.Email));
+            message.From.Add(new MailboxAddress("Tradio", _options.Email));
 
             message.To.Add(new MailboxAddress(string.Empty, email));
 

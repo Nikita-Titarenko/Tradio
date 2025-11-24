@@ -13,5 +13,7 @@
         public ICollection<Message> Messages { get; set; } = [];
 
         public ICollection<Complaint> Complaints { get; set; } = [];
+
+        public ICollection<Payment> Payments { get; set; } = [];
     }
 }

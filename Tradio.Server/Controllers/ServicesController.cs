@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.Messages;
 using Tradio.Application.Dtos.Services;
 using Tradio.Application.Services.Services;
 using Tradio.Server.RequestsModel.Services;
@@ -22,6 +24,8 @@ namespace Tradio.Server.Controllers
 
         [HttpPost]
         [Authorize]
+        [ProducesResponseType(typeof(ServiceDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateService(CreateServiceRequestModel requestModel)
         {
             var result = await _serviceService.CreateServiceAsync(_mapper.Map<CreateServiceDto>(requestModel), GetUserId());
@@ -41,6 +45,8 @@ namespace Tradio.Server.Controllers
 
         [HttpPut("{serviceId}")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateService(int serviceId, UpdateServiceRequestModel requestModel)
         {
             var result = await _serviceService.UpdateServiceAsync(serviceId, _mapper.Map<UpdateServiceDto>(requestModel), GetUserId());
@@ -54,6 +60,8 @@ namespace Tradio.Server.Controllers
 
         [HttpDelete("{serviceId}")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteService(int serviceId)
         {
             var result = await _serviceService.DeleteServiceAsync(serviceId, GetUserId());
@@ -67,6 +75,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("{serviceId}")]
         [Authorize]
+        [ProducesResponseType(typeof(ServiceDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetService(int serviceId)
         {
             var result = await _serviceService.GetServiceDtoAsync(serviceId);
@@ -82,6 +92,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet]
         [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<ServiceListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetServices(int pageNumber, int pageSize, int categoryId, int? countryId, int? cityId, string? subName)
         {
             var result = await _serviceService.GetServiceDtosAsync(pageNumber, pageSize, categoryId, countryId, cityId, subName);
@@ -97,6 +109,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("by-user")]
         [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<ServiceListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetServicesByUser()
         {
             var result = await _serviceService.GetServicesByUserAsync(GetUserId());

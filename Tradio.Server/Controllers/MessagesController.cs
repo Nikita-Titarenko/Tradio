@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.ApplicationUserServices;
+using Tradio.Application.Dtos.Complaints;
 using Tradio.Application.Dtos.Messages;
 using Tradio.Application.Services.Messages;
 using Tradio.Infrastructure.Services;
@@ -23,6 +26,8 @@ namespace Tradio.Server.Controllers
 
         [HttpPost]
         [Authorize]
+        [ProducesResponseType(typeof(MessageDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateService(CreateMessageRequestModel requestModel)
         {
             var result = await _messageService.CreateMessageAsync(GetUserId(), _mapper.Map<CreateMessageDto>(requestModel));
@@ -42,6 +47,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("{messageId}")]
         [Authorize]
+        [ProducesResponseType(typeof(MessageDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetMessage(int messageId)
         {
             var result = await _messageService.GetMessageDtoAsync(messageId);
@@ -57,6 +64,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("by-chat")]
         [Authorize]
+        [ProducesResponseType(typeof(ChatDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetMessages(int applicationUserServiceId)
         {
             var result = await _messageService.GetMessagesAsync(applicationUserServiceId, GetUserId());

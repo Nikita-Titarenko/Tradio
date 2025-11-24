@@ -7,6 +7,7 @@ namespace Tradio.Application.Services
     {
         Task<Result> BanUserAsync(string userId, TimeSpan banDuration);
         Task<Result<ConfirmEmailResultDto>> ConfirmEmailAsync(ConfirmEmailDto dto);
+        Task<Result<UserDto>> GetUserDtoAsync(string userId);
         Task<Result> IsUserAllowed(string userId);
         Task<Result<LoginResultDto>> LoginAsync(LoginUserDto dto);
         Task<Result> MakePaymentAsync(string giverId, string receiverId, int creditCount);

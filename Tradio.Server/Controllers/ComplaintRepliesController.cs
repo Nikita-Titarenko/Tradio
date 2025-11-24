@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Dtos.ComplaintReplies;
+using Tradio.Application.Dtos.Messages;
 using Tradio.Application.Services.ComplaintReplies;
 using Tradio.Server.Common;
 using Tradio.Server.RequestsModel.ComplaintReplies;
@@ -23,6 +25,8 @@ namespace Tradio.Server.Controllers
 
         [HttpPost]
         [Authorize(Roles = DefaultRoles.AdminRole)]
+        [ProducesResponseType(typeof(ComplaintReplyDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateComplaintReply(CreateComplaintReplyRequestModel requestModel)
         {
             var result = await _complaintReplyService.CreateComplaintReplyAsync(_mapper.Map<CreateComplaintReplyDto>(requestModel), GetUserId());
@@ -39,6 +43,8 @@ namespace Tradio.Server.Controllers
 
         [HttpGet("{complaintReplyId}")]
         [Authorize]
+        [ProducesResponseType(typeof(ComplaintReplyDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComplaintReply(int complaintReplyId)
         {
             var result = await _complaintReplyService.GetComplaintReplyDtoAsync(complaintReplyId);

@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Dtos.Users;
 using Tradio.Application.Services;
@@ -25,13 +24,11 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(typeof(RegisterResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> RegisterUser(RegisterUserRequestModel request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var registerResult = await _userService.RegisterUserAsync(_mapper.Map<RegisterUserDto>(request));
 
             if (!registerResult.IsSuccess)
@@ -48,13 +45,11 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpPost("confirm-email")]
+        [ProducesResponseType(typeof(SignInResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ConfirmEmail(EmailConfirmationRequestModel request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var confirmEmailResult = await _userService.ConfirmEmailAsync(_mapper.Map<ConfirmEmailDto>(request));
 
             if (!confirmEmailResult.IsSuccess)
@@ -79,6 +74,9 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpPost("resend-confirm-email")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ResendConfirmEmail(ResendEmailConfirmationRequestModel request)
         {
             var confirmEmailResult = await _userService.ResendRegistrationEmailAsync(request.UserId);
@@ -97,13 +95,11 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(SignInResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Login(LoginRequestModel request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var loginResult = await _userService.LoginAsync(_mapper.Map<LoginUserDto>(request));
 
             if (!loginResult.IsSuccess)
@@ -126,6 +122,20 @@ namespace Tradio.Server.Controllers
             }
 
             return Ok(new SignInResponseModel { JwtToken = jwtToken, EmailConfirmed = loginResult.Value.EmailConfirmed, UserId = loginResult.Value.UserId });
+        }
+
+        [HttpGet("{userId}")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUser(string userId)
+        {
+            var getUserResult = await _userService.GetUserDtoAsync(userId);
+            if (!getUserResult.IsSuccess)
+            {
+                return BadRequest(getUserResult.Value);
+            }
+
+            return Ok(getUserResult.Value);
         }
     }
 }

@@ -31,7 +31,6 @@ namespace Tradio.Infrastructure
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IPaymentProcessorService, StripePaymentService>();
-            services.AddScoped<IFileService, Services.FileService>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<INotificationService, NotificationService>();

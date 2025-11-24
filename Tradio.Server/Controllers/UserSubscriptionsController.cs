@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Stripe.Climate;
+using Tradio.Application.Dtos.Messages;
+using Tradio.Application.Dtos.UserSubscriptions;
 using Tradio.Application.Services.UserSubscriptionService;
 using Tradio.Infrastructure.Options;
 
@@ -19,6 +22,8 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(UserSubscriptionDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateUserSubscription(int subscriptionId)
         {
             var userId = GetUserId();
