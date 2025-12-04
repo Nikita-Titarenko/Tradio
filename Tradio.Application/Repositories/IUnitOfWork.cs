@@ -6,6 +6,7 @@
         IApplicationUserServiceRepository GetApplicationUserServiceRepository();
         ICategoryRepository GetCategoryRepository();
         ICityRepository GetCityRepository();
+        IClimateRepository GetClimateRepository();
         IComplaintRepository GetComplaintRepository();
         IRepository<T> GetDbSet<T>() where T : class;
         IMessageRepository GetMessageRepository();

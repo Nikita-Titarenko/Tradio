@@ -54,6 +54,16 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowNgrok", policy =>
+    {
+        policy.AllowAnyHeader()
+              .AllowAnyMethod()
+              .SetIsOriginAllowed(origin => true);
+    });
+});
+
 builder.Services.AddSignalR();
 
 builder.Services.AddAutoMapper(c => { }, AppDomain.CurrentDomain.GetAssemblies());
@@ -73,7 +83,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseDefaultFiles();
+
+//app.UseHttpsRedirection();
+
+app.UseCors("AllowNgrok");
 
 app.UseAuthentication();
 

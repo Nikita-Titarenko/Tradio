@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using Tradio.Application.Services;
 using Tradio.Application.Services.ApplicationUserServices;
 using Tradio.Application.Services.Categories;
 using Tradio.Application.Services.Cities;
+using Tradio.Application.Services.Climates;
 using Tradio.Application.Services.ComplaintReplies;
 using Tradio.Application.Services.Complaints;
 using Tradio.Application.Services.Countries;
@@ -30,6 +32,7 @@ namespace Tradio.Infrastructure
             services.AddScoped<IComplaintReplyService, ComplaintReplyService>();
             services.AddScoped<IApplicationUserServiceService, ApplicationUserServiceService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IClimateService, Application.Services.Climates.ClimateService>();
 
             return services;
         }

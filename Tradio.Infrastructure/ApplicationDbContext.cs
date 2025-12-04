@@ -25,6 +25,12 @@ namespace Tradio.Infrastructure
                 .HasForeignKey(au => au.ApplicationUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Climate>()
+                .HasOne<ApplicationUser>()
+                .WithMany(au => au.Climates)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<ApplicationUserService>()
                 .HasOne<ApplicationUser>()
                 .WithMany(au => au.ApplicationUserServices)
@@ -66,5 +72,7 @@ namespace Tradio.Infrastructure
         public DbSet<ComplaintReply> ComplaintReplies { get; set; }
 
         public DbSet<Payment> Payments { get; set; }
+
+        public DbSet<Climate> Climates { get; set; }
     }
 }

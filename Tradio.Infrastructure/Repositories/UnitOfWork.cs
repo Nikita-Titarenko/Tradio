@@ -41,6 +41,8 @@ namespace Tradio.Infrastructure.Repositories
 
         public IPaymentRepository GetPaymentRepository() => new PaymentRepository(_dbContext);
 
+        public IClimateRepository GetClimateRepository() => new ClimateRepository(_dbContext);
+
         public void Dispose()
         {
             _dbContext.Dispose();

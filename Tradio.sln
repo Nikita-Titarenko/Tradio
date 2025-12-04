@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tradio.Domain", "Tradio.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tradio.Server", "Tradio.Server\Tradio.Server.csproj", "{029C64B4-E9C0-9FBD-D53E-9E185F6BBC1C}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Tradio.Client", "Tradio.Client\Tradio.Client.esproj", "{CC0934E0-A5EF-2181-750E-ACBA2465D806}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{029C64B4-E9C0-9FBD-D53E-9E185F6BBC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{029C64B4-E9C0-9FBD-D53E-9E185F6BBC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{029C64B4-E9C0-9FBD-D53E-9E185F6BBC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0934E0-A5EF-2181-750E-ACBA2465D806}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
