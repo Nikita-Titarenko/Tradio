@@ -1,0 +1,19 @@
+<div>
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email</label>
+    <input formControlName="email" />
+    <div *ngIf="f['email'].invalid && f['email'].touched">
+      Email is required
+    </div>
+
+    <label>Password</label>
+    <input formControlName="password" />
+    <div *ngIf="f['password'].invalid && f['password'].touched">
+      Password is required
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div>
