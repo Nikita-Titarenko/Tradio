@@ -7,7 +7,6 @@ import { CommonModule } from "@angular/common";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
