@@ -11,7 +11,8 @@ namespace Tradio.Infrastructure.Services
     {
         private readonly PaymentOptions _options;
 
-        public StripePaymentService(IOptions<PaymentOptions> options) {
+        public StripePaymentService(IOptions<PaymentOptions> options)
+        {
             _options = options.Value;
         }
         public async Task<string> CreateCheckoutSessionAsync(int orderId, IEnumerable<ItemWithPriceDto> items, string successUrl, string cancleUrl, string metadataName)

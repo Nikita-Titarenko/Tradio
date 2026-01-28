@@ -16,7 +16,8 @@ namespace Tradio.Server.Controllers
         private readonly IUserSubscriptionService _userSubscriptionService;
         private readonly PaymentOptions _options;
 
-        public UserSubscriptionsController(IUserSubscriptionService userSubscriptionService, IOptions<PaymentOptions> options) {
+        public UserSubscriptionsController(IUserSubscriptionService userSubscriptionService, IOptions<PaymentOptions> options)
+        {
             _userSubscriptionService = userSubscriptionService;
             _options = options.Value;
         }

@@ -11,7 +11,8 @@ namespace Tradio.Application.Services.SubscriptionTypes
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public SubscriptionTypeService(IUnitOfWork unitOfWork, IMapper mapper) {
+        public SubscriptionTypeService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }

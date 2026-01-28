@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class CountryProfile : Profile
     {
-        public CountryProfile() {
+        public CountryProfile()
+        {
             CreateMap<Country, CountryDto>();
         }
     }

@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class ApplicationUserServiceProfile : Profile
     {
-        public ApplicationUserServiceProfile() {
+        public ApplicationUserServiceProfile()
+        {
             CreateMap<ApplicationUserService, ApplicationUserServiceDto>();
         }
     }

@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class SubscriptionTypeProfile : Profile
     {
-        public SubscriptionTypeProfile() {
+        public SubscriptionTypeProfile()
+        {
             CreateMap<SubscriptionType, SubscriptionTypeDto>();
         }
     }

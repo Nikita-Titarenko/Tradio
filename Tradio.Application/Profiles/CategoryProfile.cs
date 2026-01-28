@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class CategoryProfile : Profile
     {
-        public CategoryProfile() {
+        public CategoryProfile()
+        {
             CreateMap<Category, CategoryDto>();
         }
     }

@@ -17,7 +17,8 @@ namespace Tradio.Server.Controllers
         private readonly IComplaintService _complaintService;
         private readonly IMapper _mapper;
 
-        public ComplaintsController(IComplaintService complaintService, IMapper mapper) {
+        public ComplaintsController(IComplaintService complaintService, IMapper mapper)
+        {
             _complaintService = complaintService;
             _mapper = mapper;
         }
@@ -36,7 +37,7 @@ namespace Tradio.Server.Controllers
 
             return CreatedAtAction(
                 nameof(GetComplaint),
-                new { complaintId = result.Value.Id},
+                new { complaintId = result.Value.Id },
                 result.Value);
         }
 

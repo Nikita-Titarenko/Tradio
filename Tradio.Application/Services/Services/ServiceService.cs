@@ -14,7 +14,8 @@ namespace Tradio.Application.Services.Services
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public ServiceService(IUnitOfWork unitOfWork, ICategoryService categoryService, IMapper mapper, IUserService userService) {
+        public ServiceService(IUnitOfWork unitOfWork, ICategoryService categoryService, IMapper mapper, IUserService userService)
+        {
             _unitOfWork = unitOfWork;
             _categoryService = categoryService;
             _mapper = mapper;

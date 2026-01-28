@@ -17,7 +17,8 @@ namespace Tradio.Server.Controllers
         private readonly IServiceService _serviceService;
         private readonly IMapper _mapper;
 
-        public ServicesController(IServiceService serviceService, IMapper mapper) {
+        public ServicesController(IServiceService serviceService, IMapper mapper)
+        {
             _serviceService = serviceService;
             _mapper = mapper;
         }
@@ -38,7 +39,7 @@ namespace Tradio.Server.Controllers
 
             return CreatedAtAction(
                 nameof(GetService),
-                new { serviceId = service.Id},
+                new { serviceId = service.Id },
                 service
             );
         }

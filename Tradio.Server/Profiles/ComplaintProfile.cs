@@ -6,7 +6,8 @@ namespace Tradio.Server.Profiles
 {
     public class ComplaintProfile : Profile
     {
-        public ComplaintProfile() {
+        public ComplaintProfile()
+        {
             CreateMap<CreateComplaintRequestModel, CreateComplaintDto>();
         }
     }

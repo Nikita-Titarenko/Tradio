@@ -19,7 +19,8 @@ namespace Tradio.Application.Services.Complaints
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public ComplaintService(IUnitOfWork unitOfWork, IApplicationUserServiceService applicationUserServiceService, IMapper mapper, IUserService userService) {
+        public ComplaintService(IUnitOfWork unitOfWork, IApplicationUserServiceService applicationUserServiceService, IMapper mapper, IUserService userService)
+        {
             _unitOfWork = unitOfWork;
             _applicationUserServiceService = applicationUserServiceService;
             _mapper = mapper;

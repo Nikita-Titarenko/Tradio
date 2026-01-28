@@ -12,7 +12,8 @@ namespace Tradio.Server.Controllers
     {
         private readonly IClimateService _climateService;
 
-        public ClimatesController(IClimateService climateService) {
+        public ClimatesController(IClimateService climateService)
+        {
             _climateService = climateService;
         }
 

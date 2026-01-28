@@ -6,7 +6,7 @@ namespace Tradio.Infrastructure.Common
     {
         public static readonly City[] Cities = new City[]
         {
-        
+
             new City
             {
                 Id = 1,

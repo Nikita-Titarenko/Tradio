@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class CityProfile : Profile
     {
-        public CityProfile() {
+        public CityProfile()
+        {
             CreateMap<City, CityDto>();
         }
     }

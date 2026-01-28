@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class MessageProfile : Profile
     {
-        public MessageProfile() {
+        public MessageProfile()
+        {
             CreateMap<Message, MessageDto>();
         }
     }

@@ -6,7 +6,8 @@ namespace Tradio.Server.Profiles
 {
     public class ServiceProfile : Profile
     {
-        public ServiceProfile() {
+        public ServiceProfile()
+        {
             CreateMap<CreateServiceRequestModel, CreateServiceDto>();
             CreateMap<UpdateServiceRequestModel, UpdateServiceDto>();
         }

@@ -11,7 +11,8 @@ namespace Tradio.Application.Services.Climates
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ClimateService(IUnitOfWork unitOfWork, IMapper mapper) {
+        public ClimateService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }

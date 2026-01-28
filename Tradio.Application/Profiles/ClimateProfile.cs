@@ -6,7 +6,8 @@ namespace Tradio.Application.Profiles
 {
     public class ClimateProfile : Profile
     {
-        public ClimateProfile() {
+        public ClimateProfile()
+        {
             CreateMap<ClimateDto, Climate>();
         }
     }

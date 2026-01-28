@@ -11,7 +11,8 @@ namespace Tradio.Application.Services.Cities
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CityService(IUnitOfWork unitOfWork, IMapper mapper) {
+        public CityService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
