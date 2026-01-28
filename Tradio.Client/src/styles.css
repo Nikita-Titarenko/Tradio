@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+.d-flex {
+  display: flex;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.hero-section {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+html, body {
+  background: #1d1c23;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: white;
+}
+
+.hero-title{
+    font-size: 90px;
+    margin: 0px;
+}
+
+.hero-text {
+    font-size: 30px;
+    color: #aaa9b0;
+}
+
+.btn{
+    cursor: pointer;
+}
+
+.btn-primary{
+
+}
+
+.btn-secondary{
+
+}
