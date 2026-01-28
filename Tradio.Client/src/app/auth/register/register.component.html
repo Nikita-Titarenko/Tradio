@@ -1,31 +1,37 @@
-<div>
-  <h2>Register</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label>Name</label>
-    <input formControlName="name" />
-    <div *ngIf="f['name'].invalid && f['name'].touched">
+ <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="vertical-container">
+  <h2 class="form-header">Register</h2>
+  <div class="form-group">
+    <label for="name" class="label-text">Name</label>
+    <input id="name" type="text" formControlName="name" />
+    <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
       Name is required
     </div>
+  </div>
 
-    <label>Email</label>
-    <input formControlName="email" />
-    <div *ngIf="f['email'].invalid && f['email'].touched">
+  <div class="form-group">
+    <label for="email" class="label-text">Email</label>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
       Email is required
     </div>
+  </div>
 
-    <label>Password</label>
-    <input formControlName="password" />
-    <div *ngIf="f['password'].invalid && f['password'].touched">
+  <div class="form-group">
+    <label for="password" class="label-text">Password</label>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
       Password is required
     </div>
+  </div>
 
-    <label>Confirm password</label>
-    <input formControlName="confirmPassword" />
-    <div *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched">
+  <div class="form-group">
+    <label for="confirmPassword" class="label-text">Confirm password</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+    <div *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched" class="error">
       Confirm password is required
     </div>
+  </div>
 
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
-    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
-  </form>
-</div>
+  <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</form>
