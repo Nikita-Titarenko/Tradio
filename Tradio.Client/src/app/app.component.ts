@@ -6,10 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   imports: [
-    RouterOutlet,
-    RouterLink
+    RouterOutlet
   ]
 })
-export class AppComponent {
-  title = 'Tradio.Client';
-}
+export class AppComponent {}
