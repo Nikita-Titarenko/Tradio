@@ -17,6 +17,7 @@
   </div>
 
   <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-form">Login</button>
+  <p class="center-text">Don't have an account? <span><a routerLink="/register" class="link">Sign up</a></span></p>
   <div class="form-group">
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
   </div>

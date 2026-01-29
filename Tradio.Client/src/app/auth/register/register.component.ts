@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     RouterModule
   ]
-/*  styleUrls: ['./register.component.css']*/
 })
 
 export class RegisterComponent {

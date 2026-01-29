@@ -1,8 +1,10 @@
- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="vertical-container">
+<img src="assets/images/register-image.png" class="auth-illustration" />
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-container">
   <h2 class="form-header">Register</h2>
   <div class="form-group">
     <label for="name" class="label-text">Name</label>
-    <input id="name" type="text" formControlName="name" />
+    <input id="name" type="text" formControlName="name" placeholder="Name" />
     <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
       Name is required
     </div>
@@ -10,7 +12,7 @@
 
   <div class="form-group">
     <label for="email" class="label-text">Email</label>
-    <input id="email" type="email" formControlName="email" />
+    <input id="email" type="email" formControlName="email" placeholder="Email" />
     <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
       Email is required
     </div>
@@ -18,7 +20,7 @@
 
   <div class="form-group">
     <label for="password" class="label-text">Password</label>
-    <input id="password" type="password" formControlName="password" />
+    <input id="password" type="password" formControlName="password" placeholder="Password" />
     <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
       Password is required
     </div>
@@ -26,12 +28,13 @@
 
   <div class="form-group">
     <label for="confirmPassword" class="label-text">Confirm password</label>
-    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirm password" />
     <div *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched" class="error">
       Confirm password is required
     </div>
   </div>
 
-  <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+  <button class="btn btn-primary btn-form" type="submit" [disabled]="registerForm.invalid">Register</button>
+  <p class="center-text">Already have an account? <span><a routerLink="/login" class="link">Sign in</a></span></p>
   <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>
