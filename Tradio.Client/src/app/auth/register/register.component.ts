@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
+  host: {
+    class: 'flex'
+  },
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -41,8 +44,8 @@ export class RegisterComponent {
 
     const { name, email, password, confirmPassword } = this.registerForm.value;
     this.authService.register(name, email, password, confirmPassword, 1).subscribe({
-      next: () => this.router.navigate(['/login']),
-      error: err => this.errorMessage = err.error.message || 'Помилка реєстрації'
+      next: (response) => this.router.navigate(['/confirm-email'], {queryParams: {'user-id': response.userId}}),
+      error: err => this.errorMessage = err.error[0].message || 'Registration error'
     });
   }
 }

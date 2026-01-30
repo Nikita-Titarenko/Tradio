@@ -1,0 +1,13 @@
+<form [formGroup]="confirmEmailForm" (ngSubmit)="onSubmit()" class="form-container">
+  <h2 class="form-header">Confirm email</h2>
+  <div class="form-group">
+    <label for="code" class="label-text">Verification code</label>
+    <input id="code" type="text" formControlName="code" placeholder="Verification code" />
+    <div *ngIf="f['code'].invalid && f['code'].touched" class="error">
+      Verification code is required
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-form" type="submit" [disabled]="confirmEmailForm.invalid">Confirm email</button>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</form>

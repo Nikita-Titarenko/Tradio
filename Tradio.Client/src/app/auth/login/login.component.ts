@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  host: {
+    class: 'flex'
+  },
   imports: [
     CommonModule,
     ReactiveFormsModule,
