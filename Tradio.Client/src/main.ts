@@ -3,7 +3,7 @@ import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { routes } from './app/app.routes';
-import { AuthInterceptor } from './app/core/interceptor/auth-interceptor';
+import { AuthInterceptor } from './app/core/interceptor/auth.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [

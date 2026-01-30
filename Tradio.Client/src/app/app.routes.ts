@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
+import { GuestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
   {
@@ -13,7 +15,8 @@ export const routes: Routes = [
       {
         path: 'services',
         loadComponent: () => import('./services/services/services.component').then(m => m.ServicesComponent),
-        title: 'Tradio'
+        title: 'Tradio',
+        canActivate: [AuthGuard]
       }
     ]
   },
@@ -24,17 +27,20 @@ export const routes: Routes = [
       {
         path: 'register',
         loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent),
-        title: "Register"
+        title: "Register",
+        canActivate: [GuestGuard]
       },
       {
         path: 'login',
         loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
-        title: "Login"
+        title: "Login",
+        canActivate: [GuestGuard]
       },
       {
         path: 'confirm-email',
         loadComponent: () => import('./auth/confirm-email/confirm-email.component').then(m => m.ConfirmEmailComponent),
-        title: "Confirm email"
+        title: "Confirm email",
+        canActivate: [GuestGuard]
       }
     ]
   }
