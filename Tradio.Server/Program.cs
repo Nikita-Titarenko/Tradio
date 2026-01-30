@@ -64,6 +64,24 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.Configure<ApiBehaviorOptions>(config =>
+{
+    config.InvalidModelStateResponseFactory = cont =>
+    {
+        var errors = cont.ModelState
+            .Where(m => m.Value != null && m.Value.Errors.Count > 0)
+            .SelectMany(m => m.Value!.Errors
+            .Select(e =>
+            {
+                return new
+                {
+                    message = e.ErrorMessage
+                };
+            }));
+        return new BadRequestObjectResult(errors);
+    };
+});
+
 builder.Services.AddSignalR();
 
 builder.Services.AddAutoMapper(c => { }, AppDomain.CurrentDomain.GetAssemblies());
