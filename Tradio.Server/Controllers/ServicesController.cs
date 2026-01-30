@@ -95,7 +95,7 @@ namespace Tradio.Server.Controllers
         [Authorize]
         [ProducesResponseType(typeof(IEnumerable<ServiceListItemDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetServices(int pageNumber, int pageSize, int categoryId, int? countryId, int? cityId, string? subName)
+        public async Task<IActionResult> GetServices(int pageNumber, int pageSize, int? categoryId, int? countryId, int? cityId, string? subName)
         {
             var result = await _serviceService.GetServiceDtosAsync(pageNumber, pageSize, categoryId, countryId, cityId, subName);
             if (!result.IsSuccess)

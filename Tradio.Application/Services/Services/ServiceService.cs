@@ -132,7 +132,7 @@ namespace Tradio.Application.Services.Services
             return Result.Ok(_mapper.Map<ServiceDto>(service));
         }
 
-        public async Task<Result<IEnumerable<ServiceListItemDto>>> GetServiceDtosAsync(int pageNumber, int pageSize, int categoryId, int? countryId, int? cityId, string? subName)
+        public async Task<Result<IEnumerable<ServiceListItemDto>>> GetServiceDtosAsync(int pageNumber, int pageSize, int? categoryId, int? countryId, int? cityId, string? subName)
         {
             var serviceRepository = _unitOfWork.GetServiceRepository();
 
