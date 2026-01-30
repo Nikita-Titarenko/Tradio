@@ -9,6 +9,11 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./home.component').then(m => m.HomeComponent),
         title: 'Tradio'
+      },
+      {
+        path: 'services',
+        loadComponent: () => import('./services/services/services.component').then(m => m.ServicesComponent),
+        title: 'Tradio'
       }
     ]
   },

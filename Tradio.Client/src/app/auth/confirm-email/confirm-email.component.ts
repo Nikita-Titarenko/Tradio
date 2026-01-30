@@ -41,7 +41,10 @@ export class ConfirmEmailComponent {
     const userId = this.activatedRoute.snapshot.queryParams['user-id'];
     const { code } = this.confirmEmailForm.value;
     this.authService.confirmEmail(code, userId).subscribe({
-      next: () => this.router.navigate(['/confirm-email']),
+      next: (response) => {
+        this.authService.saveJwtToken(response.jwtToken);
+        this.router.navigate(['/services']);
+      },
       error: err => this.errorMessage = err.error.message || 'Email confirmation error'
     });
   }

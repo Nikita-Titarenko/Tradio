@@ -9,6 +9,7 @@ import { SignInResponseModel } from '../responses/sign-in-response-model';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:5188/api/Users';
+  private jwtTokenName = 'jwtToken';
 
   constructor(private http: HttpClient) { }
 
@@ -22,5 +23,17 @@ export class AuthService {
 
   confirmEmail(code: string, userId: string): Observable<SignInResponseModel> {
     return this.http.post<SignInResponseModel>(`${this.apiUrl}/confirm-email`, { code, userId });
+  }
+
+  get isLoggedIn() {
+    return !!localStorage.getItem(this.jwtTokenName);
+  }
+
+  saveJwtToken(jwtToken: string){
+    localStorage.setItem(this.jwtTokenName, jwtToken);
+  }
+
+  logout(){
+    localStorage.removeItem(this.jwtTokenName);
   }
 }

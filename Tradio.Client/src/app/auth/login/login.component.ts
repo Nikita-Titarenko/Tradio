@@ -42,7 +42,10 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe({
-      next: () => this.router.navigate(['/login']),
+      next: (response) => {
+        this.authService.saveJwtToken(response.jwtToken);
+        this.router.navigate(['/services']);
+      },
       error: err => this.errorMessage = err.error.message || 'Registration error'
     });
   }
