@@ -1,11 +1,11 @@
-<header>
+<header [ngClass]="router.url === '/' ? 'home-header' : ''">
   <nav>
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/">Tradio</a>
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Tradio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="services" *ngIf="authService.isLoggedIn">Services</a>
+        <a class="nav-link" routerLink="/services" routerLinkActive="active" *ngIf="authService.isLoggedIn">Services</a>
       </li>
       <li>
         <a routerLink="login" class="nav-link" *ngIf="!authService.isLoggedIn">Login</a>

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
   host: {
-    class: 'flex'
+    class: 'flex-row'
   },
   imports: [
     CommonModule,

@@ -1,19 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'main-layout',
   templateUrl: './main-layout.component.html',
+  host: {
+    class: 'flex-column'
+  },
   imports: [
     CommonModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class MainLayoutComponent {
-  constructor(public authService: AuthService){}
+  constructor(public authService: AuthService, public router: Router){}
 
   logout(){
     this.authService.logout();

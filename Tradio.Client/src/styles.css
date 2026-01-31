@@ -6,10 +6,18 @@
   width: 100%;
 }
 
-.flex{
+.flex-row{
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: row;
+}
+
+.flex-column{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-section {
@@ -24,7 +32,7 @@
     flex-direction: column;
     width: 50%;
     height: 100%;
-    justify-content: space-around;
+    justify-content: center;
     margin: 0px auto 0px auto;
 }
 
@@ -102,8 +110,11 @@ h1, h2, h3, h4, h5, h6{
 }
 
 header{
-    position: absolute;
     width: 100%;
+}
+
+.home-header{
+    position: absolute;
 }
 
 .label-text{
@@ -146,4 +157,8 @@ p {
 
 .center-text{
     margin: 0px auto 0px auto;
+}
+
+.active{
+    font-weight: bold;
 }

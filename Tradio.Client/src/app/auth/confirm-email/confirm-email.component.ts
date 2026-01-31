@@ -9,7 +9,7 @@ import { AuthService } from "../../core/services/auth.service";
     templateUrl: './confirm-email.component.html',
     styleUrl: './confirm-email.component.css',
     host: {
-      class: 'flex'
+      class: 'flex-row'
     },
     imports: [
         CommonModule,
