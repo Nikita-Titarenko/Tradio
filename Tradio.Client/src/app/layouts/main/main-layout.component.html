@@ -5,18 +5,37 @@
         <a class="nav-link" routerLink="/" routerLinkActive="active">Tradio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/services" routerLinkActive="active" *ngIf="authService.isLoggedIn">Services</a>
+        <a
+          class="nav-link"
+          routerLink="/services"
+          routerLinkActive="active"
+          *ngIf="authService.isLoggedIn"
+          >Services</a
+        >
       </li>
       <li>
-        <a routerLink="login" class="nav-link" *ngIf="!authService.isLoggedIn">Login</a>
+        <a routerLink="login" class="nav-link" *ngIf="!authService.isLoggedIn"
+          >Login</a
+        >
       </li>
       <li>
-        <a routerLink="register" class="nav-link" *ngIf="!authService.isLoggedIn">Register</a>
+        <a
+          routerLink="register"
+          class="nav-link"
+          *ngIf="!authService.isLoggedIn"
+          >Register</a
+        >
       </li>
       <li class="nav-item">
-        <button class="nav-link" *ngIf="authService.isLoggedIn" (click)="logout()">Log out</button>
+        <button
+          class="nav-link"
+          *ngIf="authService.isLoggedIn"
+          (click)="logout()"
+        >
+          Log out
+        </button>
       </li>
     </ul>
   </nav>
 </header>
-<router-outlet/>
+<router-outlet />

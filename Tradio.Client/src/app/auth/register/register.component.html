@@ -12,7 +12,12 @@
 
   <div class="form-group">
     <label for="email" class="label-text">Email</label>
-    <input id="email" type="email" formControlName="email" placeholder="Email" />
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+    />
     <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
       Email is required
     </div>
@@ -20,7 +25,12 @@
 
   <div class="form-group">
     <label for="password" class="label-text">Password</label>
-    <input id="password" type="password" formControlName="password" placeholder="Password" />
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="Password"
+    />
     <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
       Password is required
     </div>
@@ -28,13 +38,30 @@
 
   <div class="form-group">
     <label for="confirmPassword" class="label-text">Confirm password</label>
-    <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirm password" />
-    <div *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched" class="error">
+    <input
+      id="confirmPassword"
+      type="password"
+      formControlName="confirmPassword"
+      placeholder="Confirm password"
+    />
+    <div
+      *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched"
+      class="error"
+    >
       Confirm password is required
     </div>
   </div>
 
-  <button class="btn btn-primary btn-form" type="submit" [disabled]="registerForm.invalid">Register</button>
-  <p class="center-text">Already have an account? <span><a routerLink="/login" class="link">Sign in</a></span></p>
+  <button
+    class="btn btn-primary btn-form"
+    type="submit"
+    [disabled]="registerForm.invalid"
+  >
+    Register
+  </button>
+  <p class="center-text">
+    Already have an account?
+    <span><a routerLink="/login" class="link">Sign in</a></span>
+  </p>
   <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>

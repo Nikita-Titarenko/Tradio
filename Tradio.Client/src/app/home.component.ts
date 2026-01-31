@@ -5,11 +5,8 @@ import { Component } from '@angular/core';
   selector: 'home',
   templateUrl: 'home.component.html',
   host: {
-    class: 'flex-column'
+    class: 'flex-column',
   },
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
 })
-
-export class HomeComponent { }
+export class HomeComponent {}

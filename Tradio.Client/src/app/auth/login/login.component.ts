@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router'
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -9,15 +14,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   host: {
-    class: 'flex-row'
+    class: 'flex-row',
   },
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule
-  ]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
 })
-
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -25,7 +25,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -46,7 +46,8 @@ export class LoginComponent {
         this.authService.saveJwtToken(response.jwtToken);
         this.router.navigate(['/services']);
       },
-      error: err => this.errorMessage = err.error.message || 'Registration error'
+      error: (err) =>
+        (this.errorMessage = err.error.message || 'Registration error'),
     });
   }
 }

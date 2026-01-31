@@ -1,22 +1,23 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../core/services/auth.service";
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-    selector: 'confirm-email',
-    templateUrl: './confirm-email.component.html',
-    styleUrl: './confirm-email.component.css',
-    host: {
-      class: 'flex-row'
-    },
-    imports: [
-        CommonModule,
-        ReactiveFormsModule
-    ]
+  selector: 'confirm-email',
+  templateUrl: './confirm-email.component.html',
+  styleUrl: './confirm-email.component.css',
+  host: {
+    class: 'flex-row',
+  },
+  imports: [CommonModule, ReactiveFormsModule],
 })
-
 export class ConfirmEmailComponent {
   confirmEmailForm: FormGroup;
   errorMessage: string = '';
@@ -25,7 +26,7 @@ export class ConfirmEmailComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.confirmEmailForm = this.fb.group({
       code: ['', Validators.required],
@@ -45,7 +46,8 @@ export class ConfirmEmailComponent {
         this.authService.saveJwtToken(response.jwtToken);
         this.router.navigate(['/services']);
       },
-      error: err => this.errorMessage = err.error.message || 'Email confirmation error'
+      error: (err) =>
+        (this.errorMessage = err.error.message || 'Email confirmation error'),
     });
   }
 }

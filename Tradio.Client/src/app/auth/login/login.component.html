@@ -2,7 +2,12 @@
   <h2 class="form-header">Login</h2>
   <div class="form-group">
     <label for="email" class="label-text">Email</label>
-    <input id="email" type="email" formControlName="email" placeholder="Email"/>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+    />
     <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
       Email is required
     </div>
@@ -10,17 +15,30 @@
 
   <div class="form-group">
     <label for="password" class="label-text">Password</label>
-    <input id="password" type="password" formControlName="password" placeholder="Password" />
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="Password"
+    />
     <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
       Password is required
     </div>
   </div>
 
-  <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-form">Login</button>
-  <p class="center-text">Don't have an account? <span><a routerLink="/register" class="link">Sign up</a></span></p>
+  <button
+    type="submit"
+    [disabled]="loginForm.invalid"
+    class="btn btn-primary btn-form"
+  >
+    Login
+  </button>
+  <p class="center-text">
+    Don't have an account?
+    <span><a routerLink="/register" class="link">Sign up</a></span>
+  </p>
   <div class="form-group">
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
   </div>
-
 </form>
-<img src="assets/images/login-image.jpg" class="auth-illustration"/>
+<img src="assets/images/login-image.jpg" class="auth-illustration" />

@@ -1,10 +1,10 @@
 <form [formGroup]="formGroup">
-    <select formControlName="selectedCategory">
-        <option *ngFor="let category of categories" value="category.id">
-            {{category.name}}
-        </option>
-    </select>
+  <select formControlName="selectedCategory">
+    <option *ngFor="let category of categories" value="category.id">
+      {{ category.name }}
+    </option>
+  </select>
 </form>
 <div *ngFor="let service of services">
-    <h6>{{ service.name }}</h6>
+  <h6>{{ service.name }}</h6>
 </div>

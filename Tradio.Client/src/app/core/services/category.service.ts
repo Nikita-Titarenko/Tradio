@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { CategoryModel } from '../responses/category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
   private apiUrl = 'http://localhost:5188/api/Categories';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCategories(parentCategoryId?: number): Observable<CategoryModel[]> {
     let params = new HttpParams();
@@ -18,5 +18,4 @@ export class CategoryService {
     }
     return this.http.get<CategoryModel[]>(`${this.apiUrl}`, { params });
   }
-
 }

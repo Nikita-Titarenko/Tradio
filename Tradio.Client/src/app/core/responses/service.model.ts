@@ -1,3 +1,1 @@
-export interface ServiceModel{
-
-}
+export interface ServiceModel {}
