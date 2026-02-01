@@ -1,10 +1,27 @@
-<form [formGroup]="formGroup">
-  <select formControlName="selectedCategory">
-    <option *ngFor="let category of categories" value="category.id">
-      {{ category.name }}
-    </option>
-  </select>
-</form>
-<div *ngFor="let service of services">
+<div
+  class="dropdown"
+  (mouseenter)="loadCategories()"
+  (mouseleave)="removeCategories()"
+>
+  <button class="select-button">Select category ></button>
+
+  <button
+    class="select-button"
+    *ngFor="let category of categories$ | async"
+    (mouseenter)="loadSubcategories(category.id)"
+  >
+    <div class="sub-dropdown" *ngIf="hoverCategoryId === category.id">
+      <button
+        class="select-button"
+        *ngFor="let subcategory of subcategories$ | async"
+        (click)="chooseSubcategory(subcategory.id)"
+      >
+        {{ subcategory.name }}
+      </button>
+    </div>
+    {{ category.name }} >
+  </button>
+</div>
+<div *ngFor="let service of services$ | async">
   <h6>{{ service.name }}</h6>
 </div>

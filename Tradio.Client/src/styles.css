@@ -52,6 +52,10 @@ body {
   height: 100%;
 }
 
+html {
+  padding: 0px 6rem 0px 6rem;
+}
+
 h1,
 h2,
 h3,
@@ -166,4 +170,33 @@ p {
 
 .active {
   font-weight: bold;
+}
+
+.dropdown {
+  color: white;
+  border-radius: 10px;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #3a374d;
+  width: 10rem;
+  position: relative;
+}
+
+.select-button {
+  background: #3a374d;
+  color: white;
+  width: 10rem;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.sub-dropdown {
+  position: absolute;
+  left: 100%;
+  /* bottom: 100%; */
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Observable, BehaviorSubject, switchMap, of } from 'rxjs';
 import { CategoryModel } from '../../core/responses/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { ServiceService } from '../../core/services/service.service';
@@ -20,37 +16,47 @@ import { ServiceListItemModule } from '../../core/responses/service-list-item.mo
   imports: [CommonModule, ReactiveFormsModule],
 })
 export class ServicesComponent implements OnInit {
-  categories: CategoryModel[] = [];
-  services: ServiceListItemModule[] = [];
-  formGroup: FormGroup;
+  categories$!: Observable<CategoryModel[]>;
+  subcategories$!: Observable<CategoryModel[]>;
+  services$!: Observable<ServiceListItemModule[]>;
+  hoverCategoryId?: number;
+  private selectedSubcategoryId$ = new BehaviorSubject<number | undefined>(
+    undefined,
+  );
   pageNumber = 1;
   pageSize = 10;
 
   constructor(
     private categoryService: CategoryService,
     private serviceService: ServiceService,
-    formBuilder: FormBuilder,
-  ) {
-    this.formGroup = formBuilder.group({
-      selectedCategory: [''],
-    });
-    this.formGroup.get('selectedCategory')!.valueChanges.subscribe((value) => {
-      this.serviceService
-        .getServices(this.pageNumber, this.pageSize, { categoryId: value })
-        .subscribe((data) => {
-          this.categories = data;
-        });
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe((data) => {
-      this.categories = data;
-    });
-    this.serviceService
-      .getServices(this.pageNumber, this.pageSize)
-      .subscribe((data) => {
-        this.services = data;
-      });
+    this.loadCategories();
+    this.services$ = this.selectedSubcategoryId$.pipe(
+      switchMap((subcategoryId) =>
+        this.serviceService.getServices(this.pageNumber, this.pageSize, {
+          categoryId: subcategoryId,
+        }),
+      ),
+    );
+  }
+
+  loadCategories() {
+    this.categories$ = this.categoryService.getCategories();
+  }
+
+  loadSubcategories(categoryId: number) {
+    this.subcategories$ = this.categoryService.getCategories(categoryId);
+    this.hoverCategoryId = categoryId;
+  }
+
+  removeCategories() {
+    this.categories$ = of([]);
+    this.subcategories$ = of([]);
+  }
+
+  chooseSubcategory(subcategoryId: number) {
+    this.selectedSubcategoryId$.next(subcategoryId);
   }
 }
