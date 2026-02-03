@@ -1,10 +1,12 @@
+<div class="filter-panel">
 <div
   class="dropdown"
   (mouseenter)="loadCategories()"
   (mouseleave)="removeCategories()"
 >
-  <button class="select-button">Select category ></button>
-
+  <button class="select-button">{{(selectedSubcategory$ | async)?.name || 'Select category '}}
+      <img src="assets/images/dropdown-button-icon.svg" alt="Dropdown icon">
+  </button>
   <button
     class="select-button"
     *ngFor="let category of categories$ | async"
@@ -14,13 +16,41 @@
       <button
         class="select-button"
         *ngFor="let subcategory of subcategories$ | async"
-        (click)="chooseSubcategory(subcategory.id)"
+        (click)="chooseSubcategory(subcategory)"
       >
         {{ subcategory.name }}
       </button>
     </div>
     {{ category.name }} >
   </button>
+</div>
+<div
+  class="dropdown"
+  (mouseenter)="loadCountries()"
+  (mouseleave)="removeCountries()"
+>
+  <button class="select-button">{{(selectedCity$ | async)?.name ||(selectedCountry$ | async)?.name || 'Select country '}}
+    <img src="assets/images/dropdown-button-icon.svg" alt="Dropdown icon">
+  </button>
+
+  <button
+    class="select-button"
+    *ngFor="let country of countries$ | async"
+    (mouseenter)="loadCities(country.id)"
+    (click)="chooseCountry(country)"
+  >
+    <div class="sub-dropdown" *ngIf="hoverCountryId === country.id">
+      <button
+        class="select-button"
+        *ngFor="let city of cities$ | async"
+        (click)="chooseCity(city)"
+      >
+        {{ city.name }}
+      </button>
+    </div>
+    {{ country.name }} >
+  </button>
+</div>
 </div>
 <div *ngFor="let service of services$ | async">
   <h6>{{ service.name }}</h6>

@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Observable, BehaviorSubject, switchMap, of } from 'rxjs';
+import { Observable, BehaviorSubject, switchMap, of, combineLatest } from 'rxjs';
 import { CategoryModel } from '../../core/responses/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { ServiceService } from '../../core/services/service.service';
 import { ServiceListItemModule } from '../../core/responses/service-list-item.model';
+import { CountryModel } from '../../core/responses/country.model';
+import { CityModel } from '../../core/responses/city.model';
+import { CityService } from '../../core/services/city.service';
+import { CountryService } from '../../core/services/country.service';
 
 @Component({
   selector: 'services',
@@ -18,9 +22,18 @@ import { ServiceListItemModule } from '../../core/responses/service-list-item.mo
 export class ServicesComponent implements OnInit {
   categories$!: Observable<CategoryModel[]>;
   subcategories$!: Observable<CategoryModel[]>;
+  countries$!: Observable<CountryModel[]>;
+  cities$!: Observable<CityModel[]>;
   services$!: Observable<ServiceListItemModule[]>;
   hoverCategoryId?: number;
-  private selectedSubcategoryId$ = new BehaviorSubject<number | undefined>(
+  hoverCountryId?: number;
+  selectedSubcategory$ = new BehaviorSubject<CategoryModel | undefined>(
+    undefined,
+  );
+  selectedCountry$ = new BehaviorSubject<CountryModel | undefined>(
+    undefined,
+  );
+  selectedCity$ = new BehaviorSubject<CityModel | undefined>(
     undefined,
   );
   pageNumber = 1;
@@ -29,14 +42,21 @@ export class ServicesComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private serviceService: ServiceService,
+    private countryService: CountryService,
+    private cityService: CityService,
   ) {}
 
   ngOnInit(): void {
-    this.loadCategories();
-    this.services$ = this.selectedSubcategoryId$.pipe(
-      switchMap((subcategoryId) =>
+    this.services$ = combineLatest([
+      this.selectedSubcategory$,
+      this.selectedCountry$,
+      this.selectedCity$,
+    ]).pipe(
+      switchMap(([subcategory, country, city]) =>
         this.serviceService.getServices(this.pageNumber, this.pageSize, {
-          categoryId: subcategoryId,
+          categoryId: subcategory?.id,
+          countryId: country?.id,
+          cityId: city?.id,
         }),
       ),
     );
@@ -56,7 +76,34 @@ export class ServicesComponent implements OnInit {
     this.subcategories$ = of([]);
   }
 
-  chooseSubcategory(subcategoryId: number) {
-    this.selectedSubcategoryId$.next(subcategoryId);
+  removeCountries() {
+    this.countries$ = of([]);
+    this.cities$ = of([]);
+  }
+
+  chooseSubcategory(subcategory: CategoryModel) {
+    this.selectedSubcategory$.next(subcategory);
+    this.removeCategories();
+  }
+
+  loadCountries() {
+    this.countries$ = this.countryService.getCountries();
+  }
+
+  loadCities(countryId: number) {
+    this.cities$ = this.cityService.getCities(countryId);
+    this.hoverCountryId = countryId;
+  }
+
+  chooseCountry(country: CountryModel) {
+    this.selectedCity$.next(undefined);
+    this.selectedCountry$.next(country);
+    this.removeCountries();
+  }
+
+  chooseCity(city: CityModel) {
+    this.selectedCountry$.next(undefined);
+    this.selectedCity$.next(city);
+    this.removeCountries();
   }
 }
