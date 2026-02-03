@@ -70,20 +70,20 @@ h6 {
 }
 
 .hero-title {
-  font-size: 90px;
+  font-size: 6rem;
   margin: 0px;
 }
 
 .hero-text {
-  font-size: 30px;
+  font-size: 2rem;
   color: var(--gray-color);
-  margin-bottom: 50px;
+  margin-bottom: 4rem;
 }
 
 .btn {
   cursor: pointer;
   border-radius: 10px;
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .btn:disabled {
@@ -93,13 +93,13 @@ h6 {
 .btn-primary {
   background-color: orange;
   color: white;
-  font-size: 30px;
+  font-size: 2rem;
   width: 50%;
-  margin: 10px auto 10px auto;
+  margin: 1rem auto 1rem auto;
 }
 
 .btn-form {
-  padding: 5px 20px 5px 20px;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
 .btn-secondary {
@@ -109,7 +109,7 @@ h6 {
   all: unset;
   cursor: pointer;
   color: white;
-  font-size: 24px;
+  font-size: 2rem;
 }
 
 .nav {
@@ -143,7 +143,7 @@ header {
 .error {
   color: #862627;
   background: #ecc8c5;
-  padding: 10px;
+  padding: 1rem;
   border-radius: 10px;
 }
 
@@ -155,7 +155,7 @@ input {
   border-radius: 10px;
   height: 30px;
   border-color: transparent;
-  margin: 12px;
+  margin: 1rem;
 }
 
 p {
@@ -205,7 +205,6 @@ p {
   position: absolute;
   z-index: 1;
   left: 100%;
-  /* bottom: 100%; */
   margin: 0px;
   display: flex;
   flex-direction: column;
