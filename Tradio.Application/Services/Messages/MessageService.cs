@@ -128,6 +128,23 @@ namespace Tradio.Application.Services.Messages
             return Result.Ok(chat);
         }
 
+        public async Task<Result<ChatDto>> GetMessagesByServiceAsync(int serviceId, string userId)
+        {
+            var isUserAllowedResult = await _userService.IsUserAllowed(userId);
+            if (!isUserAllowedResult.IsSuccess)
+            {
+                return Result.Fail(isUserAllowedResult.Errors);
+            }
+
+            var messageDbSet = _unitOfWork.GetMessageRepository();
+            var chat = await messageDbSet.GetMessagesByServiceAsync(serviceId, userId);
+            if (chat == null)
+            {
+                return Result.Fail(new Error("Chat not found").WithMetadata("Code", "ChatNotFound"));
+            }
+            return Result.Ok(chat);
+        }
+
         private async Task<Result<MessageDto>> CreateMessageAsync(Message message)
         {
             var messageDbSet = _unitOfWork.GetDbSet<Message>();

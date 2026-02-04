@@ -35,5 +35,29 @@ namespace Tradio.Infrastructure.Repositories
                 })
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<ChatDto?> GetMessagesByServiceAsync(int serviceId, string applicationUserId)
+        {
+            return await _dbContext
+                .ApplicationUserServices
+                .Where(us => us.ServiceId == serviceId)
+                .Select(us => new ChatDto
+                {
+                    ApplicationUserId = us.ApplicationUserId != applicationUserId ? us.ApplicationUserId : us.Service.ApplicationUserId,
+                    ServiceId = us.Id,
+                    ServiceName = us.Service.Name,
+                    FullName = _dbContext.Users.Where(u => u.Id == us.ApplicationUserId).Select(u => u.Fullname).First(),
+                    Messages = us.Messages.Select(m => new MessageDto
+                    {
+                        Id = m.Id,
+                        ApplicationUserServiceId = m.ApplicationUserServiceId,
+                        CreationDateTime = m.CreationDateTime,
+                        IsYourMessage = m.IsFromProvider ? us.Service.ApplicationUserId == applicationUserId : us.ApplicationUserId == applicationUserId,
+                        IsRead = m.IsRead,
+                        Text = m.Text
+                    })
+                })
+                .FirstOrDefaultAsync();
+        }
     }
 }

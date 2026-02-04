@@ -62,13 +62,30 @@ namespace Tradio.Server.Controllers
             return Ok(message);
         }
 
-        [HttpGet("by-chat")]
+        [HttpGet("by-application-user-service")]
         [Authorize]
         [ProducesResponseType(typeof(ChatDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetMessages(int applicationUserServiceId)
+        public async Task<IActionResult> GetMessagesByApplicationUserServiceId(int applicationUserServiceId)
         {
             var result = await _messageService.GetMessagesAsync(applicationUserServiceId, GetUserId());
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            var message = result.Value;
+
+            return Ok(message);
+        }
+
+        [HttpGet("by-service")]
+        [Authorize]
+        [ProducesResponseType(typeof(ChatDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetMessagesByServiceId(int serviceId)
+        {
+            var result = await _messageService.GetMessagesByServiceAsync(serviceId, GetUserId());
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);

@@ -9,5 +9,6 @@ namespace Tradio.Application.Services.Messages
         Task<Result<MessageDto>> CreateMessageAsync(string senderUserId, CreateMessageDto dto);
         Task<Result<MessageDto>> GetMessageDtoAsync(int messageId);
         Task<Result<ChatDto>> GetMessagesAsync(int applicationUserServiceId, string userId);
+        Task<Result<ChatDto>> GetMessagesByServiceAsync(int serviceId, string userId);
     }
 }
