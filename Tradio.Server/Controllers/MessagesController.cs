@@ -48,7 +48,7 @@ namespace Tradio.Server.Controllers
         [HttpGet("{messageId}")]
         [Authorize]
         [ProducesResponseType(typeof(MessageDto), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetMessage(int messageId)
         {
             var result = await _messageService.GetMessageDtoAsync(messageId);
@@ -65,7 +65,7 @@ namespace Tradio.Server.Controllers
         [HttpGet("by-chat")]
         [Authorize]
         [ProducesResponseType(typeof(ChatDto), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetMessages(int applicationUserServiceId)
         {
             var result = await _messageService.GetMessagesAsync(applicationUserServiceId, GetUserId());
