@@ -61,7 +61,7 @@
 <a
   class="service-item"
   *ngFor="let service of services$ | async"
-  [routerLink]="['/service']"
+  routerLink="/service"
   [queryParams]="{ serviceId: service.id }"
 >
   <service-item [service]="service"></service-item>
