@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tradio.Application.Dtos.Services;
 using Tradio.Application.Repositories;
 using Tradio.Domain;
 
@@ -30,6 +31,27 @@ namespace Tradio.Infrastructure.Repositories
             return await _dbSet
                 .Where(s => s.ApplicationUserId == userId)
                 .ToListAsync();
+        }
+
+        public async Task<ServiceDto?> GetServiceAsync(int serviceId)
+        {
+            return await _dbSet
+                .Where(s => s.Id == serviceId)
+                .Select(s => new ServiceDto
+                {
+                    ApplicationUserId = s.ApplicationUserId,
+                    CategoryName = s.Category.Name,
+                    CreationDateTime = s.CreationDateTime,
+                    Description = s.Description,
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    ApplicationUserName = _dbContext.Users
+                        .Where(u => u.Id == s.ApplicationUserId)
+                        .Select(u => u.UserName)
+                        .FirstOrDefault()!,
+                })
+                .FirstOrDefaultAsync();
         }
     }
 }

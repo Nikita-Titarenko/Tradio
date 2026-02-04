@@ -1,6 +1,4 @@
-﻿using Tradio.Domain;
-
-namespace Tradio.Application.Dtos.Services
+﻿namespace Tradio.Application.Dtos.Services
 {
     public class ServiceDto
     {
@@ -12,10 +10,12 @@ namespace Tradio.Application.Dtos.Services
 
         public DateTime CreationDateTime { get; set; }
 
-        public int CategoryId { get; set; }
+        public string CategoryName { get; set; } = string.Empty;
 
         public int Price { get; set; }
 
         public string ApplicationUserId { get; set; } = string.Empty;
+
+        public string ApplicationUserName { get; set; } = string.Empty;
     }
 }

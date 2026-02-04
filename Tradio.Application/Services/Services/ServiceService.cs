@@ -121,15 +121,14 @@ namespace Tradio.Application.Services.Services
 
         public async Task<Result<ServiceDto>> GetServiceDtoAsync(int serviceId)
         {
-            var getServiceResult = await GetServiceAsync(serviceId);
-            if (!getServiceResult.IsSuccess)
+            var serviceRepository = _unitOfWork.GetServiceRepository();
+            var serviceDto = await serviceRepository.GetServiceAsync(serviceId);
+            if (serviceDto == null)
             {
-                return Result.Fail(getServiceResult.Errors);
+                return Result.Fail(new Error("Service not found").WithMetadata("Code", "ServiceNotFound"));
             }
 
-            var service = getServiceResult.Value;
-
-            return Result.Ok(_mapper.Map<ServiceDto>(service));
+            return Result.Ok(serviceDto);
         }
 
         public async Task<Result<IEnumerable<ServiceListItemDto>>> GetServiceDtosAsync(int pageNumber, int pageSize, int? categoryId, int? countryId, int? cityId, string? subName)
