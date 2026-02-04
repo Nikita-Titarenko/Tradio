@@ -28,7 +28,7 @@ namespace Tradio.Server.Controllers
         [Authorize]
         [ProducesResponseType(typeof(MessageDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateService(CreateMessageRequestModel requestModel)
+        public async Task<IActionResult> CreateMessage(CreateMessageRequestModel requestModel)
         {
             var result = await _messageService.CreateMessageAsync(GetUserId(), _mapper.Map<CreateMessageDto>(requestModel));
             if (!result.IsSuccess)
