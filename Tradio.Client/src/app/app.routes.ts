@@ -25,6 +25,22 @@ export const routes: Routes = [
         title: 'Tradio',
         canActivate: [AuthGuard],
       },
+      {
+        path: 'service',
+        loadComponent: () =>
+          import('./services/service/service.component').then(
+            (m) => m.ServiceComponent,
+          ),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'chats',
+        loadComponent: () =>
+          import('./chats/chats.component').then((m) => m.ChatsComponent),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {

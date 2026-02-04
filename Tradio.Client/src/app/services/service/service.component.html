@@ -1,0 +1,27 @@
+<div class="service-item-flex-row container">
+  <div>
+    <h6 class="service-item-h1">{{ (service$ | async)?.name }}</h6>
+    <h6 class="service-item-h3">{{ (service$ | async)?.price }} грн</h6>
+  </div>
+  <div class="additional-container">
+    <h6 class="service-item-h3">
+      Created {{ (service$ | async)?.creationDateTime | date: "dd-MM-yyyy" }}
+    </h6>
+    <h6 class="service-item-h1">
+      {{ (service$ | async)?.applicationUserName }}
+    </h6>
+    <a
+      routerLink="/chats"
+      [queryParams]="{ serviceId: (service$ | async)?.id }"
+      class="btn btn-secondary"
+      >Start chat</a
+    >
+  </div>
+</div>
+
+<div class="container">
+  <p class="service-item-p p-bottom-3">
+    {{ (service$ | async)?.categoryName }}
+  </p>
+  <p class="service-item-p">{{ (service$ | async)?.description }}</p>
+</div>

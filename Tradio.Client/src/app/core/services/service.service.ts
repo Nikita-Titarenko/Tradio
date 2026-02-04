@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ServiceListItemModule } from '../responses/service-list-item.model';
+import { ServiceModel } from '../responses/service.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,10 @@ export class ServiceService {
   private apiUrl = 'http://localhost:5188/api/Services';
 
   constructor(private http: HttpClient) {}
+
+  getService(serviceId: number): Observable<ServiceModel> {
+    return this.http.get<ServiceModel>(`${this.apiUrl}/${serviceId}`);
+  }
 
   getServices(
     pageNumber: number,

@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Observable, BehaviorSubject, switchMap, of, combineLatest } from 'rxjs';
+import {
+  Observable,
+  BehaviorSubject,
+  switchMap,
+  of,
+  combineLatest,
+} from 'rxjs';
 import { CategoryModel } from '../../core/responses/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { ServiceService } from '../../core/services/service.service';
@@ -10,6 +16,8 @@ import { CountryModel } from '../../core/responses/country.model';
 import { CityModel } from '../../core/responses/city.model';
 import { CityService } from '../../core/services/city.service';
 import { CountryService } from '../../core/services/country.service';
+import { ServiceItemComponent } from '../../components/service-item/service-item.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'services',
@@ -17,7 +25,12 @@ import { CountryService } from '../../core/services/country.service';
   host: {
     class: 'flex-column',
   },
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ServiceItemComponent,
+    RouterLink,
+  ],
 })
 export class ServicesComponent implements OnInit {
   categories$!: Observable<CategoryModel[]>;
@@ -30,12 +43,8 @@ export class ServicesComponent implements OnInit {
   selectedSubcategory$ = new BehaviorSubject<CategoryModel | undefined>(
     undefined,
   );
-  selectedCountry$ = new BehaviorSubject<CountryModel | undefined>(
-    undefined,
-  );
-  selectedCity$ = new BehaviorSubject<CityModel | undefined>(
-    undefined,
-  );
+  selectedCountry$ = new BehaviorSubject<CountryModel | undefined>(undefined);
+  selectedCity$ = new BehaviorSubject<CityModel | undefined>(undefined);
   pageNumber = 1;
   pageSize = 10;
 
