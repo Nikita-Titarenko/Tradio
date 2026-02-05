@@ -13,7 +13,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./home.component').then((m) => m.HomeComponent),
+          import('./home/home.component').then((m) => m.HomeComponent),
         title: 'Tradio',
       },
       {

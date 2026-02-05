@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrl: '../auth.css',
   host: {
     class: 'flex-row',
   },

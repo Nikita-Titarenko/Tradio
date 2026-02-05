@@ -22,6 +22,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'services',
   templateUrl: './services.component.html',
+  styleUrl: './services.component.css',
   host: {
     class: 'flex-column',
   },

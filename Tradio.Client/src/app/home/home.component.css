@@ -1,0 +1,17 @@
+.hero-section {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  min-height: 100%;
+}
+
+.hero-title {
+  font-size: 6rem;
+  margin: 0px;
+}
+
+.hero-text {
+  font-size: 2rem;
+  color: var(--gray-color);
+  margin-bottom: 4rem;
+}

@@ -8,6 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 @Component({
   selector: 'service',
   templateUrl: './service.component.html',
+  styleUrl: './service.component.css',
   imports: [CommonModule, RouterLink],
   host: { class: 'flex-column text-center' },
 })

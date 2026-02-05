@@ -16,6 +16,7 @@ import {
 @Component({
   selector: 'chats',
   templateUrl: './chats.component.html',
+  styleUrls: ['./chats.component.css'],
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   host: { class: 'flex-row' },
 })
@@ -67,8 +68,9 @@ export class ChatsComponent implements OnInit {
     this.selectedChatId = chatId;
   }
 
-  onEnter(event: KeyboardEvent) {
-    if (event.shiftKey) {
+  onEnter(event: Event) {
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.shiftKey) {
       return;
     }
     event.preventDefault();
