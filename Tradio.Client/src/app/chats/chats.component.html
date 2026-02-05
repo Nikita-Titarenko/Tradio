@@ -1,0 +1,46 @@
+<div class="chat-container">
+  <div
+    *ngFor="let chat of chatListItems | async"
+    class="chat-item"
+    (click)="selectChat(chat.id)"
+    [class.selected]="chat.id === selectedChatId"
+  >
+    <h3>{{ chat.fullName }}</h3>
+    <div class="flex-row">
+      <p class="last-message">{{ chat.lastMessageText }}</p>
+      <p class="date">{{ chat.lastMessageDateTime | date: "HH:mm" }}</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="chatModel | async as chat" class="flex-column">
+  <h1>{{ chat.fullName }}</h1>
+  <a
+    routerLink="/service"
+    [queryParams]="{ serviceId: chat.serviceId }"
+    class="secondary-link"
+    >{{ chat.serviceName }}</a
+  >
+  <div class="messages-container">
+    <div *ngFor="let message of chat.messages" class="message">
+      <p class="message-text">{{ message.text }}</p>
+      <p class="date">{{ message.creationDateTime | date: "HH:mm" }}</p>
+    </div>
+  </div>
+
+  <form
+    [formGroup]="createMessageGroup"
+    (ngSubmit)="createMessage()"
+    class="create-message-container"
+  >
+    <textarea
+      id="text"
+      formControlName="text"
+      placeholder="Write a message..."
+      class="input-message"
+      (keydown.enter)="onEnter($event)"
+    ></textarea>
+    <button type="submit" class="btn">
+      <i class="fa fa-paper-plane icon"></i>
+    </button>
+  </form>
+</div>
