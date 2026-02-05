@@ -39,23 +39,26 @@ namespace Tradio.Infrastructure.Repositories
         public async Task<ChatDto?> GetMessagesByServiceAsync(int serviceId, string applicationUserId)
         {
             return await _dbContext
-                .ApplicationUserServices
-                .Where(us => us.ServiceId == serviceId)
-                .Select(us => new ChatDto
+                .Services
+                .Where(s => s.Id == serviceId)
+                .Select(s => new ChatDto
                 {
-                    ApplicationUserId = us.ApplicationUserId != applicationUserId ? us.ApplicationUserId : us.Service.ApplicationUserId,
-                    ServiceId = us.Id,
-                    ServiceName = us.Service.Name,
-                    FullName = _dbContext.Users.Where(u => u.Id == us.ApplicationUserId).Select(u => u.Fullname).First(),
-                    Messages = us.Messages.Select(m => new MessageDto
-                    {
-                        Id = m.Id,
-                        ApplicationUserServiceId = m.ApplicationUserServiceId,
-                        CreationDateTime = m.CreationDateTime,
-                        IsYourMessage = m.IsFromProvider ? us.Service.ApplicationUserId == applicationUserId : us.ApplicationUserId == applicationUserId,
-                        IsRead = m.IsRead,
-                        Text = m.Text
-                    })
+                    ApplicationUserId = s.ApplicationUserId != applicationUserId ? s.ApplicationUserId : s.ApplicationUserId,
+                    ServiceId = s.Id,
+                    ServiceName = s.Name,
+                    FullName = _dbContext.Users.Where(u => u.Id == s.ApplicationUserId).Select(u => u.Fullname).First(),
+                    Messages = s.ApplicationUserServices
+                        .Where(us => us.ServiceId == serviceId 
+                        && us.ApplicationUserId == applicationUserId)
+                        .SelectMany(us => us.Messages.Select(m => new MessageDto
+                        {
+                            Id = m.Id,
+                            ApplicationUserServiceId = m.ApplicationUserServiceId,
+                            CreationDateTime = m.CreationDateTime,
+                            IsYourMessage = m.IsFromProvider ? s.ApplicationUserId == applicationUserId : us.ApplicationUserId == applicationUserId,
+                            IsRead = m.IsRead,
+                            Text = m.Text
+                        })).ToList()
                 })
                 .FirstOrDefaultAsync();
         }

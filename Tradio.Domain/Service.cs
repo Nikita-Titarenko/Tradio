@@ -23,5 +23,7 @@ namespace Tradio.Domain
         public bool IsVisible { get; set; }
 
         public string ApplicationUserId { get; set; } = string.Empty;
+
+        public ICollection<ApplicationUserService> ApplicationUserServices { get; set; } = [];
     }
 }
