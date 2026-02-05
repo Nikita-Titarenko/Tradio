@@ -4,4 +4,6 @@ export interface ChatModel {
   fullName: string;
   serviceName: string;
   messages: MessageModel[];
+  applicationUserId: string;
+  serviceId: number;
 }
