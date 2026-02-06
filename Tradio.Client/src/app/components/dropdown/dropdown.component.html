@@ -1,0 +1,26 @@
+<div
+  class="dropdown"
+  (mouseenter)="loadData.emit()"
+  (mouseleave)="mouseLeaveData()"
+>
+  <button class="select-button">
+    {{ (selectedData$ | async)?.name || "Select category " }}
+    <img src="assets/images/dropdown-button-icon.svg" alt="Dropdown icon" />
+  </button>
+  <button
+    class="select-button"
+    *ngFor="let category of data$ | async"
+    (mouseenter)="mouseEnterData(category.id)"
+  >
+    <div class="sub-dropdown" *ngIf="hoverDataId === category.id">
+      <button
+        class="select-button"
+        *ngFor="let subcategory of subData$ | async"
+        (click)="chooseSubdata(subcategory)"
+      >
+        {{ subcategory.name }}
+      </button>
+    </div>
+    {{ category.name }} >
+  </button>
+</div>

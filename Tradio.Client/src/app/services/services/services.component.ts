@@ -18,6 +18,7 @@ import { CityService } from '../../core/services/city.service';
 import { CountryService } from '../../core/services/country.service';
 import { ServiceItemComponent } from '../../components/service-item/service-item.component';
 import { RouterLink } from '@angular/router';
+import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 
 @Component({
   selector: 'services',
@@ -31,6 +32,7 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     ServiceItemComponent,
     RouterLink,
+    DropdownComponent,
   ],
 })
 export class ServicesComponent implements OnInit {

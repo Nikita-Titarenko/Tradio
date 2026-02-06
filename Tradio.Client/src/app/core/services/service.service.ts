@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ServiceListItemModule } from '../responses/service-list-item.model';
 import { ServiceModel } from '../responses/service.model';
+import { CreateServiceModel } from '../requests/create-service.model';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +41,13 @@ export class ServiceService {
     }
 
     return this.http.get<ServiceListItemModule[]>(`${this.apiUrl}`, { params });
+  }
+
+  getServicesByUser(): Observable<ServiceListItemModule[]> {
+    return this.http.get<ServiceListItemModule[]>(`${this.apiUrl}/by-user`);
+  }
+
+  createService(createServiceModel: CreateServiceModel): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, createServiceModel);
   }
 }

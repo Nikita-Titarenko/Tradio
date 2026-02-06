@@ -3,7 +3,9 @@
     *ngFor="let chat of chatListItems | async"
     class="chat-item"
     (click)="selectChat(chat.id)"
-    [class.selected-chat]="chat.id === (chatModel | async)?.applicationUserServiceId"
+    [class.selected-chat]="
+      chat.id === (chatModel | async)?.applicationUserServiceId
+    "
   >
     <h3>{{ chat.fullName }}</h3>
     <div class="flex-row">
