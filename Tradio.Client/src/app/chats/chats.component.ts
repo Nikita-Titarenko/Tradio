@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatModel } from '../core/responses/chat.model';
 import { ApplicationUserServiceService } from '../core/services/application-user-service.service';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { ChatListItemModel } from '../core/responses/chat-list-item.model';
 import { MessageService } from '../core/services/message.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -43,7 +43,6 @@ export class ChatsComponent implements OnInit {
   chatModel?: Observable<ChatModel>;
   chatListItems!: Observable<ChatListItemModel[]>;
   createMessageGroup: FormGroup;
-  selectedChatId?: number;
 
   createMessage() {
     if (!this.createMessageGroup.valid) {
@@ -65,7 +64,6 @@ export class ChatsComponent implements OnInit {
 
   selectChat(chatId: number) {
     this.chatModel = this.messageService.getMessagesByChat(chatId);
-    this.selectedChatId = chatId;
   }
 
   onEnter(event: Event) {

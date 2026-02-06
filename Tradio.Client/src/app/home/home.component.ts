@@ -9,6 +9,6 @@ import { RouterLink } from '@angular/router';
   host: {
     class: 'flex-column',
   },
-  imports: [CommonModule, RouterLink,],
+  imports: [CommonModule, RouterLink],
 })
 export class HomeComponent {}
