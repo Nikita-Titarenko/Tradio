@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: '../auth.css',
+  styleUrl: '../../../form.css',
   host: {
     class: 'flex-row',
   },

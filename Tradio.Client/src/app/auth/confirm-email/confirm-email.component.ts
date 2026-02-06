@@ -12,7 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'confirm-email',
   templateUrl: './confirm-email.component.html',
-  styleUrl: '../auth.css',
+  styleUrl: '../../../form.css',
   host: {
     class: 'flex-row',
   },
