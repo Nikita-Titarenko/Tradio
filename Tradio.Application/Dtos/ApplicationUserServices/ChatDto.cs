@@ -12,6 +12,8 @@ namespace Tradio.Application.Dtos.ApplicationUserServices
 
         public string ServiceName { get; set; } = string.Empty;
 
+        public int? ApplicationUserServiceId { get; set; }
+
         public IEnumerable<MessageDto> Messages { get; set; } = [];
     }
 }

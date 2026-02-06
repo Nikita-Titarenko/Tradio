@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Stripe;
 using Tradio.Application.Dtos.ApplicationUserServices;
 using Tradio.Application.Dtos.Messages;
 using Tradio.Application.Repositories;
@@ -23,6 +24,7 @@ namespace Tradio.Infrastructure.Repositories
                     ServiceId = us.Id,
                     ServiceName = us.Service.Name,
                     FullName = _dbContext.Users.Where(u => u.Id == us.ApplicationUserId).Select(u => u.Fullname).First(),
+                    ApplicationUserServiceId = applicationUserServiceId,
                     Messages = us.Messages.Select(m => new MessageDto
                     {
                         Id = m.Id,
@@ -47,6 +49,11 @@ namespace Tradio.Infrastructure.Repositories
                     ServiceId = s.Id,
                     ServiceName = s.Name,
                     FullName = _dbContext.Users.Where(u => u.Id == s.ApplicationUserId).Select(u => u.Fullname).First(),
+                    ApplicationUserServiceId = s.ApplicationUserServices
+                        .Where(us => us.ServiceId == serviceId
+                        && us.ApplicationUserId == applicationUserId)
+                        .Select(us => us.Id)
+                        .FirstOrDefault(),
                     Messages = s.ApplicationUserServices
                         .Where(us => us.ServiceId == serviceId 
                         && us.ApplicationUserId == applicationUserId)
