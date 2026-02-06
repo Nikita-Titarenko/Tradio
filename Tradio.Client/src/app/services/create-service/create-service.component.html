@@ -1,0 +1,67 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="createService()"
+  class="form-container"
+>
+  <h2 class="form-header">Create Service</h2>
+  <div class="form-group">
+    <label for="name" class="label-text">Name</label>
+    <input id="name" type="text" formControlName="name" placeholder="Name" />
+    <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
+      Name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="price" class="label-text">Price</label>
+    <input
+      id="price"
+      type="number"
+      formControlName="price"
+      placeholder="Price"
+    />
+    <div *ngIf="f['price'].invalid && f['price'].touched" class="error">
+      Price is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="label-text">Description</label>
+    <textarea
+      id="description"
+      type="text"
+      formControlName="description"
+      placeholder="Description"
+    ></textarea>
+    <div
+      *ngIf="f['description'].invalid && f['description'].touched"
+      class="error"
+    >
+      Description is required
+    </div>
+  </div>
+
+  <div class="switch-toggle-group">
+    <input
+      id="isVisible"
+      type="checkbox"
+      form
+      [formGroup]="formGroup"
+      formControlName="isVisible"
+      label="Is Visible"
+    />
+    <label for="isVisible" class="toggle-switch"></label>
+    <p class="white">Is Visible</p>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="formGroup.invalid"
+    class="btn btn-primary btn-form"
+  >
+    Create Service
+  </button>
+  <div class="form-group">
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</form>
