@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Component({
@@ -8,11 +8,12 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
   imports: [CommonModule],
 })
 export class DropdownComponent {
-  @Output() loadData = new EventEmitter<void>();
-  @Output() loadSubData = new EventEmitter<number>();
+
+  @Input() loadData: () => Observable<any[]> = () => of([]);
+  @Input() loadSubData: (id: number) => Observable<any[]> = () => of([]);
   @Input() selectedData$!: BehaviorSubject<any>;
-  @Input() subData$!: Observable<any[]>;
-  @Input() data$!: Observable<any[]>;
+  subData$: Observable<any[]> = of([]);
+  data$: Observable<any[]> = of([]);
   hoverDataId?: number;
 
   removeData() {
@@ -25,9 +26,13 @@ export class DropdownComponent {
     this.removeData();
   }
 
+  mouseEnterDropdown() {
+    this.data$ = this.loadData();
+  }
+
   mouseEnterData(id: number) {
     this.hoverDataId = id;
-    this.loadSubData.emit(id);
+    this.subData$ = this.loadSubData(id);
   }
 
   mouseLeaveData() {

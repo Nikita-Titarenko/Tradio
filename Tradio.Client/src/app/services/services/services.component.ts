@@ -36,13 +36,7 @@ import { DropdownComponent } from '../../components/dropdown/dropdown.component'
   ],
 })
 export class ServicesComponent implements OnInit {
-  categories$!: Observable<CategoryModel[]>;
-  subcategories$!: Observable<CategoryModel[]>;
-  countries$!: Observable<CountryModel[]>;
-  cities$!: Observable<CityModel[]>;
   services$!: Observable<ServiceListItemModule[]>;
-  hoverCategoryId?: number;
-  hoverCountryId?: number;
   selectedSubcategory$ = new BehaviorSubject<CategoryModel | undefined>(
     undefined,
   );
@@ -74,48 +68,19 @@ export class ServicesComponent implements OnInit {
     );
   }
 
-  loadCategories() {
-    this.categories$ = this.categoryService.getCategories();
+  loadCategories = () => {
+    return this.categoryService.getCategories();
   }
 
-  loadSubcategories(categoryId: number) {
-    this.subcategories$ = this.categoryService.getCategories(categoryId);
-    this.hoverCategoryId = categoryId;
+  loadSubcategories = (categoryId: number) => {
+    return this.categoryService.getCategories(categoryId);
   }
 
-  removeCategories() {
-    this.categories$ = of([]);
-    this.subcategories$ = of([]);
+  loadCountries = () => {
+    return this.countryService.getCountries();
   }
 
-  removeCountries() {
-    this.countries$ = of([]);
-    this.cities$ = of([]);
-  }
-
-  chooseSubcategory(subcategory: CategoryModel) {
-    this.selectedSubcategory$.next(subcategory);
-    this.removeCategories();
-  }
-
-  loadCountries() {
-    this.countries$ = this.countryService.getCountries();
-  }
-
-  loadCities(countryId: number) {
-    this.cities$ = this.cityService.getCities(countryId);
-    this.hoverCountryId = countryId;
-  }
-
-  chooseCountry(country: CountryModel) {
-    this.selectedCity$.next(undefined);
-    this.selectedCountry$.next(country);
-    this.removeCountries();
-  }
-
-  chooseCity(city: CityModel) {
-    this.selectedCountry$.next(undefined);
-    this.selectedCity$.next(city);
-    this.removeCountries();
+  loadCities = (countryId: number) => {
+    return this.cityService.getCities(countryId);
   }
 }
