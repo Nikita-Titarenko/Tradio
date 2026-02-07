@@ -1,10 +1,12 @@
 <form [formGroup]="formGroup" class="filter-panel">
   <dropdown
+    placeholder="category"
     formControlName="selectedSubcategory"
     [loadData]="loadCategories"
     [loadSubData]="loadSubcategories"
   ></dropdown>
   <dropdown
+    placeholder="city"
     formControlName="selectedCity"
     [loadData]="loadCountries"
     [loadSubData]="loadCities"

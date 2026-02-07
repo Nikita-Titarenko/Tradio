@@ -26,6 +26,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
+  @Input() placeholder!: string;
   @Input() loadData: () => Observable<any[]> = () => of([]);
   @Input() loadSubData: (id: number) => Observable<any[]> = () => of([]);
   value?: any;
