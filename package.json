@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "Tradio.Client/**/*.{js,ts,html,css,json}": [
+      "prettier --write"
+    ]
+  }
+}
