@@ -4,7 +4,7 @@
   (mouseleave)="mouseLeaveData()"
 >
   <button class="select-button">
-    {{ (selectedData$ | async)?.name || "Select category " }}
+    {{ value?.name || "Select category " }}
     <img src="assets/images/dropdown-button-icon.svg" alt="Dropdown icon" />
   </button>
   <button

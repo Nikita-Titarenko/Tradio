@@ -1,15 +1,15 @@
-<div class="filter-panel">
+<form [formGroup]="formGroup" class="filter-panel">
   <dropdown
-    [selectedData$]="selectedSubcategory$"
+    formControlName="selectedSubcategory"
     [loadData]="loadCategories"
     [loadSubData]="loadSubcategories"
   ></dropdown>
   <dropdown
-    [selectedData$]="selectedCity$"
+    formControlName="selectedCity"
     [loadData]="loadCountries"
     [loadSubData]="loadCities"
   ></dropdown>
-</div>
+</form>
 <a
   class="service-item"
   *ngFor="let service of services$ | async"

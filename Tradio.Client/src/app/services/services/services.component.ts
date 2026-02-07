@@ -1,24 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import {
-  Observable,
-  BehaviorSubject,
-  switchMap,
-  of,
-  combineLatest,
-} from 'rxjs';
-import { CategoryModel } from '../../core/responses/category.model';
-import { CategoryService } from '../../core/services/category.service';
-import { ServiceService } from '../../core/services/service.service';
+  FormBuilder,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Observable, of, startWith, switchMap } from 'rxjs';
+import { DropdownComponent } from '../../components/dropdown/dropdown.component';
+import { ServiceItemComponent } from '../../components/service-item/service-item.component';
 import { ServiceListItemModule } from '../../core/responses/service-list-item.model';
-import { CountryModel } from '../../core/responses/country.model';
-import { CityModel } from '../../core/responses/city.model';
+import { CategoryService } from '../../core/services/category.service';
 import { CityService } from '../../core/services/city.service';
 import { CountryService } from '../../core/services/country.service';
-import { ServiceItemComponent } from '../../components/service-item/service-item.component';
-import { RouterLink } from '@angular/router';
-import { DropdownComponent } from '../../components/dropdown/dropdown.component';
+import { ServiceService } from '../../core/services/service.service';
 
 @Component({
   selector: 'services',
@@ -33,15 +29,19 @@ import { DropdownComponent } from '../../components/dropdown/dropdown.component'
     ServiceItemComponent,
     RouterLink,
     DropdownComponent,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true,
+    },
   ],
 })
 export class ServicesComponent implements OnInit {
   services$!: Observable<ServiceListItemModule[]>;
-  selectedSubcategory$ = new BehaviorSubject<CategoryModel | undefined>(
-    undefined,
-  );
-  selectedCountry$ = new BehaviorSubject<CountryModel | undefined>(undefined);
-  selectedCity$ = new BehaviorSubject<CityModel | undefined>(undefined);
+  formGroup: FormGroup;
   pageNumber = 1;
   pageSize = 10;
 
@@ -50,37 +50,41 @@ export class ServicesComponent implements OnInit {
     private serviceService: ServiceService,
     private countryService: CountryService,
     private cityService: CityService,
-  ) {}
+    formBuilder: FormBuilder,
+  ) {
+    this.formGroup = formBuilder.group({
+      selectedSubcategory: [],
+      selectedCity: [],
+    });
+  }
 
   ngOnInit(): void {
-    this.services$ = combineLatest([
-      this.selectedSubcategory$,
-      this.selectedCountry$,
-      this.selectedCity$,
-    ]).pipe(
-      switchMap(([subcategory, country, city]) =>
-        this.serviceService.getServices(this.pageNumber, this.pageSize, {
-          categoryId: subcategory?.id,
-          countryId: country?.id,
-          cityId: city?.id,
-        }),
-      ),
-    );
+    this.formGroup.valueChanges
+      .pipe(
+        startWith(this.formGroup.value),
+        switchMap((value) =>
+          this.serviceService.getServices(this.pageNumber, this.pageSize, {
+            categoryId: value.selectedSubcategory?.id,
+            cityId: value.selectedCity?.id,
+          }),
+        ),
+      )
+      .subscribe((services) => (this.services$ = of(services)));
   }
 
   loadCategories = () => {
     return this.categoryService.getCategories();
-  }
+  };
 
   loadSubcategories = (categoryId: number) => {
     return this.categoryService.getCategories(categoryId);
-  }
+  };
 
   loadCountries = () => {
     return this.countryService.getCountries();
-  }
+  };
 
   loadCities = (countryId: number) => {
     return this.cityService.getCities(countryId);
-  }
+  };
 }
