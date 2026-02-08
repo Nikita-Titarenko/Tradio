@@ -53,8 +53,8 @@ export class ServicesComponent implements OnInit {
     formBuilder: FormBuilder,
   ) {
     this.formGroup = formBuilder.group({
-      selectedSubcategory: [],
-      selectedCity: [],
+      selectedSubcategoryId: [],
+      selectedCityId: [],
     });
   }
 
@@ -64,8 +64,12 @@ export class ServicesComponent implements OnInit {
         startWith(this.formGroup.value),
         switchMap((value) =>
           this.serviceService.getServices(this.pageNumber, this.pageSize, {
-            categoryId: value.selectedSubcategory?.id,
-            cityId: value.selectedCity?.id,
+            ...(value.selectedSubcategoryId != null && {
+              categoryId: value.selectedSubcategoryId,
+            }),
+            ...(value.selectedCityId != null && {
+              cityId: value.selectedCityId,
+            }),
           }),
         ),
       )
