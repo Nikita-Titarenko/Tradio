@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Tradio.Server.Attributes;
 
 namespace Tradio.Server.RequestsModel.Messages
 {
@@ -8,7 +8,7 @@ namespace Tradio.Server.RequestsModel.Messages
 
         public int ServiceId { get; set; }
 
-        [StringLength(200)]
+        [StringLengthWithCode(200)]
         public string Text { get; set; } = string.Empty;
     }
 }

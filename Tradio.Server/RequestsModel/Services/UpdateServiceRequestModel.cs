@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Tradio.Server.Attributes;
 
 namespace Tradio.Server.RequestsModel.Services
 {
@@ -6,10 +6,10 @@ namespace Tradio.Server.RequestsModel.Services
     {
         public int Id { get; set; }
 
-        [StringLength(200, MinimumLength = 5)]
+        [StringLengthWithCode(200, MinimumLength = 5)]
         public string Name { get; set; } = string.Empty;
 
-        [StringLength(1000, MinimumLength = 5)]
+        [StringLengthWithCode(1000, MinimumLength = 5)]
         public string Description { get; set; } = string.Empty;
 
         public int CategoryId { get; set; }
