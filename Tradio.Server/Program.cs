@@ -1,10 +1,12 @@
 using System.Text;
+using System.Text.Json;
 using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Tradio.Infrastructure;
 using Tradio.Infrastructure.Hubs;
+using Tradio.Server.ValidationErrors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +50,17 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
             .Where(ms => ms.Value != null && ms.Value.Errors.Count > 0)
             .SelectMany(ms => ms.Value!.Errors.Select(e =>
             {
-                return new Error(e.ErrorMessage);
+                var baseError = JsonSerializer.Deserialize<BaseValidationError>(e.ErrorMessage);
+                if (baseError == null)
+                {
+                    return new BaseValidationError
+                    {
+                        Code = "UnknownError",
+                        Message = e.ErrorMessage
+                    };
+                }
+
+                return baseError;
             }));
         return new BadRequestObjectResult(new { errors });
     };
@@ -62,24 +74,6 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .SetIsOriginAllowed(origin => true);
     });
-});
-
-builder.Services.Configure<ApiBehaviorOptions>(config =>
-{
-    config.InvalidModelStateResponseFactory = cont =>
-    {
-        var errors = cont.ModelState
-            .Where(m => m.Value != null && m.Value.Errors.Count > 0)
-            .SelectMany(m => m.Value!.Errors
-            .Select(e =>
-            {
-                return new
-                {
-                    message = e.ErrorMessage
-                };
-            }));
-        return new BadRequestObjectResult(errors);
-    };
 });
 
 builder.Services.AddSignalR();
