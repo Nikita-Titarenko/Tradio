@@ -17,5 +17,7 @@
         public string ApplicationUserId { get; set; } = string.Empty;
 
         public string ApplicationUserName { get; set; } = string.Empty;
+
+        public bool IsVisible { get; set; }
     }
 }

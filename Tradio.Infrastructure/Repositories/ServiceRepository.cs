@@ -50,6 +50,7 @@ namespace Tradio.Infrastructure.Repositories
                         .Where(u => u.Id == s.ApplicationUserId)
                         .Select(u => u.UserName)
                         .FirstOrDefault()!,
+                    IsVisible = s.IsVisible
                 })
                 .FirstOrDefaultAsync();
         }
