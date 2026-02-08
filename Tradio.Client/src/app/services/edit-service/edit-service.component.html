@@ -1,0 +1,87 @@
+<form [formGroup]="formGroup" (ngSubmit)="editService()" class="form-container">
+  <h2 class="form-header">Edit Service</h2>
+  <div class="form-group">
+    <label for="name" class="label-text">Name</label>
+    <input id="name" type="text" formControlName="name" placeholder="Name" />
+    <div
+      *ngIf="f['name'].errors?.['required'] && f['name'].touched"
+      class="error"
+    >
+      Name is required
+    </div>
+    <div class="error" *ngIf="f['name'].errors?.['apiError']">
+      {{ f["name"].errors?.["apiError"] }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="price" class="label-text">Price</label>
+    <input
+      id="price"
+      type="number"
+      formControlName="price"
+      placeholder="Price"
+    />
+    <div
+      *ngIf="f['price'].errors?.['required'] && f['price'].touched"
+      class="error"
+    >
+      Price is required
+    </div>
+    <div class="error" *ngIf="f['price'].errors?.['apiError']">
+      {{ f["price"].errors?.["apiError"] }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="label-text">Description</label>
+    <textarea
+      id="description"
+      type="text"
+      formControlName="description"
+      placeholder="Description"
+    ></textarea>
+    <div
+      *ngIf="f['description'].errors?.['required'] && f['description'].touched"
+      class="error"
+    >
+      Description is required
+    </div>
+    <div class="error" *ngIf="f['description'].errors?.['apiError']">
+      {{ f["description"].errors?.["apiError"] }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <dropdown
+      placeholder="category"
+      formControlName="categoryId"
+      [loadData]="loadCategories"
+      [loadSubData]="loadSubcategories"
+    ></dropdown>
+  </div>
+
+  <div class="switch-toggle-group">
+    <input
+      id="isVisible"
+      type="checkbox"
+      form
+      [formGroup]="formGroup"
+      formControlName="isVisible"
+      label="Is Visible"
+    />
+    <label for="isVisible" class="toggle-switch"></label>
+    <p class="white">Is Visible</p>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="formGroup.invalid"
+    class="btn btn-primary btn-form"
+  >
+    Edit Service
+  </button>
+  <div class="form-group">
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</form>

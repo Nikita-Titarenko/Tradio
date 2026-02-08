@@ -7,4 +7,5 @@ export interface ServiceModel {
   categoryId: number;
   applicationUserName: string;
   categoryName: string;
+  isVisible: boolean;
 }
