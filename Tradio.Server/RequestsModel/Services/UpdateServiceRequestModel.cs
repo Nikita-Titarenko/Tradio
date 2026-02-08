@@ -4,8 +4,6 @@ namespace Tradio.Server.RequestsModel.Services
 {
     public class UpdateServiceRequestModel
     {
-        public int Id { get; set; }
-
         [StringLengthWithCode(200, MinimumLength = 5)]
         public string Name { get; set; } = string.Empty;
 
