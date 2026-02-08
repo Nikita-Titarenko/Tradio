@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.service-item {
+  text-decoration-line: none;
+  display: flex;
+}
+
+.service-item-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.editable {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

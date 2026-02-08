@@ -1,2 +1,16 @@
-<h6 class="service-item-h1">{{ service.name }}</h6>
-<p class="service-item-h3">{{ service.price }} credits</p>
+<div class="service-item" (click)="navigateToService()">
+  <div class="service-item-main">
+    <h6 class="service-item-h1">{{ service.name }}</h6>
+    <p class="service-item-h3">{{ service.price }} credits</p>
+  </div>
+  <div class="editable" *ngIf="editable">
+    <a
+      class="btn btn-secondary"
+      routerLink="/edit-service"
+      [queryParams]="{ serviceId: service.id }"
+      (click)="$event.stopPropagation()"
+      >Edit</a
+    >
+    <button class="btn btn-danger" (click)="deleteService()">Delete</button>
+  </div>
+</div>

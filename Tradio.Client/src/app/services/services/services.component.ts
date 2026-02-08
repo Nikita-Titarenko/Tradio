@@ -27,7 +27,6 @@ import { ServiceService } from '../../core/services/service.service';
     CommonModule,
     ReactiveFormsModule,
     ServiceItemComponent,
-    RouterLink,
     DropdownComponent,
     ReactiveFormsModule,
   ],

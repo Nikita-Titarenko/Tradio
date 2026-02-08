@@ -51,6 +51,15 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'edit-service',
+        loadComponent: () =>
+          import('./services/edit-service/edit-service.component').then(
+            (m) => m.EditServiceComponent,
+          ),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'create-service',
         loadComponent: () =>
           import('./services/create-service/create-service.component').then(

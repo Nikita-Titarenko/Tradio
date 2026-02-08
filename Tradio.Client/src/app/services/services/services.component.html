@@ -12,11 +12,6 @@
     [loadSubData]="loadCities"
   ></dropdown>
 </form>
-<a
-  class="service-item"
-  *ngFor="let service of services$ | async"
-  routerLink="/service"
-  [queryParams]="{ serviceId: service.id }"
->
+<div *ngFor="let service of services$ | async">
   <service-item [service]="service"></service-item>
-</a>
+</div>

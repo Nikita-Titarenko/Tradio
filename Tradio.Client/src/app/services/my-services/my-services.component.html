@@ -1,8 +1,3 @@
-<a
-  class="service-item"
-  *ngFor="let service of services$ | async"
-  routerLink="/service"
-  [queryParams]="{ serviceId: service.id }"
->
-  <service-item [service]="service"></service-item>
-</a>
+<div *ngFor="let service of services$ | async">
+  <service-item [service]="service" [editable]="true"></service-item>
+</div>
