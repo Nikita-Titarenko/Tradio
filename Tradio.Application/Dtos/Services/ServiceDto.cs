@@ -10,6 +10,8 @@
 
         public DateTime CreationDateTime { get; set; }
 
+        public int CategoryId { get; set; }
+
         public string CategoryName { get; set; } = string.Empty;
 
         public int Price { get; set; }

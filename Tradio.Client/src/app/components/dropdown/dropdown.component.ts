@@ -28,6 +28,7 @@ export class DropdownComponent implements ControlValueAccessor {
   }
 
   @Input() placeholder!: string;
+  @Input() startValue?: DropdownItemModel;
   @Input() loadData: () => Observable<DropdownItemModel[]> = () => of([]);
   @Input() loadSubData: (id: number) => Observable<DropdownItemModel[]> = () =>
     of([]);

@@ -11,6 +11,7 @@ import { DropdownComponent } from '../../components/dropdown/dropdown.component'
 import { ApiFormErrorService } from '../../core/services/api-form-error.service';
 import { CategoryService } from '../../core/services/category.service';
 import { ServiceService } from '../../core/services/service.service';
+import { DropdownItemModel } from '../../components/dropdown/dropdown-item.model';
 
 @Component({
   selector: 'edit-service',
@@ -20,6 +21,7 @@ import { ServiceService } from '../../core/services/service.service';
 })
 export class EditServiceComponent implements OnInit {
   serviceId!: number;
+  startCategory!: DropdownItemModel;
   formGroup: FormGroup;
   errorMessage: string = '';
 
@@ -45,6 +47,10 @@ export class EditServiceComponent implements OnInit {
     this.serviceService.getService(this.serviceId).subscribe({
       next: (service) => {
         this.formGroup.patchValue(service);
+        this.startCategory = {
+          id: service.categoryId,
+          name: service.categoryName,
+        };
       },
     });
   }

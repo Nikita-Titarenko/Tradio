@@ -40,6 +40,7 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(s => new ServiceDto
                 {
                     ApplicationUserId = s.ApplicationUserId,
+                    CategoryId = s.CategoryId,
                     CategoryName = s.Category.Name,
                     CreationDateTime = s.CreationDateTime,
                     Description = s.Description,
