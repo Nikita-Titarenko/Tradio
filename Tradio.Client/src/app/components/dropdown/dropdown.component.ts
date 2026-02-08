@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { DropdownItemModel } from './dropdown-item.model';
 
 @Component({
   selector: 'dropdown',
@@ -16,7 +17,7 @@ import { Observable, of } from 'rxjs';
   ],
 })
 export class DropdownComponent implements ControlValueAccessor {
-  writeValue(obj: any): void {
+  writeValue(obj: DropdownItemModel): void {
     this.value = obj;
   }
   registerOnChange(fn: any): void {
@@ -27,13 +28,14 @@ export class DropdownComponent implements ControlValueAccessor {
   }
 
   @Input() placeholder!: string;
-  @Input() loadData: () => Observable<any[]> = () => of([]);
-  @Input() loadSubData: (id: number) => Observable<any[]> = () => of([]);
-  value?: any;
-  private onChange: (value: any) => void = () => {};
+  @Input() loadData: () => Observable<DropdownItemModel[]> = () => of([]);
+  @Input() loadSubData: (id: number) => Observable<DropdownItemModel[]> = () =>
+    of([]);
+  value?: DropdownItemModel;
+  private onChange: (value: number) => void = () => {};
   private onTouch: () => void = () => {};
-  subData$: Observable<any[]> = of([]);
-  data$: Observable<any[]> = of([]);
+  subData$: Observable<DropdownItemModel[]> = of([]);
+  data$: Observable<DropdownItemModel[]> = of([]);
   hoverDataId?: number;
 
   removeData() {
@@ -41,9 +43,9 @@ export class DropdownComponent implements ControlValueAccessor {
     this.subData$ = of([]);
   }
 
-  chooseSubdata(subData: any) {
+  chooseSubdata(subData: DropdownItemModel) {
     this.value = subData;
-    this.onChange(this.value);
+    this.onChange(this.value.id);
     this.removeData();
   }
 
