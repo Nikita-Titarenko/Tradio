@@ -50,4 +50,18 @@ export class ServiceService {
   createService(createServiceModel: CreateServiceModel): Observable<any> {
     return this.http.post(`${this.apiUrl}`, createServiceModel);
   }
+
+  updateService(
+    serviceId: number,
+    updateServiceModel: CreateServiceModel,
+  ): Observable<void> {
+    return this.http.put<void>(
+      `${this.apiUrl}/${serviceId}`,
+      updateServiceModel,
+    );
+  }
+
+  deleteService(serviceId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${serviceId}`);
+  }
 }
