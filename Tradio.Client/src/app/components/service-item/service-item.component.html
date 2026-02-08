@@ -11,6 +11,11 @@
       (click)="$event.stopPropagation()"
       >Edit</a
     >
-    <button class="btn btn-danger" (click)="deleteService()">Delete</button>
+    <button
+      class="btn btn-danger"
+      (click)="deleteService(); $event.stopPropagation()"
+    >
+      Delete
+    </button>
   </div>
 </div>

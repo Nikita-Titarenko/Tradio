@@ -1,3 +1,7 @@
 <div *ngFor="let service of services$ | async">
-  <service-item [service]="service" [editable]="true"></service-item>
+  <service-item
+    [service]="service"
+    [editable]="true"
+    (serviceDeleted)="deleteService(service.id)"
+  ></service-item>
 </div>
