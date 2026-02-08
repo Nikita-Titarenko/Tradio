@@ -7,8 +7,14 @@
   <div class="form-group">
     <label for="name" class="label-text">Name</label>
     <input id="name" type="text" formControlName="name" placeholder="Name" />
-    <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
+    <div
+      *ngIf="f['name'].errors?.['required'] && f['name'].touched"
+      class="error"
+    >
       Name is required
+    </div>
+    <div class="error" *ngIf="f['name'].errors?.['apiError']">
+      {{ f["name"].errors?.["apiError"] }}
     </div>
   </div>
 
@@ -20,8 +26,14 @@
       formControlName="price"
       placeholder="Price"
     />
-    <div *ngIf="f['price'].invalid && f['price'].touched" class="error">
+    <div
+      *ngIf="f['price'].errors?.['required'] && f['price'].touched"
+      class="error"
+    >
       Price is required
+    </div>
+    <div class="error" *ngIf="f['price'].errors?.['apiError']">
+      {{ f["price"].errors?.["apiError"] }}
     </div>
   </div>
 
@@ -34,11 +46,23 @@
       placeholder="Description"
     ></textarea>
     <div
-      *ngIf="f['description'].invalid && f['description'].touched"
+      *ngIf="f['description'].errors?.['required'] && f['description'].touched"
       class="error"
     >
       Description is required
     </div>
+    <div class="error" *ngIf="f['description'].errors?.['apiError']">
+      {{ f["description"].errors?.["apiError"] }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <dropdown
+      placeholder="category"
+      formControlName="categoryId"
+      [loadData]="loadCategories"
+      [loadSubData]="loadSubcategories"
+    ></dropdown>
   </div>
 
   <div class="switch-toggle-group">
