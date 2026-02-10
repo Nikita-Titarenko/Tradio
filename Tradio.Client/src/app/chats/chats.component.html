@@ -1,7 +1,23 @@
 <div class="chat-container">
-  <form [formGroup]="filterChatGroup">
-    <input type="radio" formControlName="chatType" value="received" />
-    <input type="radio" formControlName="chatType" value="provided" />
+  <form class="filter-message-panel" [formGroup]="filterChatGroup">
+    <label
+      class="filter-message-panel-item"
+      [class.selected-filter]="
+        filterChatGroup.get('chatType')?.value === 'received'
+      "
+    >
+      Received
+      <input type="radio" formControlName="chatType" value="received" />
+    </label>
+    <label
+      class="filter-message-panel-item"
+      [class.selected-filter]="
+        filterChatGroup.get('chatType')?.value === 'provided'
+      "
+    >
+      Provided
+      <input type="radio" formControlName="chatType" value="provided" />
+    </label>
   </form>
   <div
     *ngFor="let chat of chatListItems | async"

@@ -57,3 +57,27 @@
   width: 30%;
   margin-right: 5rem;
 }
+
+.filter-message-panel {
+  display: flex;
+  width: 100%;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+}
+
+.filter-message-panel-item {
+  width: 100%;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.selected-filter {
+  border-bottom: 3px solid orange;
+}
+
+input[type="radio"] {
+  all: unset;
+}
