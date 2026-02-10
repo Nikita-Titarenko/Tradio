@@ -47,6 +47,19 @@ export class AuthService {
     return !!localStorage.getItem(this.jwtTokenName);
   }
 
+  get userId() {
+    const token = localStorage.getItem(this.jwtTokenName);
+    if (!token) {
+      return null;
+    }
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.nameid;
+    } catch {
+      return null;
+    }
+  }
+
   saveJwtToken(jwtToken: string) {
     localStorage.setItem(this.jwtTokenName, jwtToken);
   }
