@@ -71,6 +71,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowNgrok", policy =>
     {
         policy.AllowAnyHeader()
+              .AllowCredentials()
               .AllowAnyMethod()
               .SetIsOriginAllowed(origin => true);
     });
