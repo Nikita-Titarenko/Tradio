@@ -1,6 +1,6 @@
 export interface MessageModel {
   text: string;
-  isUserMessage: boolean;
+  isYourMessage: boolean;
   isRead: boolean;
-  creationDateTime: Date;
+  creationDateTime: string;
 }
