@@ -21,7 +21,7 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(us => new ChatDto
                 {
                     ApplicationUserId = us.ApplicationUserId != applicationUserId ? us.ApplicationUserId : us.Service.ApplicationUserId,
-                    ServiceId = us.Id,
+                    ServiceId = us.ServiceId,
                     ServiceName = us.Service.Name,
                     FullName = _dbContext.Users.Where(u => u.Id == us.ApplicationUserId).Select(u => u.Fullname).First(),
                     ApplicationUserServiceId = applicationUserServiceId,
