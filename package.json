@@ -11,5 +11,8 @@
     "Tradio.Client/**/*.{js,ts,html,css,json}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^10.0.0"
   }
 }
