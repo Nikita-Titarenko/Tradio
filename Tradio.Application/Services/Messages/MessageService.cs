@@ -69,7 +69,7 @@ namespace Tradio.Application.Services.Messages
                     message.ApplicationUserService = applicationUserService;
                     message.IsFromProvider = senderUserId == service.ApplicationUserId;
 
-                    await _notificationService.SendMessageToChatAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
+                    await _notificationService.SendMessageAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
                     {
                         Id = message.Id,
                         CreationDateTime = message.CreationDateTime,
@@ -87,7 +87,7 @@ namespace Tradio.Application.Services.Messages
             message.ApplicationUserServiceId = applicationUserServiceId;
             message.IsFromProvider = senderUserId != getApplicationUserServiceResult.Value.ProviderUserId;
 
-            await _notificationService.SendMessageToChatAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
+            await _notificationService.SendMessageAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
             {
                 Id = message.Id,
                 CreationDateTime = message.CreationDateTime,

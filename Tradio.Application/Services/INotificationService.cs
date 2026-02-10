@@ -4,6 +4,6 @@ namespace Tradio.Application.Services
 {
     public interface INotificationService
     {
-        Task SendMessageToChatAsync(int chatId, MessageDtoForSingalR dto);
+        Task SendMessageAsync(int chatId, MessageDtoForSingalR dto);
     }
 }
