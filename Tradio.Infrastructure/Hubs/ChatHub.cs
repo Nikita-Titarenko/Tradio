@@ -8,5 +8,10 @@ namespace Tradio.Infrastructure.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
         }
+
+        public async Task AddUserAsync(string userId)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, userId.ToString());
+        }
     }
 }
