@@ -1,4 +1,8 @@
 <div class="chat-container">
+  <form [formGroup]="filterChatGroup">
+    <input type="radio" formControlName="chatType" value="received" />
+    <input type="radio" formControlName="chatType" value="provided" />
+  </form>
   <div
     *ngFor="let chat of chatListItems | async"
     class="chat-item"
@@ -22,7 +26,7 @@
     class="secondary-link"
     >{{ chat.serviceName }}</a
   >
-  <div class="messages-container">
+  <div class="messages-container" #messagesContainer>
     <div *ngFor="let message of chat.messages" class="message">
       <p class="message-text">{{ message.text }}</p>
       <p class="date">{{ message.creationDateTime | date: "HH:mm" }}</p>

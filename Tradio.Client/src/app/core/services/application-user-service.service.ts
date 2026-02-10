@@ -16,4 +16,10 @@ export class ApplicationUserServiceService {
       `${this.apiUrl}/received-service`,
     );
   }
+
+  getProvidedServiceChats(): Observable<ChatListItemModel[]> {
+    return this.http.get<ChatListItemModel[]>(
+      `${this.apiUrl}/provided-service`,
+    );
+  }
 }
