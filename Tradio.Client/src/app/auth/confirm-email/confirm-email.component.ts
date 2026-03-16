@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'confirm-email',
@@ -24,7 +24,7 @@ export class ConfirmEmailComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {

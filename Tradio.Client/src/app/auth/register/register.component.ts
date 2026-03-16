@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -24,7 +24,7 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: UserService,
     private router: Router,
   ) {
     this.registerForm = this.fb.group({

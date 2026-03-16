@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RegisterResponseModel } from '../responses/register-response.model';
 import { SignInResponseModel } from '../responses/sign-in-response.model';
+import { UserModel } from '../responses/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class UserService {
   private apiUrl = 'http://localhost:5188/api/Users';
   private jwtTokenName = 'jwtToken';
 
@@ -41,6 +42,10 @@ export class AuthService {
       code,
       userId,
     });
+  }
+
+  getUser(): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.apiUrl}/${this.userId}`);
   }
 
   get isLoggedIn() {

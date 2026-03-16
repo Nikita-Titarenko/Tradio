@@ -27,7 +27,7 @@ import {
 import { ChatListItemModel } from '../core/responses/chat-list-item.model';
 import { ChatModel } from '../core/responses/chat.model';
 import { ApplicationUserServiceService } from '../core/services/application-user-service.service';
-import { AuthService } from '../core/services/auth.service';
+import { UserService } from '../core/services/user.service';
 import { MessageService } from '../core/services/message.service';
 import { NotificationService } from '../core/services/notification.service';
 
@@ -44,7 +44,7 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
     private notificationService: NotificationService,
-    private authService: AuthService,
+    private authService: UserService,
     formBuilder: FormBuilder,
   ) {
     this.createMessageGroup = formBuilder.group({
