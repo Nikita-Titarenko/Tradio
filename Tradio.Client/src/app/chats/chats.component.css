@@ -63,6 +63,7 @@
   width: 100%;
   background-color: var(--secondary-color);
   border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .filter-message-panel-item {
