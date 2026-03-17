@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Services.Payments;
+using Tradio.Server.RequestsModel.Payments;
 
 namespace Tradio.Server.Controllers
 {
@@ -20,9 +21,9 @@ namespace Tradio.Server.Controllers
         [Authorize]
         [ProducesResponseType(typeof(PaymentDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreatePayment(int applicationUserServiceId)
+        public async Task<IActionResult> CreatePayment(CreatePaymentRequest request)
         {
-            var result = await _paymentService.CreatePaymentAsync(applicationUserServiceId, GetUserId());
+            var result = await _paymentService.CreatePaymentAsync(request.ApplicationUserServiceId, GetUserId());
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Errors);
