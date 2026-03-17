@@ -9,6 +9,7 @@ import {
 import { UserService } from '../../core/services/user.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
+import { UserModel } from '../../core/responses/user.model';
 
 @Component({
   selector: 'main-layout',
@@ -20,15 +21,16 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class MainLayoutComponent implements OnInit {
-  public creditsCount$?: Observable<number>;
+  public userModel$?: Observable<UserModel>;
+
   constructor(
     public authService: UserService,
     public router: Router,
   ) {}
   ngOnInit(): void {
-    this.creditsCount$ = this.authService
-      .getUser()
-      .pipe(map((user) => user.creditCount));
+    this.userModel$ = this.authService.user$;
+
+    this.authService.getUser().subscribe();
   }
 
   logout() {

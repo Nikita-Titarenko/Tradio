@@ -4,51 +4,69 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/" routerLinkActive="active">Tradio</a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
         <a
           class="nav-link"
           routerLink="/services"
           routerLinkActive="active"
-          *ngIf="authService.isLoggedIn"
-          >Services</a
+          title="Services"
         >
+          <i class="fa fa-th-large"></i>
+        </a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
         <a
           class="nav-link"
           routerLink="/chats"
           routerLinkActive="active"
-          *ngIf="authService.isLoggedIn"
-          >Chats</a
+          title="Chats"
         >
+          <i class="fa fa-comments"></i>
+        </a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
         <a
           class="nav-link"
           routerLink="/my-services"
           routerLinkActive="active"
-          *ngIf="authService.isLoggedIn"
-          >My services</a
+          title="My services"
         >
+          <i class="fa fa-user"></i>
+        </a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
         <a
           class="nav-link"
           routerLink="/create-service"
           routerLinkActive="active"
-          *ngIf="authService.isLoggedIn"
-          >Create service</a
+          title="Create service"
         >
+          <i class="fa fa-plus-circle"></i>
+        </a>
       </li>
-      <li class="nav-item">
-        {{ creditsCount$ | async }}
-        <i class="fa fa-coins"></i>
-      </li>
+
+      <div *ngIf="userModel$ | async as userModel">
+        <li class="nav-item">
+          {{ userModel.creditCount }} <i class="fa fa-coins"></i>
+        </li>
+      </div>
+
+      <div *ngIf="userModel$ | async as userModel">
+        <li class="nav-item">
+          {{ userModel.fullname }}
+        </li>
+      </div>
+
       <li>
         <a routerLink="login" class="nav-link" *ngIf="!authService.isLoggedIn"
           >Login</a
         >
       </li>
+
       <li>
         <a
           routerLink="register"
@@ -57,13 +75,9 @@
           >Register</a
         >
       </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          *ngIf="authService.isLoggedIn"
-          (click)="logout()"
-        >
-          Log out
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
+        <button class="nav-link" (click)="logout()" title="Log out">
+          <i class="fa fa-sign-out-alt"></i>
         </button>
       </li>
     </ul>

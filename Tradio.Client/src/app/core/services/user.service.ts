@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, tap } from 'rxjs';
 import { RegisterResponseModel } from '../responses/register-response.model';
 import { SignInResponseModel } from '../responses/sign-in-response.model';
 import { UserModel } from '../responses/user.model';
@@ -44,8 +44,13 @@ export class UserService {
     });
   }
 
+  private userSource = new ReplaySubject<UserModel>(1);
+  public user$ = this.userSource.asObservable();
+
   getUser(): Observable<UserModel> {
-    return this.http.get<UserModel>(`${this.apiUrl}/${this.userId}`);
+    return this.http
+      .get<UserModel>(`${this.apiUrl}/${this.userId}`)
+      .pipe(tap((user) => this.userSource.next(user)));
   }
 
   get isLoggedIn() {
