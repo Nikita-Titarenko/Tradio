@@ -39,7 +39,12 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(us => new
                 {
                     us.Id,
-                    FullName = _dbContext.Users.Where(u => u.Id == userId).Select(u => u.Fullname).First(),
+                    FullName = _dbContext.Users
+                        .Where(u => 
+                            u.Id == (userId == us.ApplicationUserId ? 
+                                us.Service.ApplicationUserId : 
+                                us.ApplicationUserId))
+                        .Select(u => u.Fullname).First(),
                     LastMessage = us.Messages.OrderByDescending(m => m.CreationDateTime).First()
                 })
                 .Select(us => new ChatListItemDto
@@ -59,7 +64,12 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(us => new
                 {
                     us.Id,
-                    FullName = _dbContext.Users.Where(u => u.Id == userId).Select(u => u.Fullname).First(),
+                    FullName = _dbContext.Users
+                        .Where(u => 
+                            u.Id == (userId == us.ApplicationUserId ? 
+                            us.Service.ApplicationUserId : 
+                            us.ApplicationUserId))
+                        .Select(u => u.Fullname).First(),
                     LastMessage = us.Messages.OrderByDescending(m => m.CreationDateTime).First()
                 })
                 .Select(us => new ChatListItemDto
