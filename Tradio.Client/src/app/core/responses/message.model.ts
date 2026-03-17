@@ -3,4 +3,5 @@ export interface MessageModel {
   isYourMessage: boolean;
   isRead: boolean;
   creationDateTime: string;
+  applicationUserServiceId: number;
 }

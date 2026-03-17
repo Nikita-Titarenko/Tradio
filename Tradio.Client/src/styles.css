@@ -225,3 +225,13 @@ p {
   color: white;
   font-size: 1.5rem;
 }
+
+.align-items-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.px-3 {
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}

@@ -82,3 +82,12 @@
 input[type="radio"] {
   all: unset;
 }
+
+.space-between-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-secondary {
+  width: 100%;
+}

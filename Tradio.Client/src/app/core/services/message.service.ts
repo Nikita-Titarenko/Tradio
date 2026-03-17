@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChatModel } from '../responses/chat.model';
 import { CreateMessageModel } from '../requests/create-message.model';
+import { MessageModel } from '../responses/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class MessageService {
     );
   }
 
-  createMessage(messageModel: CreateMessageModel): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, messageModel);
+  createMessage(messageModel: CreateMessageModel): Observable<MessageModel> {
+    return this.http.post<MessageModel>(`${this.apiUrl}`, messageModel);
   }
 }
