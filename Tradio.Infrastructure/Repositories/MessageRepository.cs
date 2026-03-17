@@ -20,9 +20,11 @@ namespace Tradio.Infrastructure.Repositories
                 .Where(us => us.Id == applicationUserServiceId)
                 .Select(us => new ChatDto
                 {
+                    IsRecipient = us.ApplicationUserId == applicationUserId,
                     ApplicationUserId = us.ApplicationUserId != applicationUserId ? us.ApplicationUserId : us.Service.ApplicationUserId,
                     ServiceId = us.ServiceId,
                     ServiceName = us.Service.Name,
+                    Price = us.Service.Price,
                     FullName = _dbContext.Users.Where(u => u.Id == us.ApplicationUserId).Select(u => u.Fullname).First(),
                     ApplicationUserServiceId = applicationUserServiceId,
                     Messages = us.Messages.Select(m => new MessageDto
