@@ -24,7 +24,7 @@
     class="chat-item"
     (click)="selectChat(chat.id)"
     [class.selected-chat]="
-      chat.id === (chatModel | async)?.applicationUserServiceId
+      chat.id === (chatModel$ | async)?.applicationUserServiceId
     "
   >
     <h3>{{ chat.fullName }}</h3>
@@ -34,14 +34,30 @@
     </div>
   </div>
 </div>
-<div *ngIf="chatModel | async as chat" class="flex-column">
-  <h1>{{ chat.fullName }}</h1>
-  <a
-    routerLink="/service"
-    [queryParams]="{ serviceId: chat.serviceId }"
-    class="secondary-link"
-    >{{ chat.serviceName }}</a
-  >
+<div *ngIf="chatModel$ | async as chat" class="flex-column">
+  <div class="space-between-container">
+    <h1>{{ chat.fullName }}</h1>
+    <a
+      routerLink="/service"
+      [queryParams]="{ serviceId: chat.serviceId }"
+      class="secondary-link"
+      >{{ chat.serviceName }}</a
+    >
+    <div *ngIf="chatModel$ | async as chat">
+      <button
+        *ngIf="chat.isRecipient"
+        (click)="createPayment()"
+        class="btn btn-secondary d-flex"
+      >
+        <div class="align-items-center">
+          <p class="icon px-3">Pay for service</p>
+          {{ chat.price }}
+          <i class="fa fa-coins"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+
   <div class="messages-container" #messagesContainer>
     <div *ngFor="let message of chat.messages" class="message">
       <p class="message-text">{{ message.text }}</p>

@@ -167,4 +167,15 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
     event.preventDefault();
     this.createMessage();
   }
+
+  createPayment() {
+    this.chatSubject.pipe(take(1)).subscribe((chat) => {
+      if (!chat.applicationUserServiceId) return;
+      this.paymentService
+        .createPayment({
+          applicationUserServiceId: chat.applicationUserServiceId,
+        })
+        .subscribe(() => this.authService.getUser().subscribe());
+    });
+  }
 }
