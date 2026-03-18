@@ -1,9 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ChatModel } from '../responses/chat.model';
-import { CreateMessageModel } from '../requests/create-message.model';
 import { CreatePaymentModel } from '../requests/create-payment.model';
+import { PaymentModel } from '../responses/payment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +16,9 @@ export class PaymentService {
     applicationUserServiceModel: CreatePaymentModel,
   ): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}`, applicationUserServiceModel);
+  }
+
+  getPayments(): Observable<PaymentModel[]> {
+    return this.http.get<PaymentModel[]>(`${this.apiUrl}/by-user`);
   }
 }

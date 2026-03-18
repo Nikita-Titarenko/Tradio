@@ -1,0 +1,16 @@
+.getting-money > * {
+  color: #9fc87e;
+}
+
+.loose-money > * {
+  color: #ff3f33;
+}
+
+.payment {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  background: var(--secondary-color);
+}

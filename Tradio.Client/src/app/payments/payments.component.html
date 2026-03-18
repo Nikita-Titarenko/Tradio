@@ -1,0 +1,10 @@
+<div
+  class="payment"
+  [class.loose-money]="!payment.areYouProvider"
+  [class.getting-money]="payment.areYouProvider"
+  *ngFor="let payment of payments$ | async"
+>
+  <h2>{{ payment.serviceName }}</h2>
+  <p>{{ (payment.areYouProvider ? "+" : "-") + payment.price }}</p>
+  <p>{{ payment.creationDateTime | date }}</p>
+</div>
