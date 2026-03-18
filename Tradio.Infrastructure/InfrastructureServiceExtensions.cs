@@ -36,6 +36,8 @@ namespace Tradio.Infrastructure
             services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            services.AddScoped<IDbHelper, DbHelper>();
 
             services.Configure<SmtpEmailOptions>(configuration.GetSection("EmailOptions"));
             services.Configure<JwtTokenOptions>(configuration.GetSection("Jwt"));

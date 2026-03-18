@@ -978,7 +978,7 @@ namespace Tradio.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Tradio.Domain.Service", "Service")
-                        .WithMany()
+                        .WithMany("ApplicationUserServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1121,6 +1121,11 @@ namespace Tradio.Infrastructure.Migrations
             modelBuilder.Entity("Tradio.Domain.Country", b =>
                 {
                     b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("Tradio.Domain.Service", b =>
+                {
+                    b.Navigation("ApplicationUserServices");
                 });
 
             modelBuilder.Entity("Tradio.Infrastructure.ApplicationUser", b =>

@@ -93,6 +93,15 @@ export const routes: Routes = [
         title: 'Tradio',
         canActivate: [AuthGuard],
       },
+      {
+        path: 'database',
+        loadComponent: () =>
+          import('./database/database.component').then(
+            (m) => m.DatabaseComponent,
+          ),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {

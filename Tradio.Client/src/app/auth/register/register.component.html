@@ -1,5 +1,8 @@
+<img src="assets/images/register-image.png" class="auth-illustration" />
+
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-container">
   <h2 class="form-header">{{ "AUTH.REGISTER.TITLE" | translate }}</h2>
+
   <div class="form-group">
     <label for="name" class="label-text">{{
       "AUTH.FIELDS.NAME" | translate
@@ -12,6 +15,36 @@
     />
     <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
       {{ "AUTH.ERRORS.NAME_REQUIRED" | translate }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="label-text">{{
+      "AUTH.FIELDS.EMAIL" | translate
+    }}</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      [placeholder]="'AUTH.FIELDS.EMAIL' | translate"
+    />
+    <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
+      {{ "AUTH.ERRORS.EMAIL_REQUIRED" | translate }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password" class="label-text">{{
+      "AUTH.FIELDS.PASSWORD" | translate
+    }}</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      [placeholder]="'AUTH.FIELDS.PASSWORD' | translate"
+    />
+    <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
+      {{ "AUTH.ERRORS.PASSWORD_REQUIRED" | translate }}
     </div>
   </div>
 
@@ -29,7 +62,7 @@
       *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched"
       class="error"
     >
-      {{ "AUTH.ERRORS.CONFIRM_REQUIRED" | translate }}
+      {{ "AUTH.ERRORS.CONFIRM_PASSWORD_REQUIRED" | translate }}
     </div>
   </div>
 
@@ -40,12 +73,15 @@
   >
     {{ "AUTH.REGISTER.SUBMIT" | translate }}
   </button>
+
   <p class="center-text">
     {{ "AUTH.REGISTER.ALREADY_HAVE" | translate }}
-    <span
-      ><a routerLink="/login" class="link">{{
-        "AUTH.REGISTER.SIGN_IN" | translate
-      }}</a></span
-    >
+    <span>
+      <a routerLink="/login" class="link">
+        {{ "AUTH.REGISTER.SIGN_IN" | translate }}
+      </a>
+    </span>
   </p>
+
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>

@@ -84,6 +84,19 @@
         </div>
       </li>
 
+      <li class="nav-item" *ngIf="userModel$ | async as userModel">
+        <div *ngIf="authService.isLoggedIn && userModel.roleName === 'Admin'">
+          <a
+            class="nav-link"
+            routerLink="/database"
+            routerLinkActive="active"
+            [title]="'HEADER.DATABASE' | translate"
+          >
+            <i class="fa fa-database"></i>
+          </a>
+        </div>
+      </li>
+
       <div *ngIf="userModel$ | async as userModel">
         <li class="nav-item">
           {{ userModel.creditCount }} <i class="fa fa-coins"></i>

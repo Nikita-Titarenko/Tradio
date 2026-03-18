@@ -12,8 +12,8 @@ using Tradio.Infrastructure;
 namespace Tradio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251114060931_RemoveComplaintStatus")]
-    partial class RemoveComplaintStatus
+    [Migration("20260318145210_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -153,6 +153,13 @@ namespace Tradio.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "2d13340c-d9ab-4439-bd7c-897c12f8ceba",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -174,6 +181,30 @@ namespace Tradio.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationUserServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserServiceId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Tradio.Domain.ApplicationUserService", b =>
@@ -220,7 +251,7 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -500,7 +531,7 @@ namespace Tradio.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Complaint", b =>
+            modelBuilder.Entity("Tradio.Domain.Climate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -508,8 +539,33 @@ namespace Tradio.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Humidity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Temperature")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Climates");
+                });
+
+            modelBuilder.Entity("Tradio.Domain.Complaint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApplicationUserServiceId")
                         .HasColumnType("int");
@@ -523,8 +579,6 @@ namespace Tradio.Infrastructure.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ApplicationUserServiceId");
 
@@ -548,6 +602,9 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreditReturning")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -776,7 +833,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("Fullname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -813,7 +871,8 @@ namespace Tradio.Infrastructure.Migrations
 
                     b.Property<string>("VerificationCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.HasKey("Id");
 
@@ -828,6 +887,27 @@ namespace Tradio.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2d13340c-d9ab-4439-bd7c-897c12f8ceba",
+                            AccessFailedCount = 0,
+                            CityId = 4,
+                            ConcurrencyStamp = "73fa19ca-4374-4a0a-b180-0104ef50f211",
+                            CreditCount = 105,
+                            Email = "nikitatitarenko81@gmail.com",
+                            EmailConfirmed = true,
+                            Fullname = "Микита",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NIKITATITARENKO81@GMAIL.COM",
+                            NormalizedUserName = "NIKITATITARENKO81@GMAIL.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "22758ef3-c2d6-4cc4-a8f0-dab4790fd254",
+                            TwoFactorEnabled = false,
+                            UserName = "nikitatitarenko81@gmail.com",
+                            VerificationCode = "151515"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -881,6 +961,17 @@ namespace Tradio.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Payment", b =>
+                {
+                    b.HasOne("Tradio.Domain.ApplicationUserService", "ApplicationUserService")
+                        .WithMany("Payments")
+                        .HasForeignKey("ApplicationUserServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUserService");
+                });
+
             modelBuilder.Entity("Tradio.Domain.ApplicationUserService", b =>
                 {
                     b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
@@ -890,7 +981,7 @@ namespace Tradio.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Tradio.Domain.Service", "Service")
-                        .WithMany()
+                        .WithMany("ApplicationUserServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -918,12 +1009,17 @@ namespace Tradio.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("Tradio.Domain.Complaint", b =>
+            modelBuilder.Entity("Tradio.Domain.Climate", b =>
                 {
                     b.HasOne("Tradio.Infrastructure.ApplicationUser", null)
-                        .WithMany("Complaints")
-                        .HasForeignKey("ApplicationUserId");
+                        .WithMany("Climates")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
 
+            modelBuilder.Entity("Tradio.Domain.Complaint", b =>
+                {
                     b.HasOne("Tradio.Domain.ApplicationUserService", "ApplicationUserService")
                         .WithMany("Complaints")
                         .HasForeignKey("ApplicationUserServiceId")
@@ -1011,6 +1107,8 @@ namespace Tradio.Infrastructure.Migrations
                     b.Navigation("Complaints");
 
                     b.Navigation("Messages");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Tradio.Domain.Category", b =>
@@ -1028,13 +1126,18 @@ namespace Tradio.Infrastructure.Migrations
                     b.Navigation("Cities");
                 });
 
+            modelBuilder.Entity("Tradio.Domain.Service", b =>
+                {
+                    b.Navigation("ApplicationUserServices");
+                });
+
             modelBuilder.Entity("Tradio.Infrastructure.ApplicationUser", b =>
                 {
                     b.Navigation("ApplicationUserServices");
 
-                    b.Navigation("ComplaintReplies");
+                    b.Navigation("Climates");
 
-                    b.Navigation("Complaints");
+                    b.Navigation("ComplaintReplies");
 
                     b.Navigation("Services");
 

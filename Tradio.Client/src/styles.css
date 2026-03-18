@@ -122,6 +122,13 @@ header {
   display: none;
 }
 
+.success {
+  color: #2e8626;
+  background: #c5ecc8;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
 .error {
   color: #862627;
   background: #ecc8c5;

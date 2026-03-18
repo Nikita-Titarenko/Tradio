@@ -1,0 +1,41 @@
+<button class="btn btn-primary" (click)="exportInserts()">
+  Export Inserts
+</button>
+<div class="import-container">
+  <div
+    class="drop-zone"
+    (click)="fileInput.click()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    [class.dragging]="isDragging"
+  >
+    <i class="fas fa-file-upload fa-3x"></i>
+    <p *ngIf="!selectedFile">
+      Перетягніть .sql файл сюди або натисніть для вибору
+    </p>
+    <p *ngIf="selectedFile"><strong>Обрано:</strong> {{ selectedFile.name }}</p>
+
+    <input
+      type="file"
+      #fileInput
+      (change)="onFileSelected($event)"
+      accept=".sql"
+      style="display: none"
+    />
+  </div>
+
+  <button
+    class="btn btn-secondary mt-3"
+    [disabled]="!selectedFile"
+    (click)="importBackup()"
+  >
+    <i class="fas fa-cloud-upload-alt"></i> Завантажити на сервер
+  </button>
+</div>
+<div *ngIf="sucessMessage" class="success">
+  {{ sucessMessage }}
+</div>
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>

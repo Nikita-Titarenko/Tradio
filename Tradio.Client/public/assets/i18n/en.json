@@ -120,7 +120,8 @@
     "CLIMATES": "Climates",
     "PAYMENTS": "Payments",
     "USERS": "Users",
-    "LOGOUT": "Log out"
+    "LOGOUT": "Log out",
+    "DATABASE": "Database"
   },
   "FILTER": {
     "PLACEHOLDER": {

@@ -120,7 +120,8 @@
     "CLIMATES": "Клімати",
     "PAYMENTS": "Платежі",
     "USERS": "Користувачі",
-    "LOGOUT": "Вийти"
+    "LOGOUT": "Вийти",
+    "DATABASE": "База даних"
   },
   "FILTER": {
     "PLACEHOLDER": {

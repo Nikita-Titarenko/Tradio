@@ -8,6 +8,7 @@ using Tradio.Application.Services.Climates;
 using Tradio.Application.Services.ComplaintReplies;
 using Tradio.Application.Services.Complaints;
 using Tradio.Application.Services.Countries;
+using Tradio.Application.Services.Database;
 using Tradio.Application.Services.Messages;
 using Tradio.Application.Services.Payments;
 using Tradio.Application.Services.Services;
@@ -33,6 +34,7 @@ namespace Tradio.Infrastructure
             services.AddScoped<IApplicationUserServiceService, ApplicationUserServiceService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IClimateService, Application.Services.Climates.ClimateService>();
+            services.AddScoped<IDatabaseService, DatabaseService>();
 
             return services;
         }
