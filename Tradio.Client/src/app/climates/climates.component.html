@@ -1,0 +1,13 @@
+<div class="climate" *ngIf="climate$ | async as climate">
+  <h2>Current temperature: {{ climate.currentTemperature }}</h2>
+  <p>Average temperature for day: {{ climate.avgTemperatureForDay }}</p>
+  <p>Average temperature for week: {{ climate.avgTemperatureForWeek }}</p>
+  <p>Average temperature for month: {{ climate.avgTemperatureForMonth }}</p>
+</div>
+
+<div class="climate" *ngIf="climate$ | async as climate">
+  <h2>Current humidity: {{ climate.currentHumidity }}</h2>
+  <p>Average humidity for day: {{ climate.avgHumidityForDay }}</p>
+  <p>Average humidity for week: {{ climate.avgHumidityForWeek }}</p>
+  <p>Average humidity for month: {{ climate.avgHumidityForMonth }}</p>
+</div>
