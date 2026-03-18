@@ -1,0 +1,134 @@
+{
+  "USERS": {
+    "TABLE": {
+      "FULL_NAME": "Повне ім'я",
+      "EMAIL": "Email",
+      "LOCATION": "Місто / Країна",
+      "CREDITS": "Кредити",
+      "ROLE": "Роль",
+      "STATUS": "Статус",
+      "ACTIONS": "Дії"
+    },
+    "STATUS": {
+      "BANNED": "Забанений",
+      "ACTIVE": "Активний"
+    },
+    "BUTTONS": {
+      "BAN": "Забанити",
+      "UNBAN": "Розбанити"
+    }
+  },
+  "CHAT": {
+    "FILTER": {
+      "RECEIVED": "Отримані",
+      "PROVIDED": "Надані"
+    },
+    "ACTIONS": {
+      "PAY_FOR_SERVICE": "Оплатити послугу",
+      "WRITE_MESSAGE": "Написати повідомлення..."
+    },
+    "MESSAGES": {
+      "NO_MESSAGES": "Повідомлень ще немає",
+      "ERROR_OCCURRED": "Виникла помилка"
+    }
+  },
+  "SERVICE_FORM": {
+    "TITLE": "Створити послугу",
+    "FIELDS": {
+      "NAME": "Назва",
+      "PRICE": "Ціна",
+      "DESCRIPTION": "Опис",
+      "CATEGORY": "Категорія",
+      "IS_VISIBLE": "Видимість"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "Назва обов'язкова",
+      "PRICE_REQUIRED": "Ціна обов'язкова",
+      "DESC_REQUIRED": "Опис обов'язковий"
+    },
+    "SUBMIT": "Створити послугу"
+  },
+  "SERVICE_EDIT": {
+    "TITLE": "Редагувати послугу",
+    "SUBMIT": "Оновити послугу"
+  },
+  "SERVICE_ITEM": {
+    "CREDITS": "кредитів",
+    "EDIT": "Редагувати",
+    "DELETE": "Видалити",
+    "CREATED": "Створено",
+    "START_CHAT": "Почати чат"
+  },
+  "CLIMATE": {
+    "TEMPERATURE": {
+      "CURRENT": "Поточна температура",
+      "AVG_DAY": "Середня температура за день",
+      "AVG_WEEK": "Середня температура за тиждень",
+      "AVG_MONTH": "Середня температура за місяць"
+    },
+    "HUMIDITY": {
+      "CURRENT": "Поточна вологість",
+      "AVG_DAY": "Середня вологість за день",
+      "AVG_WEEK": "Середня вологість за тиждень",
+      "AVG_MONTH": "Середня вологість за місяць"
+    }
+  },
+  "HERO": {
+    "TITLE": "Tradio",
+    "DESCRIPTION": "Tradio - це сучасна бартерна платформа, яка дозволяє користувачам безперешкодно обмінюватися професійними послугами та навичками через екосистему прямого обміну цінностями.",
+    "BUTTON": "Розпочати"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Вхід",
+      "SUBMIT": "Увійти",
+      "NO_ACCOUNT": "Немає аккаунту?",
+      "SIGN_UP": "Зареєструватися"
+    },
+    "REGISTER": {
+      "TITLE": "Реєстрація",
+      "SUBMIT": "Зареєструватися",
+      "ALREADY_HAVE": "Вже є аккаунт?",
+      "SIGN_IN": "Увійти"
+    },
+    "CONFIRM": {
+      "TITLE": "Підтвердження пошти",
+      "SUBMIT": "Підтвердити"
+    },
+    "FIELDS": {
+      "NAME": "Ім'я",
+      "EMAIL": "Email",
+      "PASSWORD": "Пароль",
+      "CONFIRM_PASSWORD": "Підтвердіть пароль",
+      "CODE": "Код підтвердження"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "Ім'я обов'язкове",
+      "EMAIL_REQUIRED": "Email обов'язковий",
+      "PASSWORD_REQUIRED": "Пароль обов'язковий",
+      "CONFIRM_REQUIRED": "Підтвердьте пароль",
+      "CODE_REQUIRED": "Код підтвердження обов'язковий"
+    }
+  },
+  "HEADER": {
+    "LOGIN": "Увійти",
+    "REGISTER": "Реєстрація",
+    "SERVICES": "Послуги",
+    "CHATS": "Чати",
+    "MY_SERVICES": "Мої послуги",
+    "CREATE": "Створити",
+    "CLIMATES": "Клімати",
+    "PAYMENTS": "Платежі",
+    "USERS": "Користувачі",
+    "LOGOUT": "Вийти"
+  },
+  "FILTER": {
+    "PLACEHOLDER": {
+      "CATEGORY": "Обрати категорію",
+      "CITY": "Обрати місто"
+    },
+    "MESSAGES": {
+      "NO_SERVICES": "Послуг за вашим запитом не знайдено"
+    }
+  }
+}

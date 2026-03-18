@@ -1,0 +1,134 @@
+{
+  "USERS": {
+    "TABLE": {
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "LOCATION": "City / Country",
+      "CREDITS": "Credits",
+      "ROLE": "Role",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    },
+    "STATUS": {
+      "BANNED": "Banned",
+      "ACTIVE": "Active"
+    },
+    "BUTTONS": {
+      "BAN": "Ban",
+      "UNBAN": "Unban"
+    }
+  },
+  "CHAT": {
+    "FILTER": {
+      "RECEIVED": "Received",
+      "PROVIDED": "Provided"
+    },
+    "ACTIONS": {
+      "PAY_FOR_SERVICE": "Pay for service",
+      "WRITE_MESSAGE": "Write a message..."
+    },
+    "MESSAGES": {
+      "NO_MESSAGES": "No messages yet",
+      "ERROR_OCCURRED": "An error occurred"
+    }
+  },
+  "SERVICE_FORM": {
+    "TITLE": "Create Service",
+    "FIELDS": {
+      "NAME": "Name",
+      "PRICE": "Price",
+      "DESCRIPTION": "Description",
+      "CATEGORY": "Category",
+      "IS_VISIBLE": "Is Visible"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "Name is required",
+      "PRICE_REQUIRED": "Price is required",
+      "DESC_REQUIRED": "Description is required"
+    },
+    "SUBMIT": "Create Service"
+  },
+  "SERVICE_EDIT": {
+    "TITLE": "Edit Service",
+    "SUBMIT": "Edit Service"
+  },
+  "SERVICE_ITEM": {
+    "CREDITS": "credits",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "CREATED": "Created",
+    "START_CHAT": "Start chat"
+  },
+  "CLIMATE": {
+    "TEMPERATURE": {
+      "CURRENT": "Current temperature",
+      "AVG_DAY": "Average temperature for day",
+      "AVG_WEEK": "Average temperature for week",
+      "AVG_MONTH": "Average temperature for month"
+    },
+    "HUMIDITY": {
+      "CURRENT": "Current humidity",
+      "AVG_DAY": "Average humidity for day",
+      "AVG_WEEK": "Average humidity for week",
+      "AVG_MONTH": "Average humidity for month"
+    }
+  },
+  "HERO": {
+    "TITLE": "Tradio",
+    "DESCRIPTION": "Tradio is a modern bartering platform that enables users to seamlessly exchange professional services and skills through a direct value-to-value ecosystem.",
+    "BUTTON": "Get started"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Login",
+      "SUBMIT": "Login",
+      "NO_ACCOUNT": "Don't have an account?",
+      "SIGN_UP": "Sign up"
+    },
+    "REGISTER": {
+      "TITLE": "Register",
+      "SUBMIT": "Register",
+      "ALREADY_HAVE": "Already have an account?",
+      "SIGN_IN": "Sign in"
+    },
+    "CONFIRM": {
+      "TITLE": "Confirm email",
+      "SUBMIT": "Confirm email"
+    },
+    "FIELDS": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm password",
+      "CODE": "Verification code"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "Name is required",
+      "EMAIL_REQUIRED": "Email is required",
+      "PASSWORD_REQUIRED": "Password is required",
+      "CONFIRM_REQUIRED": "Confirm password is required",
+      "CODE_REQUIRED": "Verification code is required"
+    }
+  },
+  "HEADER": {
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "SERVICES": "Services",
+    "CHATS": "Chats",
+    "MY_SERVICES": "My services",
+    "CREATE": "Create service",
+    "CLIMATES": "Climates",
+    "PAYMENTS": "Payments",
+    "USERS": "Users",
+    "LOGOUT": "Log out"
+  },
+  "FILTER": {
+    "PLACEHOLDER": {
+      "CATEGORY": "Select category",
+      "CITY": "Select city"
+    },
+    "MESSAGES": {
+      "NO_SERVICES": "No services found matching your criteria"
+    }
+  }
+}

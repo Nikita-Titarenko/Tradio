@@ -1,0 +1,60 @@
+{
+  "USERS": {
+    "TABLE": {
+      "FULL_NAME": "الاسم الكامل",
+      "EMAIL": "البريد الإلكتروني",
+      "LOCATION": "المدينة / الدولة",
+      "CREDITS": "الاعتمادات",
+      "ROLE": "الدور",
+      "STATUS": "الحالة",
+      "ACTIONS": "الإجراءات"
+    },
+    "STATUS": {
+      "BANNED": "محظور",
+      "ACTIVE": "نشط"
+    },
+    "BUTTONS": {
+      "BAN": "حظر",
+      "UNBAN": "إلغاء الحظر"
+    }
+  },
+  "CHAT": {
+    "FILTER": {
+      "RECEIVED": "الواردة",
+      "PROVIDED": "المقدمة"
+    },
+    "ACTIONS": {
+      "PAY_FOR_SERVICE": "الدفع مقابل الخدمة",
+      "WRITE_MESSAGE": "اكتب رسالة..."
+    },
+    "MESSAGES": {
+      "NO_MESSAGES": "لا توجد رسائل بعد",
+      "ERROR_OCCURRED": "حدث خطأ"
+    }
+  },
+  "SERVICE_FORM": {
+    "TITLE": "إنشاء خدمة",
+    "FIELDS": {
+      "NAME": "الاسم",
+      "PRICE": "السعر",
+      "DESCRIPTION": "الوصف",
+      "CATEGORY": "الفئة",
+      "IS_VISIBLE": "مرئي"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "الاسم مطلوب",
+      "PRICE_REQUIRED": "السعر مطلوب",
+      "DESC_REQUIRED": "الوصف مطلوب"
+    },
+    "SUBMIT": "إنشاء خدمة"
+  },
+  "HERO": {
+    "TITLE": "Tradio",
+    "DESCRIPTION": "Tradio هي منصة مقايضة حديثة تمكن المستخدمين من تبادل الخدمات والمهارات المهنية بسلاسة.",
+    "BUTTON": "ابدأ الآن"
+  },
+  "AUTH": {
+    "LOGIN": { "TITLE": "تسجيل الدخول", "SUBMIT": "دخول" },
+    "FIELDS": { "EMAIL": "البريد الإلكتروني", "PASSWORD": "كلمة المرور" }
+  }
+}
