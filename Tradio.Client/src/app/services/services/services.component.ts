@@ -15,6 +15,7 @@ import { CategoryService } from '../../core/services/category.service';
 import { CityService } from '../../core/services/city.service';
 import { CountryService } from '../../core/services/country.service';
 import { ServiceService } from '../../core/services/service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'services',
@@ -29,6 +30,7 @@ import { ServiceService } from '../../core/services/service.service';
     ServiceItemComponent,
     DropdownComponent,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [
     {

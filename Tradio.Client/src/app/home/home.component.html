@@ -1,14 +1,19 @@
 <section class="hero-section">
-  <img src="assets/images/hero-image.png" width="400" height="400" />
+  <img
+    src="assets/images/hero-image.png"
+    width="400"
+    height="400"
+    alt="Hero Image"
+  />
   <div class="vertical-container">
-    <h1 class="hero-title">Tradio</h1>
+    <h1 class="hero-title">{{ "HERO.TITLE" | translate }}</h1>
     <p class="hero-text">
-      Tradio is a modern bartering platform that enables users to seamlessly
-      exchange professional services and skills through a direct value-to-value
-      ecosystem.
+      {{ "HERO.DESCRIPTION" | translate }}
     </p>
     <div>
-      <a class="btn btn-primary" routerLink="/services">Get start</a>
+      <a class="btn btn-primary" routerLink="/services">
+        {{ "HERO.BUTTON" | translate }}
+      </a>
     </div>
   </div>
 </section>

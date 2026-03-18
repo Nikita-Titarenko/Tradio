@@ -11,12 +11,18 @@ import { Router } from '@angular/router';
 import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 import { CategoryService } from '../../core/services/category.service';
 import { ApiFormErrorService } from '../../core/services/api-form-error.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-service',
   templateUrl: './create-service.component.html',
   styleUrl: '../../../form.css',
-  imports: [CommonModule, ReactiveFormsModule, DropdownComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    TranslateModule,
+  ],
 })
 export class CreateServiceComponent {
   formGroup: FormGroup;

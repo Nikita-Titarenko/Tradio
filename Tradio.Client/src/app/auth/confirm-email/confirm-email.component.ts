@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'confirm-email',
@@ -16,7 +17,7 @@ import { UserService } from '../../core/services/user.service';
   host: {
     class: 'flex-row',
   },
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
 })
 export class ConfirmEmailComponent {
   confirmEmailForm: FormGroup;

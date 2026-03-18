@@ -6,7 +6,7 @@
         filterChatGroup.get('chatType')?.value === 'received'
       "
     >
-      Received
+      {{ "CHAT.FILTER.RECEIVED" | translate }}
       <input type="radio" formControlName="chatType" value="received" />
     </label>
     <label
@@ -15,7 +15,7 @@
         filterChatGroup.get('chatType')?.value === 'provided'
       "
     >
-      Provided
+      {{ "CHAT.FILTER.PROVIDED" | translate }}
       <input type="radio" formControlName="chatType" value="provided" />
     </label>
   </form>
@@ -34,9 +34,11 @@
     </div>
   </div>
 </div>
+
 <div class="form-group">
-  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage | translate }}</div>
 </div>
+
 <div *ngIf="chatModel$ | async as chat" class="flex-column">
   <div class="space-between-container">
     <h1>{{ chat.fullName }}</h1>
@@ -53,7 +55,9 @@
         class="btn btn-secondary d-flex"
       >
         <div class="align-items-center">
-          <p class="icon px-3">Pay for service</p>
+          <p class="icon px-3">
+            {{ "CHAT.ACTIONS.PAY_FOR_SERVICE" | translate }}
+          </p>
           {{ chat.price }}
           <i class="fa fa-coins"></i>
         </div>
@@ -79,7 +83,7 @@
     <textarea
       id="text"
       formControlName="text"
-      placeholder="Write a message..."
+      [placeholder]="'CHAT.ACTIONS.WRITE_MESSAGE' | translate"
       class="input-message"
       (keydown.enter)="onEnter($event)"
     ></textarea>

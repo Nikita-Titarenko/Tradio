@@ -1,10 +1,23 @@
-<div
-  class="payment"
-  [class.loose-money]="!payment.areYouProvider"
-  [class.getting-money]="payment.areYouProvider"
-  *ngFor="let payment of payments$ | async"
->
-  <h2>{{ payment.serviceName }}</h2>
-  <p>{{ (payment.areYouProvider ? "+" : "-") + payment.price }}</p>
-  <p>{{ payment.creationDateTime | date }}</p>
-</div>
+<ng-container *ngIf="payments$ | async as payments">
+  <div
+    class="payment"
+    [class.loose-money]="!payment.areYouProvider"
+    [class.getting-money]="payment.areYouProvider"
+    *ngFor="let payment of payments"
+  >
+    <h2>{{ payment.serviceName }}</h2>
+    <p>{{ (payment.areYouProvider ? "+" : "-") + payment.price }}</p>
+
+    <p>
+      {{
+        payment.creationDateTime
+          | date
+            : "mediumDate"
+            : ""
+            : (translate.currentLang === "ua"
+                ? "uk"
+                : translate.currentLang || "en")
+      }}
+    </p>
+  </div>
+</ng-container>

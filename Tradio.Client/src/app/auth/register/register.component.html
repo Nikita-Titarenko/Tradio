@@ -1,54 +1,35 @@
-<img src="assets/images/register-image.png" class="auth-illustration" />
-
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-container">
-  <h2 class="form-header">Register</h2>
+  <h2 class="form-header">{{ "AUTH.REGISTER.TITLE" | translate }}</h2>
   <div class="form-group">
-    <label for="name" class="label-text">Name</label>
-    <input id="name" type="text" formControlName="name" placeholder="Name" />
+    <label for="name" class="label-text">{{
+      "AUTH.FIELDS.NAME" | translate
+    }}</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      [placeholder]="'AUTH.FIELDS.NAME' | translate"
+    />
     <div *ngIf="f['name'].invalid && f['name'].touched" class="error">
-      Name is required
+      {{ "AUTH.ERRORS.NAME_REQUIRED" | translate }}
     </div>
   </div>
 
   <div class="form-group">
-    <label for="email" class="label-text">Email</label>
-    <input
-      id="email"
-      type="email"
-      formControlName="email"
-      placeholder="Email"
-    />
-    <div *ngIf="f['email'].invalid && f['email'].touched" class="error">
-      Email is required
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="password" class="label-text">Password</label>
-    <input
-      id="password"
-      type="password"
-      formControlName="password"
-      placeholder="Password"
-    />
-    <div *ngIf="f['password'].invalid && f['password'].touched" class="error">
-      Password is required
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="confirmPassword" class="label-text">Confirm password</label>
+    <label for="confirmPassword" class="label-text">{{
+      "AUTH.FIELDS.CONFIRM_PASSWORD" | translate
+    }}</label>
     <input
       id="confirmPassword"
       type="password"
       formControlName="confirmPassword"
-      placeholder="Confirm password"
+      [placeholder]="'AUTH.FIELDS.CONFIRM_PASSWORD' | translate"
     />
     <div
       *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched"
       class="error"
     >
-      Confirm password is required
+      {{ "AUTH.ERRORS.CONFIRM_REQUIRED" | translate }}
     </div>
   </div>
 
@@ -57,11 +38,14 @@
     type="submit"
     [disabled]="registerForm.invalid"
   >
-    Register
+    {{ "AUTH.REGISTER.SUBMIT" | translate }}
   </button>
   <p class="center-text">
-    Already have an account?
-    <span><a routerLink="/login" class="link">Sign in</a></span>
+    {{ "AUTH.REGISTER.ALREADY_HAVE" | translate }}
+    <span
+      ><a routerLink="/login" class="link">{{
+        "AUTH.REGISTER.SIGN_IN" | translate
+      }}</a></span
+    >
   </p>
-  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>

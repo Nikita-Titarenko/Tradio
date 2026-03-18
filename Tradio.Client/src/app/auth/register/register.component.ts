@@ -8,6 +8,7 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
   host: {
     class: 'flex-row',
   },
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, TranslateModule],
 })
 export class RegisterComponent {
   registerForm: FormGroup;

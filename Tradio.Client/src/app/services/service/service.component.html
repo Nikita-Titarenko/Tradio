@@ -1,27 +1,29 @@
-<div class="service-item-flex-row container">
-  <div>
-    <h6 class="service-item-h1">{{ (service$ | async)?.name }}</h6>
-    <h6 class="service-item-h3">{{ (service$ | async)?.price }} credits</h6>
+<ng-container *ngIf="service$ | async as service">
+  <div class="service-item-flex-row container">
+    <div>
+      <h6 class="service-item-h1">{{ service.name }}</h6>
+      <h6 class="service-item-h3">
+        {{ service.price }} {{ "SERVICE_ITEM.CREDITS" | translate }}
+      </h6>
+    </div>
+    <div class="left-container">
+      <h6 class="service-item-h3">
+        {{ "SERVICE_ITEM.CREATED" | translate }}
+        {{
+          service.creationDateTime
+            | date: "mediumDate" : "" : translate.currentLang || "en"
+        }}
+      </h6>
+      <h6 class="service-item-h1">
+        {{ service.applicationUserName }}
+      </h6>
+      <a
+        routerLink="/chats"
+        [queryParams]="{ serviceId: service.id }"
+        class="btn btn-secondary"
+      >
+        {{ "SERVICE_ITEM.START_CHAT" | translate }}
+      </a>
+    </div>
   </div>
-  <div class="left-container">
-    <h6 class="service-item-h3">
-      Created {{ (service$ | async)?.creationDateTime | date: "dd-MM-yyyy" }}
-    </h6>
-    <h6 class="service-item-h1">
-      {{ (service$ | async)?.applicationUserName }}
-    </h6>
-    <a
-      routerLink="/chats"
-      [queryParams]="{ serviceId: (service$ | async)?.id }"
-      class="btn btn-secondary"
-      >Start chat</a
-    >
-  </div>
-</div>
-
-<div class="container">
-  <p class="service-item-p p-bottom-3">
-    {{ (service$ | async)?.categoryName }}
-  </p>
-  <p class="service-item-p">{{ (service$ | async)?.description }}</p>
-</div>
+</ng-container>

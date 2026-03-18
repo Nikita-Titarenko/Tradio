@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { PaymentService } from '../core/services/payment.service';
 import { PaymentModel } from '../core/responses/payment.model';
 import { Observable } from 'rxjs/internal/Observable';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'payments',
@@ -14,7 +15,10 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class PaymentsComponent implements OnInit {
   payments$!: Observable<PaymentModel[]>;
-  constructor(private paymentService: PaymentService) {}
+  constructor(
+    public translate: TranslateService,
+    private paymentService: PaymentService,
+  ) {}
 
   ngOnInit(): void {
     this.payments$ = this.paymentService.getPayments();

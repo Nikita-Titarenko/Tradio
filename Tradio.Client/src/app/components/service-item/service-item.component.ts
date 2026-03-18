@@ -3,12 +3,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ServiceListItemModule } from '../../core/responses/service-list-item.model';
 import { Router, RouterLink } from '@angular/router';
 import { ServiceService } from '../../core/services/service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'service-item',
   templateUrl: './service-item.component.html',
   styleUrl: './service-item.component.css',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
 })
 export class ServiceItemComponent {
   @Input() service!: ServiceListItemModule;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   Router,
   RouterLink,
@@ -10,6 +10,7 @@ import { UserService } from '../../core/services/user.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { UserModel } from '../../core/responses/user.model';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'main-layout',
@@ -18,9 +19,16 @@ import { UserModel } from '../../core/responses/user.model';
   host: {
     class: 'flex-column',
   },
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    TranslateModule,
+  ],
 })
 export class MainLayoutComponent implements OnInit {
+  private translate = inject(TranslateService);
   public userModel$?: Observable<UserModel>;
 
   constructor(
@@ -36,5 +44,13 @@ export class MainLayoutComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  changeLang(lang: string) {
+    this.translate.use(lang);
+  }
+
+  isCurrentLang(lang: string): boolean {
+    return this.translate.currentLang === lang;
   }
 }

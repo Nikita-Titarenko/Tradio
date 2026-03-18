@@ -3,17 +3,19 @@
   (ngSubmit)="onSubmit()"
   class="form-container"
 >
-  <h2 class="form-header">Confirm email</h2>
+  <h2 class="form-header">{{ "AUTH.CONFIRM.TITLE" | translate }}</h2>
   <div class="form-group">
-    <label for="code" class="label-text">Verification code</label>
+    <label for="code" class="label-text">{{
+      "AUTH.FIELDS.CODE" | translate
+    }}</label>
     <input
       id="code"
       type="text"
       formControlName="code"
-      placeholder="Verification code"
+      [placeholder]="'AUTH.FIELDS.CODE' | translate"
     />
     <div *ngIf="f['code'].invalid && f['code'].touched" class="error">
-      Verification code is required
+      {{ "AUTH.ERRORS.CODE_REQUIRED" | translate }}
     </div>
   </div>
 
@@ -22,7 +24,6 @@
     type="submit"
     [disabled]="confirmEmailForm.invalid"
   >
-    Confirm email
+    {{ "AUTH.CONFIRM.SUBMIT" | translate }}
   </button>
-  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>

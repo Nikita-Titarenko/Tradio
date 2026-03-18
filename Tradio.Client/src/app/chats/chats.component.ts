@@ -36,12 +36,13 @@ import { MessageService } from '../core/services/message.service';
 import { NotificationService } from '../core/services/notification.service';
 import { PaymentService } from '../core/services/payment.service';
 import { MessageModel } from '../core/responses/message.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'chats',
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
   host: { class: 'flex-row' },
 })
 export class ChatsComponent implements OnInit, AfterViewChecked {

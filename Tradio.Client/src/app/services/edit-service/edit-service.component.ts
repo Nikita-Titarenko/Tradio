@@ -12,12 +12,18 @@ import { ApiFormErrorService } from '../../core/services/api-form-error.service'
 import { CategoryService } from '../../core/services/category.service';
 import { ServiceService } from '../../core/services/service.service';
 import { DropdownItemModel } from '../../components/dropdown/dropdown-item.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'edit-service',
   templateUrl: './edit-service.component.html',
   styleUrl: '../../../form.css',
-  imports: [CommonModule, ReactiveFormsModule, DropdownComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    TranslateModule,
+  ],
 })
 export class EditServiceComponent implements OnInit {
   serviceId!: number;

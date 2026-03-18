@@ -5,12 +5,13 @@ import { RouterLink } from '@angular/router';
 import { UserService } from '../core/services/user.service';
 import { UserModel } from '../core/responses/user.model';
 import { Observable } from 'rxjs/internal/Observable';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   host: { class: 'd-flex w-100' },
 })
 export class UsersComponent {

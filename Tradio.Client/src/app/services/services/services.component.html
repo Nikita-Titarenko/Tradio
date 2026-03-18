@@ -1,17 +1,29 @@
 <form [formGroup]="formGroup" class="filter-panel">
   <dropdown
-    placeholder="category"
+    [placeholder]="'FILTER.PLACEHOLDER.CATEGORY' | translate"
     formControlName="selectedSubcategoryId"
     [loadData]="loadCategories"
     [loadSubData]="loadSubcategories"
   ></dropdown>
+
   <dropdown
-    placeholder="city"
+    [placeholder]="'FILTER.PLACEHOLDER.CITY' | translate"
     formControlName="selectedCityId"
     [loadData]="loadCountries"
-    [loadSubData]="loadCities"
+    [loadSubData]="loadSubcategories"
   ></dropdown>
 </form>
-<div *ngFor="let service of services$ | async">
-  <service-item [service]="service"></service-item>
-</div>
+
+<ng-container *ngIf="services$ | async as services; else loading">
+  <div *ngFor="let service of services">
+    <service-item [service]="service"></service-item>
+  </div>
+
+  <div *ngIf="services.length === 0" class="center-text mt-4">
+    <p>{{ "FILTER.MESSAGES.NO_SERVICES" | translate }}</p>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader"></div>
+</ng-template>

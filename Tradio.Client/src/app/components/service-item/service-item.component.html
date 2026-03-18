@@ -1,7 +1,9 @@
 <div class="service-item" (click)="navigateToService()">
   <div class="service-item-main">
     <h6 class="service-item-h1">{{ service.name }}</h6>
-    <p class="service-item-h3">{{ service.price }} credits</p>
+    <p class="service-item-h3">
+      {{ service.price }} {{ "SERVICE_ITEM.CREDITS" | translate }}
+    </p>
   </div>
   <div class="editable" *ngIf="editable">
     <a
@@ -9,13 +11,14 @@
       routerLink="/edit-service"
       [queryParams]="{ serviceId: service.id }"
       (click)="$event.stopPropagation()"
-      >Edit</a
     >
+      {{ "SERVICE_ITEM.EDIT" | translate }}
+    </a>
     <button
       class="btn btn-danger"
       (click)="deleteService(); $event.stopPropagation()"
     >
-      Delete
+      {{ "SERVICE_ITEM.DELETE" | translate }}
     </button>
   </div>
 </div>
