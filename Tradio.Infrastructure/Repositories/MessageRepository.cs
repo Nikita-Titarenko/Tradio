@@ -47,6 +47,8 @@ namespace Tradio.Infrastructure.Repositories
                 .Where(s => s.Id == serviceId)
                 .Select(s => new ChatDto
                 {
+                    IsRecipient = s.ApplicationUserId != applicationUserId,
+                    Price = s.Price,
                     ApplicationUserId = s.ApplicationUserId != applicationUserId ? s.ApplicationUserId : s.ApplicationUserId,
                     ServiceId = s.Id,
                     ServiceName = s.Name,
