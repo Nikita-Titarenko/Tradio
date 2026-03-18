@@ -49,6 +49,41 @@
         </a>
       </li>
 
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
+        <a
+          class="nav-link"
+          routerLink="/climates"
+          routerLinkActive="active"
+          title="Climates"
+        >
+          <i class="fa fa-thermometer-half"></i>
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="authService.isLoggedIn">
+        <a
+          class="nav-link"
+          routerLink="/payments"
+          routerLinkActive="active"
+          title="Payments"
+        >
+          <i class="fa fa-rotate"></i>
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="userModel$ | async as userModel">
+        <div *ngIf="authService.isLoggedIn && userModel.roleName === 'Admin'">
+          <a
+            class="nav-link"
+            routerLink="/users"
+            routerLinkActive="active"
+            title="Users"
+          >
+            <i class="fa fa-users"></i>
+          </a>
+        </div>
+      </li>
+
       <div *ngIf="userModel$ | async as userModel">
         <li class="nav-item">
           {{ userModel.creditCount }} <i class="fa fa-coins"></i>
