@@ -34,6 +34,9 @@
     </div>
   </div>
 </div>
+<div class="form-group">
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
 <div *ngIf="chatModel$ | async as chat" class="flex-column">
   <div class="space-between-container">
     <h1>{{ chat.fullName }}</h1>
@@ -57,9 +60,12 @@
       </button>
     </div>
   </div>
-
   <div class="messages-container" #messagesContainer>
-    <div *ngFor="let message of chat.messages" class="message">
+    <div
+      *ngFor="let message of chat.messages"
+      class="message"
+      [class.your-message]="message.isYourMessage"
+    >
       <p class="message-text">{{ message.text }}</p>
       <p class="date">{{ message.creationDateTime | date: "HH:mm" }}</p>
     </div>

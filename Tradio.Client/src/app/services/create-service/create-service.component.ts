@@ -51,6 +51,7 @@ export class CreateServiceComponent {
         this.router.navigate(['/my-services']);
       },
       error: (err) => {
+        this.errorMessage = 'You are banned';
         this.apiFormErrorService.apply(this.formGroup, err.error.errors);
       },
     });

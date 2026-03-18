@@ -91,3 +91,9 @@ input[type="radio"] {
 .btn-secondary {
   width: 100%;
 }
+
+.your-message {
+  background-color: transparent;
+  color: white;
+  align-self: flex-end;
+}

@@ -12,9 +12,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import {
   BehaviorSubject,
+  filter,
   from,
   map,
   merge,
@@ -45,14 +46,13 @@ import { MessageModel } from '../core/responses/message.model';
 })
 export class ChatsComponent implements OnInit, AfterViewChecked {
   private chatSubject = new ReplaySubject<ChatModel>(1);
-  // Потік, який об'єднує початкові дані чату та нові повідомлення з SignalR
+
   chatModel$ = this.chatSubject.asObservable().pipe(
     switchMap((initialChat) =>
       this.notificationService.messages$.pipe(
         scan((accChat: ChatModel, newMessage) => {
           this.shouldScroll = true;
 
-          // Уникаємо дублікатів, якщо повідомлення прийшло і від API, і через SignalR
           const exists = accChat.messages.some(
             (m) =>
               m.creationDateTime === newMessage.creationDateTime &&
@@ -82,6 +82,7 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
   chatListItems!: Observable<ChatListItemModel[]>;
   createMessageGroup: FormGroup;
   filterChatGroup: FormGroup;
+  errorMessage: string = '';
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll: boolean = false;
 
@@ -92,6 +93,7 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
     private notificationService: NotificationService,
     private authService: UserService,
     private paymentService: PaymentService,
+    private router: Router,
     formBuilder: FormBuilder,
   ) {
     this.createMessageGroup = formBuilder.group({
@@ -205,9 +207,14 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
   }
 
   selectChat(chatId: number) {
-    this.messageService.getMessagesByChat(chatId).subscribe((chat) => {
-      this.shouldScroll = true;
-      this.chatSubject.next(chat);
+    this.messageService.getMessagesByChat(chatId).subscribe({
+      next: (chat) => {
+        this.shouldScroll = true;
+        this.chatSubject.next(chat);
+      },
+      error: (error) => {
+        this.errorMessage = 'You are banned';
+      },
     });
   }
 
@@ -219,13 +226,21 @@ export class ChatsComponent implements OnInit, AfterViewChecked {
   }
 
   createPayment() {
-    this.chatSubject.pipe(take(1)).subscribe((chat) => {
-      if (!chat.applicationUserServiceId) return;
-      this.paymentService
-        .createPayment({
-          applicationUserServiceId: chat.applicationUserServiceId,
-        })
-        .subscribe(() => this.authService.getUser().subscribe());
-    });
+    this.chatSubject
+      .pipe(
+        take(1),
+        filter((chat) => !!chat.applicationUserServiceId),
+        switchMap((chat) =>
+          this.paymentService.createPayment({
+            applicationUserServiceId: chat.applicationUserServiceId!,
+          }),
+        ),
+        switchMap(() => this.authService.getUser()),
+        take(1),
+      )
+      .subscribe({
+        next: () => this.router.navigate(['/payments']),
+        error: (err) => {},
+      });
   }
 }
