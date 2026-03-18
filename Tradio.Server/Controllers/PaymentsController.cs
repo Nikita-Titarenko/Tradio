@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tradio.Application.Dtos.Payments;
 using Tradio.Application.Services.Payments;
 using Tradio.Server.RequestsModel.Payments;
 

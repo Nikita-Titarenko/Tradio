@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentResults;
 using Tradio.Application.Dtos.ComplaintReplies;
+using Tradio.Application.Dtos.Payments;
 using Tradio.Application.Repositories;
 using Tradio.Application.Services.ApplicationUserServices;
 using Tradio.Domain;

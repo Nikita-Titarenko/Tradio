@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using Tradio.Application.Dtos.Payments;
 
 namespace Tradio.Application.Services.Payments
 {
