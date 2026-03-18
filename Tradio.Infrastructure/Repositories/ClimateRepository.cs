@@ -21,8 +21,8 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(u => new ClimateStatisticDto
                 {
                     UserId = u.Id,
-                    CurrentTemperature = u.Climates.OrderByDescending(c => c.Id).Select(c => c.Temperature).First(),
-                    CurrentHumidity = u.Climates.OrderByDescending(c => c.Id).Select(c => c.Humidity).First(),
+                    CurrentTemperature = u.Climates.OrderByDescending(c => c.CreationDateTime).Select(c => c.Temperature).First(),
+                    CurrentHumidity = u.Climates.OrderByDescending(c => c.CreationDateTime).Select(c => c.Humidity).First(),
                     AvgTemperatureForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo).Average(c => c.Temperature),
                     AvgHumidityForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo).Average(c => c.Humidity),
                     AvgTemperatureForWeek = u.Climates.Where(c => c.CreationDateTime > weekAgo).Average(c => c.Temperature),
