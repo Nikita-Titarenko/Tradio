@@ -42,7 +42,7 @@ namespace Tradio.Application.Services.ApplicationUserServices
                 return Result.Fail(new Error("Application user service not found").WithMetadata("Code", "ApplicationUserServiceNotFound"));
             }
 
-            return Result.Ok(_mapper.Map<ApplicationUserServiceDto>(applicationUserService));
+            return Result.Ok(applicationUserService);
         }
 
         public async Task<Result<IEnumerable<ChatListItemDto>>> GetProvidedServiceChatsAsync(string userId)
