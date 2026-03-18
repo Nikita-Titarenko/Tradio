@@ -1,6 +1,7 @@
 <button class="btn btn-primary" (click)="exportInserts()">
-  Export Inserts
+  <i class="fas fa-file-export"></i> {{ "DATABASE.EXPORT_BTN" | translate }}
 </button>
+
 <div class="import-container">
   <div
     class="drop-zone"
@@ -12,9 +13,12 @@
   >
     <i class="fas fa-file-upload fa-3x"></i>
     <p *ngIf="!selectedFile">
-      Перетягніть .sql файл сюди або натисніть для вибору
+      {{ "DATABASE.IMPORT.DROP_TEXT" | translate }}
     </p>
-    <p *ngIf="selectedFile"><strong>Обрано:</strong> {{ selectedFile.name }}</p>
+    <p *ngIf="selectedFile">
+      <strong>{{ "DATABASE.IMPORT.SELECTED" | translate }}:</strong>
+      {{ selectedFile.name }}
+    </p>
 
     <input
       type="file"
@@ -30,12 +34,14 @@
     [disabled]="!selectedFile"
     (click)="importBackup()"
   >
-    <i class="fas fa-cloud-upload-alt"></i> Завантажити на сервер
+    <i class="fas fa-cloud-upload-alt"></i>
+    {{ "DATABASE.IMPORT.UPLOAD_BTN" | translate }}
   </button>
 </div>
+
 <div *ngIf="sucessMessage" class="success">
-  {{ sucessMessage }}
+  {{ sucessMessage | translate }}
 </div>
 <div *ngIf="errorMessage" class="error">
-  {{ errorMessage }}
+  {{ errorMessage | translate }}
 </div>

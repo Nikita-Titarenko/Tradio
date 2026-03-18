@@ -131,5 +131,21 @@
     "MESSAGES": {
       "NO_SERVICES": "No services found matching your criteria"
     }
+  },
+  "DATABASE": {
+    "EXPORT_BTN": "Export data",
+    "IMPORT": {
+      "DROP_TEXT": "Drag and drop .sql file here or click to select",
+      "SELECTED": "Selected",
+      "UPLOAD_BTN": "Upload to server"
+    },
+    "SUCCESS": {
+      "IMPORT_COMPLETED": "Import completed successfully!"
+    },
+    "ERRORS": {
+      "EXPORT_FAILED": "Error during file export",
+      "IMPORT_FAILED": "Error during server import",
+      "INVALID_EXTENSION": "Please select a file with .sql extension"
+    }
   }
 }

@@ -56,5 +56,21 @@
   "AUTH": {
     "LOGIN": { "TITLE": "تسجيل الدخول", "SUBMIT": "دخول" },
     "FIELDS": { "EMAIL": "البريد الإلكتروني", "PASSWORD": "كلمة المرور" }
+  },
+  "DATABASE": {
+    "EXPORT_BTN": "تصدير البيانات",
+    "IMPORT": {
+      "DROP_TEXT": "اسحب ملف .sql هنا أو انقر للاختيار",
+      "SELECTED": "تم اختيار",
+      "UPLOAD_BTN": "رفع إلى الخادم"
+    },
+    "SUCCESS": {
+      "IMPORT_COMPLETED": "تم الاستيراد بنجاح!"
+    },
+    "ERRORS": {
+      "EXPORT_FAILED": "خطأ أثناء تصدير الملف",
+      "IMPORT_FAILED": "خطأ أثناء الاستيراد إلى الخادم",
+      "INVALID_EXTENSION": "يرجى اختيار ملف بامتداد .sql فقط"
+    }
   }
 }

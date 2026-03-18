@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core'; // Додано TranslateModule
 import { DatabaseService } from '../core/services/database.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { DatabaseService } from '../core/services/database.service';
   templateUrl: './database.component.html',
   styleUrls: ['./database.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule], // Додано TranslateModule
 })
 export class DatabaseComponent implements OnInit {
   selectedFile: File | null = null;
@@ -26,9 +26,9 @@ export class DatabaseComponent implements OnInit {
   ngOnInit(): void {}
 
   exportInserts() {
-    this.databaseService
-      .getBackup()
-      .subscribe((response: HttpResponse<Blob>) => {
+    this.resetMessages();
+    this.databaseService.getBackup().subscribe({
+      next: (response: HttpResponse<Blob>) => {
         const blob = response.body;
         if (!blob) return;
 
@@ -46,7 +46,11 @@ export class DatabaseComponent implements OnInit {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
-      });
+      },
+      error: () => {
+        this.errorMessage = 'DATABASE.ERRORS.EXPORT_FAILED';
+      },
+    });
   }
 
   onDragOver(event: DragEvent) {
@@ -80,29 +84,36 @@ export class DatabaseComponent implements OnInit {
   }
 
   private handleFile(file: File) {
+    this.resetMessages();
     if (file.name.endsWith('.sql')) {
       this.selectedFile = file;
     } else {
-      this.errorMessage = 'Будь ласка, виберіть файл з розширенням .sql';
+      this.errorMessage = 'DATABASE.ERRORS.INVALID_EXTENSION';
     }
   }
 
   importBackup() {
     if (!this.selectedFile) return;
+    this.resetMessages();
 
     const reader = new FileReader();
     reader.onload = (e) => {
       const sqlContent = e.target?.result as string;
       this.databaseService.loadBackup(sqlContent).subscribe({
         next: () => {
-          this.sucessMessage = 'Імпорт успішний';
+          this.sucessMessage = 'DATABASE.SUCCESS.IMPORT_COMPLETED';
           this.selectedFile = null;
         },
         error: (err) => {
-          this.errorMessage = 'Помилка імпорту';
+          this.errorMessage = 'DATABASE.ERRORS.IMPORT_FAILED';
         },
       });
     };
     reader.readAsText(this.selectedFile);
+  }
+
+  private resetMessages() {
+    this.sucessMessage = '';
+    this.errorMessage = '';
   }
 }
