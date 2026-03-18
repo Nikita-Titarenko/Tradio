@@ -68,6 +68,31 @@ export const routes: Routes = [
         title: 'Tradio',
         canActivate: [AuthGuard],
       },
+      {
+        path: 'climates',
+        loadComponent: () =>
+          import('./climates/climates.component').then(
+            (m) => m.ClimatesComponent,
+          ),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'payments',
+        loadComponent: () =>
+          import('./payments/payments.component').then(
+            (m) => m.PaymentsComponent,
+          ),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('./users/users.component').then((m) => m.UsersComponent),
+        title: 'Tradio',
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {
