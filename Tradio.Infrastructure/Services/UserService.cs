@@ -214,21 +214,84 @@ namespace Tradio.Infrastructure.Services
         {
             var user = await _dbContext.Users
                 .Where(u => u.Id == userId)
-                .Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Fullname = u.Fullname,
-                    CreditCount = u.CreditCount,
-                    CityName = u.City.Name,
-                    CountryName = u.City.Country.Name
-                })
+                .Include(u => u.City)
+                .Include(u => u.City.Country)
                 .FirstOrDefaultAsync();
+            
+                var role = await _userManager.GetRolesAsync(user);
+                var userDto = new UserDto
+                {
+                    Id = user.Id,
+                    Fullname = user.Fullname,
+                    CreditCount = user.CreditCount,
+                    CityName = user.City.Name,
+                    CountryName = user.City.Country.Name,
+                    Email = user.Email!,
+                    EmailConfirmed = user.EmailConfirmed,
+                    IsBanned = user.LockoutEnd.HasValue && user.LockoutEnd.Value > DateTimeOffset.UtcNow,
+                    RoleName = role.Count == 0 ? "User" : string.Join(", ", role)
+                };
+            
+
+            return Result.Ok(userDto);
+        }
+        
+        public async Task<Result> BanUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return Result.Fail(new Error("User not found").WithMetadata("Code", "UserNotFound"));
             }
+            user.LockoutEnd = DateTimeOffset.MaxValue;
+            await _userManager.UpdateAsync(user);
+            return Result.Ok();
+        }
+        
+        public async Task<Result> UnbanUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return Result.Fail(new Error("User not found").WithMetadata("Code", "UserNotFound"));
+            }
+            user.LockoutEnd = DateTimeOffset.UtcNow;
+            await _userManager.UpdateAsync(user);
+            return Result.Ok();
+        }
+        
+        public async Task<Result<IEnumerable<UserDto>>> GetUsersAsync()
+        {
+            var usersBasicData = await _dbContext.Users
+                .Select(u => new 
+                {
+                    u.Id, u.Fullname, u.CreditCount, u.Email, 
+                    u.EmailConfirmed, u.LockoutEnd,
+                    CityName = u.City.Name, 
+                    CountryName = u.City.Country.Name
+                })
+                .ToListAsync();
 
-            return Result.Ok(user);
+            var users = new List<UserDto>();
+
+            foreach (var u in usersBasicData)
+            {
+                var roles = await _userManager.GetRolesAsync(new ApplicationUser { Id = u.Id });
+                users.Add(new UserDto
+                {
+                    Id = u.Id,
+                    Fullname = u.Fullname,
+                    CreditCount = u.CreditCount,
+                    CityName = u.CityName,
+                    CountryName = u.CountryName,
+                    Email = u.Email!,
+                    EmailConfirmed = u.EmailConfirmed,
+                    IsBanned = u.LockoutEnd.HasValue && u.LockoutEnd.Value > DateTimeOffset.UtcNow,
+                    RoleName = roles.Count == 0 ? "User" : string.Join(", ", roles)
+                });
+            }
+
+            return Result.Ok<IEnumerable<UserDto>>(users);
         }
 
         private async Task<Result<ApplicationUser>> GetUserAsync(string userId)

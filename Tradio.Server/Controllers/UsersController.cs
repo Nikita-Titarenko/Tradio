@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tradio.Application.Dtos.Users;
 using Tradio.Application.Services;
+using Tradio.Server.Common;
 using Tradio.Server.RequestsModel.Users;
 using Tradio.Server.Responses.Users;
 
@@ -136,6 +138,51 @@ namespace Tradio.Server.Controllers
             }
 
             return Ok(getUserResult.Value);
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = DefaultRoles.AdminRole)]
+        [ProducesResponseType(typeof(IEnumerable<UserDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetUsers()
+        {
+            var getUserResult = await _userService.GetUsersAsync();
+            if (!getUserResult.IsSuccess)
+            {
+                return BadRequest(getUserResult.Value);
+            }
+
+            return Ok(getUserResult.Value);
+        }
+        
+        [HttpPost("ban")]
+        [Authorize(Roles = DefaultRoles.AdminRole)]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> BanUser(BanUserRequestModel request)
+        {
+            var getUserResult = await _userService.BanUserAsync(request.UserId);
+            if (!getUserResult.IsSuccess)
+            {
+                return BadRequest(getUserResult.Errors);
+            }
+
+            return NoContent();
+        }
+        
+        [HttpPost("unban")]
+        [Authorize(Roles = DefaultRoles.AdminRole)]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UnbanUser(BanUserRequestModel request)
+        {
+            var getUsersResult = await _userService.UnbanUserAsync(request.UserId);
+            if (!getUsersResult.IsSuccess)
+            {
+                return BadRequest(getUsersResult.Errors);
+            }
+
+            return NoContent();
         }
     }
 }

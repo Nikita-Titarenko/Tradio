@@ -13,5 +13,8 @@ namespace Tradio.Application.Services
         Task<Result> MakePaymentAsync(string giverId, string receiverId, int creditCount);
         Task<Result<RegisterResultDto>> RegisterUserAsync(RegisterUserDto dto);
         Task<Result> ResendRegistrationEmailAsync(string userId);
+        Task<Result<IEnumerable<UserDto>>> GetUsersAsync();
+        Task<Result> BanUserAsync(string userId);
+        Task<Result> UnbanUserAsync(string userId);
     }
 }
