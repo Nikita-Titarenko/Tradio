@@ -1,0 +1,43 @@
+<table>
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>City / Country</th>
+      <th>Credits</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users$ | async">
+      <td>{{ user.fullname }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.cityName }}, {{ user.countryName }}</td>
+      <td>{{ user.creditCount }}</td>
+      <td>{{ user.roleName }}</td>
+      <td>
+        <span [class.status-banned]="user.isBanned">
+          {{ user.isBanned ? "Banned" : "Active" }}
+        </span>
+      </td>
+      <td>
+        <button
+          *ngIf="!user.isBanned"
+          (click)="banUser(user.id)"
+          class="btn btn-ban"
+        >
+          Ban
+        </button>
+        <button
+          *ngIf="user.isBanned"
+          (click)="unbanUser(user.id)"
+          class="btn btn-unban"
+        >
+          Unban
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

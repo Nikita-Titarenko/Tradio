@@ -4,6 +4,7 @@ import { Observable, ReplaySubject, tap } from 'rxjs';
 import { RegisterResponseModel } from '../responses/register-response.model';
 import { SignInResponseModel } from '../responses/sign-in-response.model';
 import { UserModel } from '../responses/user.model';
+import { BanUserModel } from '../requests/ban-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +52,18 @@ export class UserService {
     return this.http
       .get<UserModel>(`${this.apiUrl}/${this.userId}`)
       .pipe(tap((user) => this.userSource.next(user)));
+  }
+
+  getUsers(): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(`${this.apiUrl}`);
+  }
+
+  banUser(banUserModel: BanUserModel): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/ban`, banUserModel);
+  }
+
+  unbanUser(banUserModel: BanUserModel): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/unban`, banUserModel);
   }
 
   get isLoggedIn() {

@@ -1,0 +1,24 @@
+.btn-ban {
+  background-color: #ff3f33;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.btn-unban {
+  background-color: #5bc0de;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+th,
+td {
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

@@ -4,4 +4,8 @@ export interface UserModel {
   creditCount: number;
   cityName: string;
   countryName: string;
+  email: string;
+  emailConfirmed: boolean;
+  isBanned: boolean;
+  roleName: string;
 }
