@@ -2,23 +2,18 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   LOCALE_ID,
-} from '@angular/core'; // Додали LOCALE_ID
+} from '@angular/core';
 import {
   HttpClient,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService,
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptor/auth.interceptor';
 
-// Імпорт для локалізації дат
 import { registerLocaleData } from '@angular/common';
 import localeUk from '@angular/common/locales/uk';
 registerLocaleData(localeUk, 'uk');
