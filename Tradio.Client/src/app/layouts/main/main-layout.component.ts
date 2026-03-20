@@ -7,7 +7,6 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
-import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { UserModel } from '../../core/responses/user.model';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';

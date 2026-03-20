@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { UserService } from '../core/services/user.service';
-import { UserModel } from '../core/responses/user.model';
+import { UserService } from '../../core/services/user.service';
+import { UserModel } from '../../core/responses/user.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { TranslateModule } from '@ngx-translate/core';
 

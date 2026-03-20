@@ -13,13 +13,13 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./home/home.component').then((m) => m.HomeComponent),
+          import('./features/home/home.component').then((m) => m.HomeComponent),
         title: 'Tradio',
       },
       {
         path: 'services',
         loadComponent: () =>
-          import('./services/services/services.component').then(
+          import('./features/services/services/services.component').then(
             (m) => m.ServicesComponent,
           ),
         title: 'Tradio',
@@ -28,7 +28,7 @@ export const routes: Routes = [
       {
         path: 'service',
         loadComponent: () =>
-          import('./services/service/service.component').then(
+          import('./features/services/service/service.component').then(
             (m) => m.ServiceComponent,
           ),
         title: 'Tradio',
@@ -37,14 +37,16 @@ export const routes: Routes = [
       {
         path: 'chats',
         loadComponent: () =>
-          import('./chats/chats.component').then((m) => m.ChatsComponent),
+          import('./features/chats/chats.component').then(
+            (m) => m.ChatsComponent,
+          ),
         title: 'Tradio',
         canActivate: [AuthGuard],
       },
       {
         path: 'my-services',
         loadComponent: () =>
-          import('./services/my-services/my-services.component').then(
+          import('./features/services/my-services/my-services.component').then(
             (m) => m.MyServicesComponent,
           ),
         title: 'Tradio',
@@ -53,7 +55,7 @@ export const routes: Routes = [
       {
         path: 'edit-service',
         loadComponent: () =>
-          import('./services/edit-service/edit-service.component').then(
+          import('./features/services/edit-service/edit-service.component').then(
             (m) => m.EditServiceComponent,
           ),
         title: 'Tradio',
@@ -62,7 +64,7 @@ export const routes: Routes = [
       {
         path: 'create-service',
         loadComponent: () =>
-          import('./services/create-service/create-service.component').then(
+          import('./features/services/create-service/create-service.component').then(
             (m) => m.CreateServiceComponent,
           ),
         title: 'Tradio',
@@ -71,7 +73,7 @@ export const routes: Routes = [
       {
         path: 'climates',
         loadComponent: () =>
-          import('./climates/climates.component').then(
+          import('./features/climates/climates.component').then(
             (m) => m.ClimatesComponent,
           ),
         title: 'Tradio',
@@ -80,7 +82,7 @@ export const routes: Routes = [
       {
         path: 'payments',
         loadComponent: () =>
-          import('./payments/payments.component').then(
+          import('./features/payments/payments.component').then(
             (m) => m.PaymentsComponent,
           ),
         title: 'Tradio',
@@ -89,14 +91,16 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () =>
-          import('./users/users.component').then((m) => m.UsersComponent),
+          import('./features/users/users.component').then(
+            (m) => m.UsersComponent,
+          ),
         title: 'Tradio',
         canActivate: [AuthGuard],
       },
       {
         path: 'database',
         loadComponent: () =>
-          import('./database/database.component').then(
+          import('./features/database/database.component').then(
             (m) => m.DatabaseComponent,
           ),
         title: 'Tradio',
@@ -114,7 +118,7 @@ export const routes: Routes = [
       {
         path: 'register',
         loadComponent: () =>
-          import('./auth/register/register.component').then(
+          import('./features/auth/register/register.component').then(
             (m) => m.RegisterComponent,
           ),
         title: 'Register',
@@ -123,14 +127,16 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () =>
-          import('./auth/login/login.component').then((m) => m.LoginComponent),
+          import('./features/auth/login/login.component').then(
+            (m) => m.LoginComponent,
+          ),
         title: 'Login',
         canActivate: [GuestGuard],
       },
       {
         path: 'confirm-email',
         loadComponent: () =>
-          import('./auth/confirm-email/confirm-email.component').then(
+          import('./features/auth/confirm-email/confirm-email.component').then(
             (m) => m.ConfirmEmailComponent,
           ),
         title: 'Confirm email',

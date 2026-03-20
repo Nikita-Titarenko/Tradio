@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ServiceItemComponent } from '../../components/service-item/service-item.component';
-import { ServiceListItemModule } from '../../core/responses/service-list-item.model';
-import { ServiceService } from '../../core/services/service.service';
+import { ServiceItemComponent } from '../../../shared/service-item/service-item.component';
+import { ServiceListItemModule } from '../../../core/responses/service-list-item.model';
+import { ServiceService } from '../../../core/services/service.service';
 
 @Component({
   selector: 'app-my-services',

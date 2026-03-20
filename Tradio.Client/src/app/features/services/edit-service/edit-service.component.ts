@@ -7,17 +7,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DropdownComponent } from '../../components/dropdown/dropdown.component';
-import { ApiFormErrorService } from '../../core/services/api-form-error.service';
-import { CategoryService } from '../../core/services/category.service';
-import { ServiceService } from '../../core/services/service.service';
-import { DropdownItemModel } from '../../components/dropdown/dropdown-item.model';
+import { DropdownComponent } from '../../../shared/dropdown/dropdown.component';
+import { ApiFormErrorService } from '../../../core/services/api-form-error.service';
+import { CategoryService } from '../../../core/services/category.service';
+import { ServiceService } from '../../../core/services/service.service';
+import { DropdownItemModel } from '../../../shared/dropdown/dropdown-item.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'edit-service',
   templateUrl: './edit-service.component.html',
-  styleUrl: '../../../form.css',
+  styleUrl: '../../../../form.css',
   imports: [
     CommonModule,
     ReactiveFormsModule,

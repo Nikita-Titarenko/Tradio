@@ -28,14 +28,14 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { ChatListItemModel } from '../core/responses/chat-list-item.model';
-import { ChatModel } from '../core/responses/chat.model';
-import { ApplicationUserServiceService } from '../core/services/application-user-service.service';
-import { UserService } from '../core/services/user.service';
-import { MessageService } from '../core/services/message.service';
-import { NotificationService } from '../core/services/notification.service';
-import { PaymentService } from '../core/services/payment.service';
-import { MessageModel } from '../core/responses/message.model';
+import { ChatListItemModel } from '../../core/responses/chat-list-item.model';
+import { ChatModel } from '../../core/responses/chat.model';
+import { ApplicationUserServiceService } from '../../core/services/application-user-service.service';
+import { UserService } from '../../core/services/user.service';
+import { MessageService } from '../../core/services/message.service';
+import { NotificationService } from '../../core/services/notification.service';
+import { PaymentService } from '../../core/services/payment.service';
+import { MessageModel } from '../../core/responses/message.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

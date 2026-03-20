@@ -6,15 +6,14 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { Observable, of, startWith, switchMap } from 'rxjs';
-import { DropdownComponent } from '../../components/dropdown/dropdown.component';
-import { ServiceItemComponent } from '../../components/service-item/service-item.component';
-import { ServiceListItemModule } from '../../core/responses/service-list-item.model';
-import { CategoryService } from '../../core/services/category.service';
-import { CityService } from '../../core/services/city.service';
-import { CountryService } from '../../core/services/country.service';
-import { ServiceService } from '../../core/services/service.service';
+import { DropdownComponent } from '../../../shared/dropdown/dropdown.component';
+import { ServiceItemComponent } from '../../../shared/service-item/service-item.component';
+import { ServiceListItemModule } from '../../../core/responses/service-list-item.model';
+import { CategoryService } from '../../../core/services/category.service';
+import { CityService } from '../../../core/services/city.service';
+import { CountryService } from '../../../core/services/country.service';
+import { ServiceService } from '../../../core/services/service.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

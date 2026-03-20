@@ -7,13 +7,13 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
+import { UserService } from '../../../core/services/user.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'confirm-email',
   templateUrl: './confirm-email.component.html',
-  styleUrl: '../../../form.css',
+  styleUrl: '../../../../form.css',
   host: {
     class: 'flex-row',
   },

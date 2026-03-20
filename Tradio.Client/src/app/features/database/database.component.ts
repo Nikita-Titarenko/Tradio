@@ -2,15 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
-import { TranslateModule, TranslateService } from '@ngx-translate/core'; // Додано TranslateModule
-import { DatabaseService } from '../core/services/database.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DatabaseService } from '../../core/services/database.service';
 
 @Component({
   selector: 'database',
   templateUrl: './database.component.html',
   styleUrls: ['./database.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule], // Додано TranslateModule
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
 })
 export class DatabaseComponent implements OnInit {
   selectedFile: File | null = null;

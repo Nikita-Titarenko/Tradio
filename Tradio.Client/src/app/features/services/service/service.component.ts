@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ServiceModel } from '../../core/responses/service.model';
+import { ServiceModel } from '../../../core/responses/service.model';
 import { Observable } from 'rxjs';
-import { ServiceService } from '../../core/services/service.service';
+import { ServiceService } from '../../../core/services/service.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 

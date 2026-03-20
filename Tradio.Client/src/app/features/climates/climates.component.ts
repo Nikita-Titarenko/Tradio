@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { PaymentModel } from '../core/responses/payment.model';
 import { Observable } from 'rxjs/internal/Observable';
-import { PaymentService } from '../core/services/payment.service';
-import { ClimateService } from '../core/services/climate.service';
-import { ClimateStatisticModel } from '../core/responses/climate-statistic.model';
+import { ClimateService } from '../../core/services/climate.service';
+import { ClimateStatisticModel } from '../../core/responses/climate-statistic.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

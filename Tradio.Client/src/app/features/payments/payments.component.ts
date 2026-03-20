@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { PaymentService } from '../core/services/payment.service';
-import { PaymentModel } from '../core/responses/payment.model';
+import { PaymentService } from '../../core/services/payment.service';
+import { PaymentModel } from '../../core/responses/payment.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { TranslateService } from '@ngx-translate/core';
 
