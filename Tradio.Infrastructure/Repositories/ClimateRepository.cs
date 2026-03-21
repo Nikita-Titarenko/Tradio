@@ -21,14 +21,27 @@ namespace Tradio.Infrastructure.Repositories
                 .Select(u => new ClimateStatisticDto
                 {
                     UserId = u.Id,
-                    CurrentTemperature = u.Climates.OrderByDescending(c => c.CreationDateTime).Select(c => c.Temperature).First(),
-                    CurrentHumidity = u.Climates.OrderByDescending(c => c.CreationDateTime).Select(c => c.Humidity).First(),
-                    AvgTemperatureForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo).Average(c => c.Temperature),
-                    AvgHumidityForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo).Average(c => c.Humidity),
-                    AvgTemperatureForWeek = u.Climates.Where(c => c.CreationDateTime > weekAgo).Average(c => c.Temperature),
-                    AvgHumidityForWeek = u.Climates.Where(c => c.CreationDateTime > weekAgo).Average(c => c.Humidity),
-                    AvgTemperatureForMonth = u.Climates.Where(c => c.CreationDateTime > monthAgo).Average(c => c.Temperature),
-                    AvgHumidityForMonth = u.Climates.Where(c => c.CreationDateTime > monthAgo).Average(c => c.Humidity)
+                    CurrentTemperature = u.Climates.OrderByDescending(c => c.CreationDateTime)
+                        .Select(c => c.Temperature)
+                        .FirstOrDefault(),
+                    CurrentHumidity = u.Climates.OrderByDescending(c => c.CreationDateTime)
+                        .Select(c => c.Humidity)
+                        .FirstOrDefault(),
+                    
+                    AvgTemperatureForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo)
+                        .Average(c => (double?)c.Temperature) ?? 0, 
+                    AvgHumidityForDay = u.Climates.Where(c => c.CreationDateTime > dayAgo)
+                        .Average(c => (double?)c.Humidity) ?? 0,
+            
+                    AvgTemperatureForWeek = u.Climates.Where(c => c.CreationDateTime > weekAgo)
+                        .Average(c => (double?)c.Temperature) ?? 0,
+                    AvgHumidityForWeek = u.Climates.Where(c => c.CreationDateTime > weekAgo)
+                        .Average(c => (double?)c.Humidity) ?? 0,
+            
+                    AvgTemperatureForMonth = u.Climates.Where(c => c.CreationDateTime > monthAgo)
+                        .Average(c => (double?)c.Temperature) ?? 0,
+                    AvgHumidityForMonth = u.Climates.Where(c => c.CreationDateTime > monthAgo)
+                        .Average(c => (double?)c.Humidity) ?? 0
                 })
                 .FirstOrDefaultAsync();
         }
