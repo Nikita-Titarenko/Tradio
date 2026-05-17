@@ -85,7 +85,7 @@ namespace Tradio.Application.Services.Messages
             var applicationUserServiceId = getApplicationUserServiceResult.Value.Id;
 
             message.ApplicationUserServiceId = applicationUserServiceId;
-            message.IsFromProvider = senderUserId != getApplicationUserServiceResult.Value.ProviderUserId;
+            message.IsFromProvider = senderUserId == getApplicationUserServiceResult.Value.ProviderUserId;
 
             await _notificationService.SendMessageAsync(message.ApplicationUserServiceId, new MessageDtoForSingalR
             {

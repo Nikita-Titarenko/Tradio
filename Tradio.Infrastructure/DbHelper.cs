@@ -17,15 +17,8 @@ public async Task<string> ExportAllDataToSqlAsync()
 {
     var sqlBuilder = new StringBuilder();
     
-    var ignoredTypes = new List<string> 
-    { 
-        "Categories", "Countries", "Cities", 
-        "AspNetRoles", "AspNetUserRoles", "SubscriptionTypes"
-    };
-    
-    var allEntities = _context.Model.GetEntityTypes()
-        .Where(e => !ignoredTypes.Contains(e.ClrType.Name) && 
-                    !ignoredTypes.Contains(e.GetTableName() ?? ""))
+    var allEntities = _context.Model
+        .GetEntityTypes()
         .ToList();
     
     var sortedEntities = SortEntitiesByDependencies(allEntities);
@@ -107,7 +100,7 @@ private void Visit(IEntityType entity, HashSet<IEntityType> visited, List<IEntit
 
 public async Task ImportSqlDataAsync(string sqlContent)
 {
-    var commands = sqlContent.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries);
+    var commands = sqlContent.Split("GO", StringSplitOptions.RemoveEmptyEntries);
 
     foreach (var command in commands)
     {

@@ -13,7 +13,7 @@ export class NotificationService {
 
   async start(userId: string) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7171/chatHub')
+      .withUrl('http://localhost:5188/chatHub')
       .withAutomaticReconnect()
       .build();
 
