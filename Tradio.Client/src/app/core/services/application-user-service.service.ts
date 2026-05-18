@@ -7,7 +7,7 @@ import { ChatListItemModel } from '../responses/chat-list-item.model';
   providedIn: 'root',
 })
 export class ApplicationUserServiceService {
-  private apiUrl = 'http://localhost:5188/api/ApplicationUserServices';
+  private apiUrl = 'http://localhost:7091/api/ApplicationUserServices';
 
   constructor(private http: HttpClient) {}
 

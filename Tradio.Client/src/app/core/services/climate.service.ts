@@ -7,7 +7,7 @@ import { ClimateStatisticModel } from '../responses/climate-statistic.model';
   providedIn: 'root',
 })
 export class ClimateService {
-  private apiUrl = 'http://localhost:5188/api/Climates';
+  private apiUrl = 'http://localhost:7091/api/Climates';
 
   constructor(private http: HttpClient) {}
 

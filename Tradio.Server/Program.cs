@@ -85,8 +85,6 @@ builder.Services.AddAutoMapper(c => { }, AppDomain.CurrentDomain.GetAssemblies()
 
 var app = builder.Build();
 
-app.MapHub<ChatHub>("/chatHub");
-
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -105,6 +103,8 @@ app.UseCors("AllowNgrok");
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.MapControllers();
 

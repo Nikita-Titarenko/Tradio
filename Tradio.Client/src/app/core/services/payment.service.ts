@@ -8,7 +8,7 @@ import { PaymentModel } from '../responses/payment.model';
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = 'http://localhost:5188/api/Payments';
+  private apiUrl = 'http://localhost:7091/api/Payments';
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DatabaseService {
-  private apiUrl = 'http://localhost:5188/api/Database';
+  private apiUrl = 'http://localhost:7091/api/Database';
 
   constructor(private http: HttpClient) {}
 

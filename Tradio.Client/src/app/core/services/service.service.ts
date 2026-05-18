@@ -9,7 +9,7 @@ import { CreateServiceModel } from '../requests/create-service.model';
   providedIn: 'root',
 })
 export class ServiceService {
-  private apiUrl = 'http://localhost:5188/api/Services';
+  private apiUrl = 'http://localhost:7091/api/Services';
 
   constructor(private http: HttpClient) {}
 

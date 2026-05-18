@@ -10,7 +10,7 @@ import { BanUserModel } from '../requests/ban-user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5188/api/Users';
+  private apiUrl = 'http://localhost:7091/api/Users';
   private jwtTokenName = 'jwtToken';
 
   constructor(private http: HttpClient) {}

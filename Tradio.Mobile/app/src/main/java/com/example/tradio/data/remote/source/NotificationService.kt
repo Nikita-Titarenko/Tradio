@@ -15,7 +15,7 @@ class NotificationService {
     private val _messages = MutableSharedFlow<MessageFromSignalRModel>(extraBufferCapacity = 64)
     val messages = _messages.asSharedFlow()
 
-    private val hubUrl = "http://10.0.2.2:5188/chatHub"
+    private val hubUrl = "http://10.0.2.2:7091/chatHub"
 
     fun start(userId: String, onConnected: () -> Unit = {}) {
         if (hubConnection?.connectionState == HubConnectionState.CONNECTED) {

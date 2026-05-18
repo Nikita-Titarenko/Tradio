@@ -10,11 +10,17 @@ namespace Tradio.Infrastructure
         public async static Task InitializeAsync(ApplicationDbContext context)
         {
             await context.Database.EnsureCreatedAsync();
+
+            await SeedUsersAndServicesAsync(context);
+            await SeedClimateAsync(context);
+        }
+
+        private static async Task SeedUsersAndServicesAsync(ApplicationDbContext context)
+        {
             if (await context.Services.CountAsync() != 0)
             {
                 return;
             }
-
 
             var users = new ApplicationUser[]
             {
@@ -45,13 +51,11 @@ namespace Tradio.Infrastructure
                 new Service { ApplicationUserId = users[3].Id, CategoryId = 2, Name = "Підготовка до ЗНО", Description = "Комплексна підготовка з усіх предметів.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 30 },
                 new Service { ApplicationUserId = users[4].Id, CategoryId = 2, Name = "Онлайн-репетитор з біології", Description = "Допомога у вивченні біології.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 18 },
 
-
                 new Service { ApplicationUserId = users[5].Id, CategoryId = 3, Name = "Уроки гри на гітарі", Description = "Навчу базовим акордам та імпровізації.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 25 },
                 new Service { ApplicationUserId = users[6].Id, CategoryId = 3, Name = "Уроки фортепіано", Description = "Для початківців та просунутих.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 30 },
                 new Service { ApplicationUserId = users[7].Id, CategoryId = 3, Name = "Вокальні заняття", Description = "Розвиток голосу та техніки співу.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 20 },
                 new Service { ApplicationUserId = users[8].Id, CategoryId = 3, Name = "Скрипка для дітей", Description = "Індивідуальні уроки для дітей.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 22 },
                 new Service { ApplicationUserId = users[9].Id, CategoryId = 3, Name = "Барабани та ритм", Description = "Вивчення ритму та гри на барабанах.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 28 },
-
 
                 new Service { ApplicationUserId = users[10].Id, CategoryId = 4, Name = "Англійська для початківців", Description = "Онлайн-уроки англійської мови.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 20 },
                 new Service { ApplicationUserId = users[11].Id, CategoryId = 4, Name = "Німецька мова", Description = "Індивідуальні заняття з німецької.", IsVisible = true, CreationDateTime = DateTime.UtcNow, Price = 25 },
@@ -79,6 +83,35 @@ namespace Tradio.Infrastructure
             };
 
             context.Services.AddRange(services);
+            await context.SaveChangesAsync();
+        }
+
+        private static async Task SeedClimateAsync(ApplicationDbContext context)
+        {
+            if (await context.Climates.AnyAsync())
+            {
+                return;
+            }
+
+            var adminId = "2d13340c-d9ab-4439-bd7c-897c12f8ceba";
+            var now = DateTime.UtcNow;
+
+            var climates = new Climate[]
+            {
+                new Climate { UserId = adminId, Temperature = 15.4, Humidity = 65.2, CreationDateTime = now.AddDays(-40) },
+                new Climate { UserId = adminId, Temperature = 16.1, Humidity = 60.0, CreationDateTime = now.AddDays(-35) },
+
+                new Climate { UserId = adminId, Temperature = 18.5, Humidity = 55.5, CreationDateTime = now.AddDays(-20) },
+                new Climate { UserId = adminId, Temperature = 19.2, Humidity = 58.1, CreationDateTime = now.AddDays(-18) },
+
+                new Climate { UserId = adminId, Temperature = 21.0, Humidity = 50.0, CreationDateTime = now.AddDays(-4) },
+                new Climate { UserId = adminId, Temperature = 22.3, Humidity = 48.5, CreationDateTime = now.AddDays(-3) },
+
+                new Climate { UserId = adminId, Temperature = 24.5, Humidity = 44.2, CreationDateTime = now.AddHours(-6) },
+                new Climate { UserId = adminId, Temperature = 25.1, Humidity = 42.0, CreationDateTime = now.AddHours(-2) }
+            };
+
+            context.Climates.AddRange(climates);
             await context.SaveChangesAsync();
         }
     }

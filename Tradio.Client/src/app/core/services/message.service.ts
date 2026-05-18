@@ -9,7 +9,7 @@ import { MessageModel } from '../responses/message.model';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = 'http://localhost:5188/api/Messages';
+  private apiUrl = 'http://localhost:7091/api/Messages';
 
   constructor(private http: HttpClient) {}
 

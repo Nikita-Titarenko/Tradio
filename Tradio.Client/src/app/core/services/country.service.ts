@@ -7,7 +7,7 @@ import { CountryModel } from '../responses/country.model';
   providedIn: 'root',
 })
 export class CountryService {
-  private apiUrl = 'http://localhost:5188/api/Countries';
+  private apiUrl = 'http://localhost:7091/api/Countries';
 
   constructor(private http: HttpClient) {}
 
