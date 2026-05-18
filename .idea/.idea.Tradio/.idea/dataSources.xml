@@ -9,5 +9,13 @@
       <jdbc-url>Server=(localdb)\mssqllocaldb;Database=TradioDb;Trusted_Connection=True;MultipleActiveResultSets=true</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="TradioDb@localhost" uuid="b02c1f8f-51d0-476d-b0eb-1500c4431e75">
+      <driver-ref>sqlserver.jb</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
+      <jdbc-url>Server=localhost,1433;Database=TradioDb;User Id=sa;Password=77228Glnik!;TrustServerCertificate=True</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

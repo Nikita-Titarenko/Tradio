@@ -9,6 +9,7 @@ namespace Tradio.Infrastructure
     {
         public async static Task InitializeAsync(ApplicationDbContext context)
         {
+            await context.Database.EnsureCreatedAsync();
             if (await context.Services.CountAsync() != 0)
             {
                 return;

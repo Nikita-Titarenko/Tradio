@@ -92,7 +92,6 @@ namespace Tradio.Server.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<ServiceListItemDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetServices(int pageNumber, int pageSize, int? categoryId, int? countryId, int? cityId, string? subName)

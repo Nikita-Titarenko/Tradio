@@ -2,10 +2,12 @@ using System.Text;
 using System.Text.Json;
 using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Tradio.Infrastructure;
 using Tradio.Infrastructure.Hubs;
+using Tradio.Server;
 using Tradio.Server.ValidationErrors;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -87,19 +89,16 @@ app.MapHub<ChatHub>("/chatHub");
 
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
 await DbInitializer.InitializeAsync(context);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseMiddleware<GlobalExceptionHandler>();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
-
-//app.UseHttpsRedirection();
 
 app.UseCors("AllowNgrok");
 
